@@ -11,6 +11,9 @@ export interface SelectedProjectCopy {
   impact: string
 }
 
+/** Why a project has no public link — shown as a status pill in the card's hover overlay. */
+export type ProjectAccess = 'onPremise' | 'private' | 'hackathon'
+
 /** Single source of truth for project work across the site — rendered by `ProjectCard.svelte`. */
 export type SelectedProject = {
   id: string
@@ -20,6 +23,8 @@ export type SelectedProject = {
   mediaUrl: string
   liveUrl?: string
   githubUrl?: string
+  /** Only used when there is no `liveUrl`/`githubUrl`; defaults to `'private'`. */
+  access?: ProjectAccess
 } & Record<Language, SelectedProjectCopy>
 
 export const selectedProjects: SelectedProject[] = [
@@ -74,7 +79,8 @@ export const selectedProjects: SelectedProject[] = [
         'Reduced stock registration from hours to minutes; delighted initial retail clients with real-time sales insights.'
     },
     techStack: ['React', 'Tauri', 'Hono', 'Cloudflare Workers', 'TypeScript'],
-    mediaUrl: '/videos/optifacil-demo.mp4'
+    mediaUrl: '/videos/optifacil-demo.mp4',
+    access: 'private'
   },
   {
     id: 'maxi-ai',
@@ -100,7 +106,8 @@ export const selectedProjects: SelectedProject[] = [
         '70% AUROC in production; processing ~6,000 monthly X-rays (~200 daily) in active clinical workflows.'
     },
     techStack: ['PyTorch', 'CNNs', 'Python', 'Gradio', 'On-Premise Infrastructure'],
-    mediaUrl: '/videos/maxi-demo.mp4'
+    mediaUrl: '/videos/maxi-demo.mp4',
+    access: 'onPremise'
   },
   {
     id: 'developer-tooling',
@@ -153,6 +160,7 @@ export const selectedProjects: SelectedProject[] = [
         'Built, tested, and deployed live with zero downtime for jury evaluation during event constraints.'
     },
     techStack: ['Next.js', 'Webflow Cloud', 'Webflow CMS API', 'CI/CD'],
-    mediaUrl: '/videos/pixel-rush.mp4'
+    mediaUrl: '/videos/pixel-rush.mp4',
+    access: 'hackathon'
   }
 ]

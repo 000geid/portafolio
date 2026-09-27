@@ -30,6 +30,7 @@
 					mediaUrl={project.mediaUrl}
 					liveUrl={project.liveUrl}
 					githubUrl={project.githubUrl}
+					statusLabel={$t(`projects.card.access.${project.access ?? 'private'}`)}
 					role={copy.role}
 					techStack={project.techStack}
 					architecture={copy.architecture}

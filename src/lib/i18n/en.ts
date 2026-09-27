@@ -129,7 +129,12 @@ export const en = {
 			impact: 'Impact',
 			liveDemo: 'View live site',
 			sourceCode: 'View source on GitHub',
-			opensNewTab: '(opens in a new tab)'
+			opensNewTab: '(opens in a new tab)',
+			access: {
+				onPremise: 'On-premise deployment',
+				private: 'Private / commercial system',
+				hackathon: 'Hackathon build'
+			}
 		}
 	},
 	contact: {

@@ -128,7 +128,12 @@ export const es = {
 			impact: 'Impacto',
 			liveDemo: 'Ver sitio en vivo',
 			sourceCode: 'Ver código en GitHub',
-			opensNewTab: '(se abre en una pestaña nueva)'
+			opensNewTab: '(se abre en una pestaña nueva)',
+			access: {
+				onPremise: 'Despliegue on-premise',
+				private: 'Sistema privado / comercial',
+				hackathon: 'Proyecto de hackathon'
+			}
 		}
 	},
 	contact: {

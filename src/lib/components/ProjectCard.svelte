@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { t } from '$lib/stores/i18n';
 	import ExternalLink from 'lucide-svelte/icons/external-link';
+	import Lock from 'lucide-svelte/icons/lock';
 
 	interface Props {
 		title: string;
@@ -10,14 +11,27 @@
 		mediaUrl: string;
 		liveUrl?: string;
 		githubUrl?: string;
+		/** Shown in the overlay instead of link buttons when the project has no public URL. */
+		statusLabel?: string;
 		role: string;
 		techStack: string[];
 		architecture: string;
 		impact: string;
 	}
 
-	let { title, tagline, year, mediaUrl, liveUrl, githubUrl, role, techStack, architecture, impact }: Props =
-		$props();
+	let {
+		title,
+		tagline,
+		year,
+		mediaUrl,
+		liveUrl,
+		githubUrl,
+		statusLabel,
+		role,
+		techStack,
+		architecture,
+		impact
+	}: Props = $props();
 
 	// Matches "+30%", "70%", "~6,000", "~200" — the capture group keeps matches in split() output.
 	const METRIC_PATTERN = /([+~]?\d[\d.,]*%?)/g;
@@ -91,12 +105,20 @@
 			></video>
 		{/if}
 
-		{#if hasLinks}
+		{#if hasLinks || statusLabel}
 			<div
 				class="media-overlay absolute inset-0 flex items-end justify-start gap-2 p-4
 					bg-gradient-to-t from-[rgba(15,17,20,0.72)] via-[rgba(15,17,20,0.2)] to-transparent
 					opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity duration-300"
 			>
+				{#if !hasLinks}
+					<span
+						class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-[rgba(255,255,255,0.18)] bg-[rgba(15,17,20,0.55)] backdrop-blur-sm font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-[rgba(255,255,255,0.9)]"
+					>
+						<Lock class="w-3.5 h-3.5 opacity-80" strokeWidth={2} aria-hidden={true} />
+						{statusLabel}
+					</span>
+				{/if}
 				{#if liveUrl}
 					<a
 						href={liveUrl}
