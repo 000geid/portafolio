@@ -2,78 +2,124 @@
 	import { t } from '$lib/stores/i18n';
 	import { language } from '$lib/stores/language';
 	import { reveal } from '$lib/actions/reveal';
-	import { homeFlowGroups } from '$lib/data/homeFlow';
-	import { getSectionBySlug, type SectionSlug } from '$lib/data/sections';
+	import { sectionDefinitions } from '$lib/data/sections';
 	import FeaturedProjects from '$lib/components/FeaturedProjects.svelte';
+	import SiteControls from '$lib/components/SiteControls.svelte';
 	import MapPin from 'lucide-svelte/icons/map-pin';
+	import Mail from 'lucide-svelte/icons/mail';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 
 	const recruiterEmail = 'dmalvaradog26@gmail.com';
+
+	// The work feed already lists every project, so the index only links the remaining sections.
+	const indexSections = sectionDefinitions.filter((section) => section.slug !== 'projects');
+
+	let scrollY = 0;
+	let innerHeight = 0;
 
 	$: cvHref = $language === 'es' ? '/cv/cv-es.pdf' : '/cv/cv-en.pdf';
 	$: cvLabel = $language === 'es' ? $t('cv.downloadEs') : $t('cv.downloadEn');
 	$: recruiterHref = `mailto:${recruiterEmail}`;
 	$: freelanceHref = `mailto:${recruiterEmail}?subject=${encodeURIComponent($t('about.freelance.emailSubject'))}`;
+	$: dimmed = shouldDimProfile(scrollY, innerHeight);
 
-	function sectionPath(slug: SectionSlug): string {
-		const section = getSectionBySlug(slug);
-		return section?.path ?? `/${slug}`;
+	/**
+	 * Decides when the sticky profile column fades back so the work feed takes focus.
+	 * Only has a visual effect on lg+ (see `.profile-column.dimmed` below); hover/focus
+	 * on the column always restores full opacity.
+	 */
+	function shouldDimProfile(scrollY: number, viewportHeight: number): boolean {
+		if (typeof window === 'undefined') return false;
+
+		const scrollThreshold = viewportHeight * 0.2; // Dim after scrolling 20% of the viewport height
+		const totalHeight = document.documentElement.scrollHeight;
+		const currentScrollBottom = scrollY + viewportHeight;
+		const isNearBottom = totalHeight - currentScrollBottom < 120; // Re-illuminate when reaching the end/contact area
+
+		return scrollY > scrollThreshold && !isNearBottom;
 	}
 </script>
 
-<div id="home">
-	<!-- Hero fold -->
-	<section class="scroll-mt-32 py-10 md:py-16 px-4 md:px-6 max-w-7xl mx-auto">
-		<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-			<div class="lg:col-span-7 reveal" use:reveal>
+<svelte:window bind:scrollY bind:innerHeight />
+
+{#snippet sectionIndex()}
+	<nav aria-label={$t('nav.sections')}>
+		<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--color-ink-faint)] mb-3">
+			{$t('home.explore.title')}
+		</p>
+		<ul class="space-y-0.5">
+			{#each indexSections as section, idx (section.slug)}
+				<li>
+					<a
+						href={section.path}
+						class="group flex items-center gap-3 py-2 min-h-[44px] lg:min-h-0 lg:py-1.5 text-[var(--color-ink-muted)] hover:text-[var(--color-ink-strong)] transition-colors duration-200"
+					>
+						<span class="font-mono text-[10px] tabular-nums text-[var(--color-ink-faint)]">
+							{String(idx + 1).padStart(2, '0')}
+						</span>
+						<span
+							class="h-px w-6 bg-current opacity-40 transition-all duration-300 group-hover:w-12 group-hover:opacity-100 group-hover:bg-[var(--color-signal)]"
+							aria-hidden="true"
+						></span>
+						<span class="font-mono text-xs font-semibold uppercase tracking-[0.16em]">
+							{$t(section.labelKey)}
+						</span>
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</nav>
+{/snippet}
+
+<div id="home" class="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 lg:flex lg:gap-12 xl:gap-20">
+	<!-- Profile column: sticky on lg+, stacked on top below that -->
+	<header
+		class="profile-column no-scrollbar pt-6 pb-10 md:pt-8 lg:sticky lg:top-0 lg:h-screen lg:w-[40%] lg:shrink-0 lg:overflow-y-auto lg:py-12"
+		class:dimmed
+	>
+		<div class="reveal flex flex-col gap-7 lg:gap-6 lg:min-h-full" use:reveal>
+			<div class="flex items-center justify-between gap-3">
+				<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium uppercase tracking-wide border border-[color-mix(in_srgb,var(--color-signal)_35%,transparent)] text-[var(--color-signal)] bg-[var(--color-signal-soft)]">
+					<span class="w-1.5 h-1.5 rounded-full bg-[var(--color-signal)] availability-pulse shrink-0" aria-hidden="true"></span>
+					{$t('home.availability.openToRoles')}
+				</span>
+				<SiteControls />
+			</div>
+
+			<div>
 				<p class="font-mono text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-signal)] mb-3">
 					{$t('hero.subtitle')}
 				</p>
-
-				<h1 class="font-display font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter text-[var(--color-ink-strong)] leading-[0.95] mb-4">
+				<h1 class="font-display font-semibold text-4xl sm:text-5xl xl:text-6xl tracking-tighter text-[var(--color-ink-strong)] leading-[0.95] mb-4">
 					{$t('hero.name')}
 				</h1>
-
-				<div class="flex items-center gap-2.5 mb-5">
-					<MapPin class="shrink-0 text-[var(--color-signal)]" size={18} strokeWidth={2} aria-hidden="true" />
-					<p class="font-body text-sm text-[var(--color-ink-muted)]">Buenos Aires, Argentina</p>
+				<div class="flex flex-wrap items-center gap-x-3 gap-y-2 mb-5">
+					<span class="inline-flex items-center gap-1.5 font-body text-sm text-[var(--color-ink-muted)]">
+						<MapPin class="shrink-0 text-[var(--color-signal)]" size={16} strokeWidth={2} aria-hidden="true" />
+						Buenos Aires, Argentina
+					</span>
+					<span class="font-mono text-[11px] uppercase tracking-wide text-[var(--color-ink-faint)]">
+						{$t('home.availability.remote')} · {$t('home.availability.takingFreelance')}
+					</span>
 				</div>
-
-				<p class="font-body text-base md:text-lg text-[var(--color-ink)] leading-relaxed max-w-2xl mb-6">
+				<p class="font-body text-base text-[var(--color-ink)] leading-relaxed max-w-xl">
 					{$t('hero.description')}
 				</p>
+			</div>
 
-				<div class="flex flex-wrap gap-2 mb-8" aria-label="Availability">
-					<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium uppercase tracking-wide border border-[color-mix(in_srgb,var(--color-signal)_35%,transparent)] text-[var(--color-signal)] bg-[var(--color-signal-soft)]">
-						<span class="w-1.5 h-1.5 rounded-full bg-[var(--color-signal)] availability-pulse shrink-0" aria-hidden="true"></span>
-						{$t('home.availability.openToRoles')}
-					</span>
-					<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium uppercase tracking-wide border border-[rgba(31,35,42,0.12)] dark:border-[rgba(210,217,226,0.12)] text-[var(--color-ink-muted)] bg-[rgba(31,35,42,0.03)] dark:bg-[rgba(210,217,226,0.03)]">
-						{$t('home.availability.takingFreelance')}
-					</span>
-					<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium uppercase tracking-wide border border-[rgba(31,35,42,0.12)] dark:border-[rgba(210,217,226,0.12)] text-[var(--color-ink-muted)] bg-[rgba(31,35,42,0.03)] dark:bg-[rgba(210,217,226,0.03)]">
-						{$t('home.availability.remote')}
-					</span>
-				</div>
-
-				<div class="flex flex-col sm:flex-row flex-wrap gap-3 mb-8">
+			<div class="flex flex-col gap-3 lg:gap-2.5">
+				<div class="flex flex-col sm:flex-row gap-3">
 					<a
 						href={recruiterHref}
-						class="px-6 py-4 rounded-xl bg-[var(--color-ink-strong)] text-[var(--color-parchment)] dark:bg-[var(--color-elevated)] dark:text-[var(--color-ink-strong)] font-display font-semibold text-base md:text-lg tracking-tight text-center border border-transparent dark:border-[rgba(210,217,226,0.12)] hover:bg-[var(--color-ink)] dark:hover:bg-[rgba(210,217,226,0.07)] transition-all duration-200 brutalist-shadow brutalist-shadow-hover min-h-[44px]"
+						class="flex-1 px-5 py-3.5 rounded-xl bg-[var(--color-ink-strong)] text-[var(--color-parchment)] dark:bg-[var(--color-elevated)] dark:text-[var(--color-ink-strong)] font-display font-semibold text-base tracking-tight text-center border border-transparent dark:border-[rgba(210,217,226,0.12)] hover:bg-[var(--color-ink)] dark:hover:bg-[rgba(210,217,226,0.07)] transition-all duration-200 brutalist-shadow brutalist-shadow-hover min-h-[44px] flex items-center justify-center"
 					>
 						{$t('about.ctaEmail')}
-					</a>
-					<a
-						href="/projects"
-						class="px-6 py-4 rounded-xl border border-[rgba(31,35,42,0.14)] dark:border-[rgba(210,217,226,0.14)] bg-transparent font-display font-semibold text-base md:text-lg tracking-tight text-center text-[var(--color-ink-strong)] hover:bg-[var(--color-signal-soft)] hover:border-[color-mix(in_srgb,var(--color-signal)_40%,transparent)] transition-all duration-200 min-h-[44px]"
-					>
-						{$t('about.ctaProjects')}
 					</a>
 					<a
 						href={cvHref}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="px-6 py-4 rounded-xl border border-[rgba(31,35,42,0.14)] dark:border-[rgba(210,217,226,0.14)] bg-transparent font-display font-semibold text-base md:text-lg tracking-tight text-center text-[var(--color-ink-strong)] hover:bg-[var(--color-signal-soft)] hover:border-[color-mix(in_srgb,var(--color-signal)_40%,transparent)] transition-all duration-200 flex items-center justify-center gap-2 min-h-[44px]"
+						class="flex-1 px-5 py-3.5 rounded-xl border border-[rgba(31,35,42,0.14)] dark:border-[rgba(210,217,226,0.14)] bg-transparent font-display font-semibold text-base tracking-tight text-center text-[var(--color-ink-strong)] hover:bg-[var(--color-signal-soft)] hover:border-[color-mix(in_srgb,var(--color-signal)_40%,transparent)] transition-all duration-200 flex items-center justify-center gap-2 min-h-[44px]"
 					>
 						<svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -81,165 +127,86 @@
 						{cvLabel}
 					</a>
 				</div>
-
-				<div>
-					<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--color-ink-faint)] mb-3">
-						{$t('about.coreExpertise')}
-					</p>
-					<div class="flex flex-wrap gap-1.5">
-						{#each $t('about.highlights') as highlight}
-							<span class="px-2.5 py-1.5 rounded-md bg-[rgba(31,35,42,0.05)] dark:bg-[rgba(210,217,226,0.05)] border border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)] font-mono text-[11px] text-[var(--color-ink-strong)] uppercase tracking-[0.1em]">
-								{highlight}
-							</span>
-						{/each}
-					</div>
-				</div>
-			</div>
-
-			<!-- Profile card (desktop sidebar) -->
-			<div class="lg:col-span-5 hidden lg:block">
-				<div class="reveal delay-200 lg:sticky lg:top-28" use:reveal>
-					<div class="rounded-2xl border border-[rgba(31,35,42,0.14)] dark:border-[rgba(210,217,226,0.12)] bg-[var(--color-elevated)] dark:bg-[var(--color-parchment-alt)] overflow-hidden brutalist-shadow">
-						<div class="p-6 md:p-7 border-b border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]">
-							<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-ink-faint)] mb-4">
-								{$t('about.profileCard.label')}
-							</p>
-							<ul class="space-y-2">
-								{#each $t('about.profileCard.items') as item}
-									<li class="flex items-center gap-2.5 font-body text-sm text-[var(--color-ink-muted)]">
-										<span class="w-1 h-1 rounded-full bg-[var(--color-signal)] shrink-0" aria-hidden="true"></span>
-										{item}
-									</li>
-								{/each}
-							</ul>
-						</div>
-						<div class="p-6 md:p-7">
-							<p class="font-body text-sm text-[var(--color-ink-muted)] leading-relaxed">
-								{$t('home.flowHint')}
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<FeaturedProjects />
-
-	<!-- Dual-audience cards -->
-	<section class="py-14 md:py-20 px-4 md:px-6 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]">
-		<div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-			<div class="reveal rounded-2xl border border-[rgba(31,35,42,0.12)] dark:border-[rgba(210,217,226,0.12)] bg-[var(--color-elevated)] dark:bg-[var(--color-parchment-alt)] p-6 md:p-7 flex flex-col" use:reveal>
-				<h2 class="font-display font-semibold text-xl tracking-tight text-[var(--color-ink-strong)] mb-3">
-					{$t('home.audience.hiring.title')}
-				</h2>
-				<ul class="space-y-2 mb-4 flex-1">
-					{#each $t('about.profileCard.items') as item}
-						<li class="flex items-start gap-2 font-body text-sm text-[var(--color-ink-muted)]">
-							<span class="mt-[0.4rem] w-1 h-1 rounded-full bg-[var(--color-signal)] shrink-0" aria-hidden="true"></span>
-							{item}
-						</li>
-					{/each}
-					<li class="flex items-start gap-2 font-body text-sm text-[var(--color-ink-muted)]">
-						<span class="mt-[0.4rem] w-1 h-1 rounded-full bg-[var(--color-signal)] shrink-0" aria-hidden="true"></span>
-						{$t('home.audience.hiring.highlight')}
-					</li>
-				</ul>
-				<div class="flex flex-col gap-2 mt-auto">
-					<a
-						href={cvHref}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="px-5 py-3 rounded-xl bg-[var(--color-ink-strong)] text-[var(--color-parchment)] dark:bg-[var(--color-elevated)] dark:text-[var(--color-ink-strong)] font-display font-semibold text-sm tracking-tight text-center border border-transparent dark:border-[rgba(210,217,226,0.12)] hover:bg-[var(--color-ink)] transition-all duration-200 min-h-[44px] flex items-center justify-center"
-					>
-						{$t('home.audience.hiring.ctaCv')}
-					</a>
-					<a
-						href="/career"
-						class="px-5 py-3 rounded-xl border border-[rgba(31,35,42,0.14)] dark:border-[rgba(210,217,226,0.14)] font-display font-semibold text-sm tracking-tight text-center text-[var(--color-ink-strong)] hover:bg-[var(--color-signal-soft)] transition-all duration-200 min-h-[44px] flex items-center justify-center"
-					>
-						{$t('home.audience.hiring.ctaCareer')}
-					</a>
-				</div>
-			</div>
-
-			<div class="reveal delay-100 rounded-2xl border border-[rgba(31,35,42,0.12)] dark:border-[rgba(210,217,226,0.12)] bg-[rgba(31,35,42,0.02)] dark:bg-[rgba(210,217,226,0.02)] p-6 md:p-7 flex flex-col" use:reveal>
-				<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--color-ink-faint)] mb-3">
-					{$t('about.freelance.label')}
-				</p>
-				<h2 class="font-display font-semibold text-xl tracking-tight text-[var(--color-ink-strong)] mb-3">
-					{$t('home.audience.freelance.title')}
-				</h2>
-				<p class="font-body text-sm text-[var(--color-ink-muted)] leading-relaxed mb-4">
-					{$t('about.freelance.body')}
-				</p>
-				<ul class="space-y-2 mb-6 flex-1">
-					{#each $t('home.audience.freelance.items') as item}
-						<li class="flex items-start gap-2 font-body text-sm text-[var(--color-ink-muted)]">
-							<span class="mt-[0.4rem] w-1 h-1 rounded-full bg-[var(--color-signal)] shrink-0" aria-hidden="true"></span>
-							{item}
-						</li>
-					{/each}
-				</ul>
 				<a
 					href={freelanceHref}
-					class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-[rgba(31,35,42,0.14)] dark:border-[rgba(210,217,226,0.14)] font-display font-semibold text-sm tracking-tight text-[var(--color-signal)] hover:bg-[var(--color-signal-soft)] transition-all duration-200 min-h-[44px] mt-auto"
+					class="group inline-flex items-center gap-2 self-start min-h-[44px] lg:min-h-0 font-display font-semibold text-sm tracking-tight text-[var(--color-signal)]"
 				>
 					{$t('about.freelance.cta')}
-					<ArrowRight class="w-3.5 h-3.5" strokeWidth={2} aria-hidden={true} />
+					<ArrowRight class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" strokeWidth={2} aria-hidden={true} />
 				</a>
 			</div>
-		</div>
-	</section>
 
-	<!-- Explore-more grid -->
-	<section class="py-14 md:py-20 px-4 md:px-6 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)] bg-[rgba(243,244,247,0.35)] dark:bg-[rgba(18,21,25,0.25)]">
-		<div class="max-w-4xl mx-auto">
-			<header class="mb-8 md:mb-10">
-				<p class="font-mono text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-signal)] mb-3">
-					{$t('home.explore.kicker')}
+			<div>
+				<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--color-ink-faint)] mb-3">
+					{$t('about.coreExpertise')}
 				</p>
-				<h2 class="font-display font-bold text-3xl md:text-4xl tracking-tighter text-[var(--color-ink-strong)] leading-[1.03]">
-					{$t('home.explore.title')}
-				</h2>
-			</header>
-
-			<div class="space-y-8 md:space-y-10">
-				{#each homeFlowGroups as group}
-					<div>
-						<h3 class="font-mono text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-ink-faint)] mb-3">
-							{$t(group.groupKey)}
-						</h3>
-						<div class="space-y-2">
-							{#each group.slugs as slug}
-								{@const section = getSectionBySlug(slug)}
-								<a
-									href={sectionPath(slug)}
-									class="group flex items-center justify-between gap-4 rounded-xl border border-[rgba(31,35,42,0.09)] dark:border-[rgba(210,217,226,0.09)] bg-[var(--color-elevated)] dark:bg-[var(--color-parchment-alt)] px-5 py-4 hover:border-[rgba(31,35,42,0.16)] dark:hover:border-[rgba(210,217,226,0.16)] hover:bg-[rgba(31,35,42,0.03)] dark:hover:bg-[rgba(210,217,226,0.03)] transition-all duration-200 min-h-[44px]"
-								>
-									<span class="min-w-0">
-										<span class="block font-display font-semibold text-base tracking-tight text-[var(--color-ink-strong)] mb-0.5">
-											{section ? $t(section.labelKey) : slug}
-										</span>
-										<span class="block font-body text-sm text-[var(--color-ink-muted)] truncate">
-											{$t(`home.blurbs.${slug}`)}
-										</span>
-									</span>
-									<ArrowRight class="w-4 h-4 shrink-0 text-[var(--color-signal)] opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" strokeWidth={2} aria-hidden={true} />
-								</a>
-							{/each}
-						</div>
-					</div>
-				{/each}
+				<div class="flex flex-wrap gap-1.5">
+					{#each $t('about.highlights') as highlight}
+						<span class="px-2.5 py-1.5 rounded-md bg-[rgba(31,35,42,0.05)] dark:bg-[rgba(210,217,226,0.05)] border border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)] font-mono text-[11px] text-[var(--color-ink-strong)] uppercase tracking-[0.1em]">
+							{highlight}
+						</span>
+					{/each}
+				</div>
 			</div>
+
+			<div class="hidden lg:block">
+				{@render sectionIndex()}
+			</div>
+
+			<ul class="flex items-center gap-2 lg:mt-auto" aria-label={$t('contact.title')}>
+				<li>
+					<a
+						href="https://github.com/000geid"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="social-link"
+						aria-label={$t('contact.github')}
+					>
+						<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+							<path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+						</svg>
+					</a>
+				</li>
+				<li>
+					<a
+						href="https://www.linkedin.com/in/ogeid/"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="social-link"
+						aria-label={$t('contact.linkedin')}
+					>
+						<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+							<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+						</svg>
+					</a>
+				</li>
+				<li>
+					<a href={recruiterHref} class="social-link" aria-label={$t('contact.email')}>
+						<Mail class="w-5 h-5" strokeWidth={1.75} aria-hidden={true} />
+					</a>
+				</li>
+			</ul>
 		</div>
-	</section>
+	</header>
+
+	<!-- Work feed: scrolls with the page -->
+	<main id="main-content" class="min-w-0 lg:flex-1 lg:py-12">
+		<FeaturedProjects />
+
+		<div class="lg:hidden pt-10 pb-4 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]">
+			{@render sectionIndex()}
+		</div>
+
+		<footer class="py-10 font-body text-xs uppercase tracking-wider text-[var(--color-ink-faint)]">
+			© {new Date().getFullYear()} Diego Alvarado
+		</footer>
+	</main>
 </div>
 
 <style>
 	.reveal {
 		opacity: 0;
-		transform: translateY(40px);
+		transform: translateY(24px);
 		transition:
 			opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
 			transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -248,6 +215,47 @@
 	.reveal:global(.visible) {
 		opacity: 1;
 		transform: translateY(0);
+	}
+
+	.profile-column {
+		transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	/* Dimming only makes sense while the column is pinned beside the feed. */
+	@media (min-width: 1024px) {
+		.profile-column.dimmed {
+			opacity: 0.7;
+		}
+
+		.profile-column.dimmed:hover,
+		.profile-column.dimmed:focus-within {
+			opacity: 1;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.profile-column {
+			transition: none;
+		}
+	}
+
+	.social-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 0.5rem;
+		color: var(--color-ink-muted);
+		transition:
+			color 0.2s ease,
+			background-color 0.2s ease;
+	}
+
+	.social-link:hover,
+	.social-link:focus-visible {
+		color: var(--color-signal);
+		background-color: var(--color-signal-soft);
 	}
 
 	.availability-pulse {
