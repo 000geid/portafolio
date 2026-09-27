@@ -124,6 +124,15 @@ export const en = {
 		title: 'Projects',
 		kicker: 'Selected Work',
 		flowReadStory: 'Read the story',
+		card: {
+			role: 'Role',
+			stack: 'Tech stack',
+			architecture: 'Architecture',
+			impact: 'Impact',
+			liveDemo: 'View live site',
+			sourceCode: 'View source on GitHub',
+			opensNewTab: '(opens in a new tab)'
+		},
 		groups: {
 			products: 'Products',
 			oss: 'Open source',

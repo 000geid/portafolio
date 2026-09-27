@@ -123,6 +123,15 @@ export const es = {
 		title: 'Proyectos',
 		kicker: 'Trabajo seleccionado',
 		flowReadStory: 'Ver la historia',
+		card: {
+			role: 'Rol',
+			stack: 'Stack',
+			architecture: 'Arquitectura',
+			impact: 'Impacto',
+			liveDemo: 'Ver sitio en vivo',
+			sourceCode: 'Ver código en GitHub',
+			opensNewTab: '(se abre en una pestaña nueva)'
+		},
 		groups: {
 			products: 'Productos',
 			oss: 'Código abierto',

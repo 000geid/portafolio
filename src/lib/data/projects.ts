@@ -458,3 +458,96 @@ export function getFeaturedProjects(): ProjectEntry[] {
     .map((id) => byId.get(id))
     .filter((p): p is ProjectEntry => p !== undefined)
 }
+
+/** Home work feed — rendered by `ProjectCard.svelte`. Independent from the `/projects` case studies above. */
+export interface SelectedProject {
+  id: string
+  title: string
+  year: string
+  /** Problem + solution in ~2 lines. */
+  tagline: string
+  role: string
+  techStack: string[]
+  architecture: string
+  /** Numbers in this string (e.g. "+30%", "~6,000") are highlighted on the card. */
+  impact: string
+  /** MP4/WebM loop or GIF under `static/`. The card falls back to a placeholder if the file is missing. */
+  mediaUrl: string
+  liveUrl?: string
+  githubUrl?: string
+}
+
+export const selectedProjects: SelectedProject[] = [
+  {
+    id: 'muveran-ai',
+    title: 'Muveran AI',
+    year: '2025 - 2026',
+    tagline:
+      'Multi-channel AI agent platform with customized RAG orchestration for social media SaaS integrations.',
+    role: 'Lead Technical Developer & Architect',
+    techStack: ['Python', 'LangGraph', 'LLMs', 'Custom RAG', 'Docker', 'Meta API'],
+    architecture:
+      'LangGraph orchestration layer over custom RAG pipeline + microservices architecture with VPS deployment.',
+    impact:
+      '+30% RAG API throughput under parallel execution; live beta serving hundreds of active users.',
+    mediaUrl: '/videos/muveran-demo.mp4',
+    liveUrl: 'https://muveran.ai'
+  },
+  {
+    id: 'optifacil',
+    title: 'OptiFácil',
+    year: '2025',
+    tagline:
+      'Cross-platform edge desktop application streamlining stock management and sales analytics for optical retail.',
+    role: 'End-to-End Product Engineer',
+    techStack: ['React', 'Tauri', 'Hono', 'Cloudflare Workers', 'TypeScript'],
+    architecture:
+      'Tauri desktop wrapper backed by serverless APIs on Cloudflare Workers for edge persistence.',
+    impact:
+      'Reduced stock registration from hours to minutes; delighted initial retail clients with real-time sales insights.',
+    mediaUrl: '/videos/optifacil-demo.mp4'
+  },
+  {
+    id: 'maxi-ai',
+    title: 'MAXI — Clinical Decision Support',
+    year: '2023',
+    tagline:
+      'Deep learning chest X-ray anomaly detection system integrated into hospital clinical workflows.',
+    role: 'Fullstack AI Developer',
+    techStack: ['PyTorch', 'CNNs', 'Python', 'Gradio', 'On-Premise Infrastructure'],
+    architecture:
+      'Preprocessing pipeline & CNN model fine-tuning served via Gradio interface on hospital on-premise servers.',
+    impact:
+      '70% AUROC in production; processing ~6,000 monthly X-rays (~200 daily) in active clinical workflows.',
+    mediaUrl: '/videos/maxi-demo.mp4'
+  },
+  {
+    id: 'developer-tooling',
+    title: 'Pacto CLI & Madie VS Code Extension',
+    year: '2024 - 2025',
+    tagline:
+      'Spec-driven development CLI framework in Go and WYSIWYG Markdown editor extension for VS Code.',
+    role: 'Creator & Maintainer',
+    techStack: ['Go', 'TypeScript', 'VS Code Extension API', 'GitHub Actions'],
+    architecture:
+      'Spec verification engine linking Markdown plan slices to work states + custom webview editor sync.',
+    impact:
+      'Published open-source CLI with versioned releases + published VS Code Marketplace extension.',
+    mediaUrl: '/videos/pacto-madie.mp4',
+    githubUrl: 'https://github.com/triple0-labs/pacto-spec'
+  },
+  {
+    id: 'pixel-rush',
+    title: 'Pixel Rush Arcade',
+    year: '2026',
+    tagline:
+      'Fullstack arcade minigame and quiz server built and deployed live during Nerdearla Hackathon.',
+    role: 'Backend & Infrastructure Lead',
+    techStack: ['Next.js', 'Webflow Cloud', 'Webflow CMS API', 'CI/CD'],
+    architecture:
+      'Event-driven backend hosted on Webflow Cloud with Webflow CMS utilized as real-time trivia data storage.',
+    impact:
+      'Built, tested, and deployed live with zero downtime for jury evaluation during event constraints.',
+    mediaUrl: '/videos/pixel-rush.mp4'
+  }
+]
