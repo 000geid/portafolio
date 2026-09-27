@@ -10,7 +10,7 @@ export const es = {
 		about:
 			'Product Engineer y Desarrollador Full-Stack con base en Buenos Aires—UI, APIs, bases de datos y sistemas en producción. Disponible para roles y proyectos freelance.',
 		projects:
-			'Trabajo seleccionado: productos publicados, herramientas open source y entregas para clientes—agrupadas por tipo, con resultados.',
+			'Trabajo seleccionado: plataformas de IA, productos publicados y herramientas open source—con rol, arquitectura e impacto medible.',
 		skills:
 			'Stack agrupado por área: desarrollo full-stack, integración de IA/LLM, cloud y entrega continua.',
 		career: 'Línea de tiempo laboral y freelance: roles, alcance, clientes e IA aplicada a salud, con métricas.',
@@ -121,8 +121,6 @@ export const es = {
 	},
 	projects: {
 		title: 'Proyectos',
-		kicker: 'Trabajo seleccionado',
-		flowReadStory: 'Ver la historia',
 		card: {
 			role: 'Rol',
 			stack: 'Stack',
@@ -131,36 +129,6 @@ export const es = {
 			liveDemo: 'Ver sitio en vivo',
 			sourceCode: 'Ver código en GitHub',
 			opensNewTab: '(se abre en una pestaña nueva)'
-		},
-		groups: {
-			products: 'Productos',
-			oss: 'Código abierto',
-			client: 'Trabajo con clientes'
-		},
-		story: {
-			label: 'Historia del proyecto',
-			back: 'Volver al inicio',
-			role: 'Rol',
-			timeline: 'Cronología',
-			problem: 'El problema',
-			solution: 'Cómo lo resolví',
-			impact: 'Impacto',
-			technologies: 'Tecnologías',
-			patterns: 'Arquitectura',
-			gallery: 'Interfaz del producto',
-			galleryLead:
-				'Capturas de la experiencia publicada: layout mobile-first, sincronización y detalle.',
-			galleryHint: 'Toca o haz clic en una imagen para verla a tamaño completo',
-			galleryExpand: 'Ver a tamaño completo',
-			carouselPrev: 'Captura anterior',
-			carouselNext: 'Captura siguiente',
-			carouselGoTo: 'Ir a captura',
-			clientGallery: 'Galería de clientes',
-			viewerHint: 'Click para abrir visor y zoom',
-			imageViewer: 'Visor de imágenes',
-			resetZoom: 'Restablecer zoom',
-			notFoundTitle: 'Proyecto no encontrado',
-			notFoundBody: 'Esta historia aún no está disponible.'
 		}
 	},
 	contact: {

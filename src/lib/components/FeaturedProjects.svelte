@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { t } from '$lib/stores/i18n';
+	import { language } from '$lib/stores/language';
 	import { selectedProjects } from '$lib/data/projects';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
 	import { reveal } from '$lib/actions/reveal';
@@ -20,18 +21,19 @@
 
 	<ol class="space-y-6 md:space-y-8">
 		{#each selectedProjects as project (project.id)}
+			{@const copy = project[$language]}
 			<li class="reveal" use:reveal>
 				<ProjectCard
-					title={project.title}
-					tagline={project.tagline}
+					title={copy.title}
+					tagline={copy.tagline}
 					year={project.year}
 					mediaUrl={project.mediaUrl}
 					liveUrl={project.liveUrl}
 					githubUrl={project.githubUrl}
-					role={project.role}
+					role={copy.role}
 					techStack={project.techStack}
-					architecture={project.architecture}
-					impact={project.impact}
+					architecture={copy.architecture}
+					impact={copy.impact}
 				/>
 			</li>
 		{/each}
