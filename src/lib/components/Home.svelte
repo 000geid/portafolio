@@ -16,12 +16,13 @@
 
 	let scrollY = 0;
 	let innerHeight = 0;
+	let isHoveringRightColumn = false;
 
 	$: cvHref = $language === 'es' ? '/cv/cv-es.pdf' : '/cv/cv-en.pdf';
 	$: cvLabel = $language === 'es' ? $t('cv.downloadEs') : $t('cv.downloadEn');
 	$: recruiterHref = `mailto:${recruiterEmail}`;
 	$: freelanceHref = `mailto:${recruiterEmail}?subject=${encodeURIComponent($t('about.freelance.emailSubject'))}`;
-	$: dimmed = shouldDimProfile(scrollY, innerHeight);
+	$: dimmed = isHoveringRightColumn || shouldDimProfile(scrollY, innerHeight);
 
 	/**
 	 * Decides when the sticky profile column fades back so the work feed takes focus.
@@ -190,7 +191,12 @@
 	</header>
 
 	<!-- Work feed: scrolls with the page -->
-	<main id="main-content" class="min-w-0 lg:flex-1 lg:py-12">
+	<main
+		id="main-content"
+		class="min-w-0 lg:flex-1 lg:py-12"
+		onmouseenter={() => (isHoveringRightColumn = true)}
+		onmouseleave={() => (isHoveringRightColumn = false)}
+	>
 		<FeaturedProjects />
 
 		<div class="lg:hidden pt-10 pb-4 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]">
@@ -218,7 +224,7 @@
 	}
 
 	.profile-column {
-		transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+		transition: opacity 300ms ease;
 	}
 
 	/* Dimming only makes sense while the column is pinned beside the feed. */
