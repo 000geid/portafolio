@@ -76,7 +76,7 @@ export const es = {
 			cta: 'Hablemos de tu proyecto',
 			emailSubject: 'Proyecto freelance — [nombre de tu proyecto]'
 		},
-		ctaEmail: 'Hablemos por email',
+		ctaEmail: 'Hablemos por mail',
 		ctaProjects: 'Ver proyectos'
 	},
 	careerPath: {
@@ -160,9 +160,7 @@ export const es = {
 		flowHint:
 			'De IA para diagnóstico médico a SaaS full-stack—productos construidos de punta a punta y corriendo en producción.',
 		availability: {
-			openToRoles: 'Disponible para roles',
-			takingFreelance: 'Acepto freelance',
-			remote: 'Remoto · GMT-3'
+			openToRoles: 'Disponible para roles'
 		},
 		featured: {
 			kicker: 'Trabajo publicado',

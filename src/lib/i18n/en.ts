@@ -76,7 +76,7 @@ export const en = {
 			cta: "Let's talk about your project",
 			emailSubject: 'Freelance project — [your project name]'
 		},
-		ctaEmail: 'Email me',
+		ctaEmail: 'Mail me',
 		ctaProjects: 'View projects'
 	},
 	careerPath: {
@@ -161,9 +161,7 @@ export const en = {
 		flowHint:
 			'From medical imaging AI to full-stack SaaS—products built end to end, in production.',
 		availability: {
-			openToRoles: 'Open to roles',
-			takingFreelance: 'Taking freelance',
-			remote: 'Remote · GMT-3'
+			openToRoles: 'Open to roles'
 		},
 		featured: {
 			kicker: 'Proof of work',

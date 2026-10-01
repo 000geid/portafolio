@@ -7,7 +7,6 @@
 	import SiteControls from '$lib/components/SiteControls.svelte';
 	import MapPin from 'lucide-svelte/icons/map-pin';
 	import Mail from 'lucide-svelte/icons/mail';
-	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 
 	const recruiterEmail = 'dmalvaradog26@gmail.com';
 
@@ -21,7 +20,6 @@
 	$: cvHref = $language === 'es' ? '/cv/cv-es.pdf' : '/cv/cv-en.pdf';
 	$: cvLabel = $language === 'es' ? $t('cv.downloadEs') : $t('cv.downloadEn');
 	$: recruiterHref = `mailto:${recruiterEmail}`;
-	$: freelanceHref = `mailto:${recruiterEmail}?subject=${encodeURIComponent($t('about.freelance.emailSubject'))}`;
 	$: dimmed = isHoveringRightColumn || shouldDimProfile(scrollY, innerHeight);
 
 	/**
@@ -99,9 +97,6 @@
 						<MapPin class="shrink-0 text-[var(--color-signal)]" size={16} strokeWidth={2} aria-hidden="true" />
 						Buenos Aires, Argentina
 					</span>
-					<span class="font-mono text-[11px] uppercase tracking-wide text-[var(--color-ink-faint)]">
-						{$t('home.availability.remote')} · {$t('home.availability.takingFreelance')}
-					</span>
 				</div>
 				<p class="font-body text-base text-[var(--color-ink)] leading-relaxed max-w-xl">
 					{$t('hero.description')}
@@ -112,8 +107,9 @@
 				<div class="flex flex-col sm:flex-row gap-3">
 					<a
 						href={recruiterHref}
-						class="flex-1 px-5 py-3.5 rounded-xl bg-[var(--color-ink-strong)] text-[var(--color-parchment)] dark:bg-[var(--color-elevated)] dark:text-[var(--color-ink-strong)] font-display font-semibold text-base tracking-tight text-center border border-transparent dark:border-[rgba(210,217,226,0.12)] hover:bg-[var(--color-ink)] dark:hover:bg-[rgba(210,217,226,0.07)] transition-all duration-200 brutalist-shadow brutalist-shadow-hover min-h-[44px] flex items-center justify-center"
+						class="flex-1 px-5 py-3.5 rounded-xl bg-[var(--color-ink-strong)] text-[var(--color-parchment)] dark:bg-[var(--color-elevated)] dark:text-[var(--color-ink-strong)] font-display font-semibold text-base tracking-tight text-center border border-transparent dark:border-[rgba(210,217,226,0.12)] hover:bg-[var(--color-ink)] dark:hover:bg-[rgba(210,217,226,0.07)] transition-all duration-200 brutalist-shadow brutalist-shadow-hover min-h-[44px] flex items-center justify-center gap-2"
 					>
+						<Mail class="w-4 h-4" strokeWidth={1.75} aria-hidden={true} />
 						{$t('about.ctaEmail')}
 					</a>
 					<a
@@ -128,13 +124,6 @@
 						{cvLabel}
 					</a>
 				</div>
-				<a
-					href={freelanceHref}
-					class="group inline-flex items-center gap-2 self-start min-h-[44px] lg:min-h-0 font-display font-semibold text-sm tracking-tight text-[var(--color-signal)]"
-				>
-					{$t('about.freelance.cta')}
-					<ArrowRight class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" strokeWidth={2} aria-hidden={true} />
-				</a>
 			</div>
 
 			<div>
