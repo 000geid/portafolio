@@ -1,16 +1,11 @@
-import { projectsData } from '$lib/data/projects';
 import { sectionDefinitions } from '$lib/data/sections';
 import { resolveSiteOrigin } from '$lib/seo/site';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = ({ url }) => {
 	const origin = resolveSiteOrigin(url.origin);
-	const paths = [
-		'/',
-		...sectionDefinitions.map((s) => s.path),
-		'/projects',
-		...projectsData.map((p) => `/projects/${p.id}`)
-	];
+	// `/projects` is already one of the section paths.
+	const paths = ['/', ...sectionDefinitions.map((s) => s.path)];
 
 	const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

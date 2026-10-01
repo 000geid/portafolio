@@ -10,7 +10,7 @@ export const en = {
 		about:
 			'Product Engineer and Full-Stack Developer based in Buenos Aires—UI, APIs, databases, and production systems. Available for roles and freelance projects.',
 		projects:
-			'Selected work: shipped products, open-source tools, and client delivery—grouped by type, with outcomes.',
+			'Selected work: AI platforms, shipped products, and open-source tools—with role, architecture, and measurable impact.',
 		skills:
 			'Stack grouped by area: full-stack engineering, AI/LLM integration, cloud and delivery.',
 		career: 'Employment and freelance timeline: roles, scope, clients, and applied ML in healthcare—with metrics.',
@@ -122,36 +122,19 @@ export const en = {
 	},
 	projects: {
 		title: 'Projects',
-		kicker: 'Selected Work',
-		flowReadStory: 'Read the story',
-		groups: {
-			products: 'Products',
-			oss: 'Open source',
-			client: 'Client work'
-		},
-		story: {
-			label: 'Project Story',
-			back: 'Back to home',
+		card: {
 			role: 'Role',
-			timeline: 'Timeline',
-			problem: 'The problem',
-			solution: 'How we solved it',
+			stack: 'Tech stack',
+			architecture: 'Architecture',
 			impact: 'Impact',
-			technologies: 'Technologies',
-			patterns: 'Architecture',
-			gallery: 'Product interface',
-			galleryLead: 'Screens from the shipped experience—mobile-first layout, sync, and detail.',
-			galleryHint: 'Tap or click an image to view full size',
-			galleryExpand: 'View full size',
-			carouselPrev: 'Previous screenshot',
-			carouselNext: 'Next screenshot',
-			carouselGoTo: 'Go to screenshot',
-			clientGallery: 'Client gallery',
-			viewerHint: 'Click to open viewer and zoom',
-			imageViewer: 'Image viewer',
-			resetZoom: 'Reset zoom',
-			notFoundTitle: 'Project not found',
-			notFoundBody: 'This story is not available yet.'
+			liveDemo: 'View live site',
+			sourceCode: 'View source on GitHub',
+			opensNewTab: '(opens in a new tab)',
+			access: {
+				onPremise: 'On-premise deployment',
+				private: 'Private / commercial system',
+				hackathon: 'Hackathon build'
+			}
 		}
 	},
 	contact: {

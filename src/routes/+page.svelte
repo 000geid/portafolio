@@ -42,6 +42,4 @@
 	jsonLd={personJsonLd}
 />
 
-<main id="main-content" class="border-t border-[rgba(31,35,42,0.1)] dark:border-[rgba(210,217,226,0.1)]">
-	<Home />
-</main>
+<Home />
