@@ -9,30 +9,43 @@
 	import Contact from '$lib/components/Contact.svelte';
 	import SiteControls from '$lib/components/SiteControls.svelte';
 	import ArrowDown from 'lucide-svelte/icons/arrow-down';
+	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 
 	const cvHref = $derived($language === 'es' ? '/cv/cv-es.pdf' : '/cv/cv-en.pdf');
 
 	onMount(() => {
-		if (window.location.hash === '#projects') {
-			document.getElementById('featured-work')?.scrollIntoView();
+		function revealHashTarget() {
+			const hash = window.location.hash.slice(1);
+			const target = document.getElementById(hash === 'projects' ? 'featured-work' : hash);
+			const disclosure = target?.closest('details');
+			if (disclosure && !disclosure.open) {
+				disclosure.open = true;
+				requestAnimationFrame(() => target?.scrollIntoView());
+			} else if (hash === 'projects') {
+				target?.scrollIntoView();
+			}
 		}
+
+		revealHashTarget();
+		window.addEventListener('hashchange', revealHashTarget);
+		return () => window.removeEventListener('hashchange', revealHashTarget);
 	});
 </script>
 
-<div id="home" class="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 lg:flex lg:items-start lg:gap-12 xl:gap-20">
-	<header class="pt-6 pb-8 md:pt-8 lg:sticky lg:top-0 lg:w-[40%] lg:shrink-0 lg:py-12 lg:max-h-svh lg:overflow-y-auto">
-		<div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 mb-6 lg:mb-9">
+<div id="home" class="max-w-6xl mx-auto px-5 md:px-8 lg:px-12">
+	<header class="pt-6 pb-12 md:pt-8 md:pb-20 lg:pb-28">
+		<div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 mb-12 md:mb-20">
 			<p class="font-body text-sm text-[var(--color-ink-muted)]">Buenos Aires, Argentina</p>
 			<SiteControls />
 		</div>
 
-		<h1 class="font-display font-semibold text-4xl sm:text-5xl xl:text-6xl tracking-tight text-[var(--color-ink-strong)] leading-[1.05] mb-2">
+		<h1 class="font-display font-semibold text-5xl sm:text-6xl lg:text-7xl tracking-tight text-[var(--color-ink-strong)] leading-[1.05] mb-2">
 			{$t('hero.name')}
 		</h1>
 		<p class="font-body text-base sm:text-lg font-medium text-[var(--color-signal)]">
 			{$t('hero.subtitle')}
 		</p>
-		<p class="font-body text-base sm:text-lg text-[var(--color-ink)] leading-relaxed max-w-sm mt-3 lg:mt-5">
+		<p class="font-body text-base sm:text-lg text-[var(--color-ink)] leading-relaxed max-w-xl mt-4 lg:mt-6">
 			{$t('hero.description')}
 		</p>
 
@@ -65,11 +78,25 @@
 		</nav>
 	</header>
 
-	<main id="main-content" class="min-w-0 lg:flex-1 lg:py-12 space-y-16 md:space-y-20">
+	<main id="main-content" class="min-w-0 space-y-16 md:space-y-24 lg:space-y-32">
 		<FeaturedProjects />
 		<Timeline embedded={true} />
-		<Skills embedded={true} />
-		<Education embedded={true} />
+		<div class="border-t border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
+			<details class="group border-b border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
+				<summary class="flex items-center justify-between gap-4 min-h-16 cursor-pointer list-none font-display font-semibold text-2xl text-[var(--color-ink-strong)] hover:text-[var(--color-signal)] [&::-webkit-details-marker]:hidden">
+					{$t('skills.title')}
+					<ChevronDown class="w-5 h-5 shrink-0 group-open:rotate-180" strokeWidth={1.75} aria-hidden="true" />
+				</summary>
+				<Skills embedded={true} />
+			</details>
+			<details class="group border-b border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
+				<summary class="flex items-center justify-between gap-4 min-h-16 cursor-pointer list-none font-display font-semibold text-2xl text-[var(--color-ink-strong)] hover:text-[var(--color-signal)] [&::-webkit-details-marker]:hidden">
+					{$t('education.title')}
+					<ChevronDown class="w-5 h-5 shrink-0 group-open:rotate-180" strokeWidth={1.75} aria-hidden="true" />
+				</summary>
+				<Education embedded={true} />
+			</details>
+		</div>
 		<Contact embedded={true} />
 	</main>
 </div>

@@ -69,6 +69,36 @@
 		</SectionPageHeader>
 	{/if}
 
+	{#if embedded}
+		<ol class="border-t border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
+			{#each [...timelineData].reverse() as item (item.id)}
+				<li class="py-7 md:py-9 border-b border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
+					<p class="font-body text-sm text-[var(--color-ink-muted)] mb-2">
+						{formatDate(item.startDate)} — {formatDate(item.endDate)}
+					</p>
+					<h3 class="font-display font-semibold text-2xl md:text-3xl text-[var(--color-ink-strong)]">
+						{$language === 'es' ? item.title_es : item.title_en}
+					</h3>
+					<p class="font-body text-sm text-[var(--color-signal)] mt-1">
+						{$language === 'es' ? item.company : (item.company_en ?? item.company)}
+					</p>
+					<p class="font-body text-base text-[var(--color-ink-muted)] leading-relaxed max-w-2xl mt-3">
+						{$language === 'es' ? item.description_es : item.description_en}
+					</p>
+					<details class="mt-2">
+						<summary class="min-h-11 w-fit flex items-center cursor-pointer font-body text-sm font-semibold text-[var(--color-signal)] hover:underline underline-offset-4">
+							{$t('careerPath.expandButton')}
+						</summary>
+						<ul class="list-disc pl-5 space-y-2 pb-2 max-w-2xl font-body text-sm text-[var(--color-ink-muted)]">
+							{#each $language === 'es' ? item.responsibilities_es : item.responsibilities_en as responsibility}
+								<li>{responsibility}</li>
+							{/each}
+						</ul>
+					</details>
+				</li>
+			{/each}
+		</ol>
+	{:else}
 	<div class="space-y-6 mt-2 md:mt-4">
 		{#each timelineData as item, index}
 			<div
@@ -152,6 +182,7 @@
 			</div>
 		{/each}
 	</div>
+	{/if}
 </section>
 
 <style>

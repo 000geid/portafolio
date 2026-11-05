@@ -12,7 +12,7 @@
 {#snippet projectList(projects: SelectedProject[])}
 	<ul class="divide-y divide-[color-mix(in_srgb,var(--color-ink)_16%,transparent)] border-t border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
 		{#each projects as project (project.id)}
-			<li class="pt-5 pb-3 md:pt-6 md:pb-4">
+			<li class="py-8 md:py-12">
 				<ProjectCard
 					{...project[$language]}
 					year={project.year}
@@ -30,7 +30,7 @@
 <section id="featured-work" tabindex="-1" aria-labelledby="featured-work-title" class="scroll-mt-8">
 	<h2
 		id="featured-work-title"
-		class="font-display font-bold text-3xl md:text-4xl tracking-tight text-[var(--color-ink-strong)] leading-snug mb-4 md:mb-5"
+		class="font-display font-bold text-3xl md:text-4xl tracking-tight text-[var(--color-ink-strong)] leading-snug mb-6 md:mb-8"
 	>
 		{$t('home.featured.title')}
 	</h2>

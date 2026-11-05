@@ -72,9 +72,9 @@
 	});
 </script>
 
-<article>
+<article class="max-w-3xl">
 	<header class="mb-3">
-		<h3 class="font-display font-semibold text-2xl md:text-3xl tracking-tight text-[var(--color-ink-strong)] leading-tight mb-1">
+		<h3 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-[var(--color-ink-strong)] leading-tight mb-1">
 			{title}
 		</h3>
 		<p class="flex flex-wrap gap-x-2 font-body text-sm text-[var(--color-ink-muted)]">
@@ -89,7 +89,7 @@
 	</header>
 
 	<p class="font-body text-base text-[var(--color-ink-muted)] leading-relaxed max-w-prose">{tagline}</p>
-	<p class="mt-2 font-body text-base font-medium text-[var(--color-ink-strong)] leading-relaxed max-w-prose">
+	<p class="mt-4 font-body text-base md:text-lg font-medium text-[var(--color-ink-strong)] leading-relaxed max-w-prose">
 		{#each impactParts as part, i}
 			{#if i % 2 === 1}
 				<strong class="font-mono font-semibold text-[var(--color-signal)]">{part}</strong>
