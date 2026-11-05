@@ -10,7 +10,7 @@
 </script>
 
 <div
-	class="min-h-screen bg-[var(--color-parchment)] text-[var(--color-ink)] transition-colors noise-overlay relative grid-pattern"
+	class="min-h-screen bg-[var(--color-parchment)] text-[var(--color-ink)] transition-colors noise-overlay relative"
 >
 	<a
 		href="#main-content"

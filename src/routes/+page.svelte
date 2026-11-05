@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 	import SeoMeta from '$lib/components/SeoMeta.svelte';
 	import Home from '$lib/components/Home.svelte';
-	import { legacyHashRedirects } from '$lib/data/sections';
 	import { absoluteUrl, resolveSiteOrigin } from '$lib/seo/site';
 	import { t } from '$lib/stores/i18n';
 
@@ -25,14 +22,6 @@
 				addressCountry: 'AR'
 			}
 		};
-	});
-
-	onMount(() => {
-		const hash = typeof window !== 'undefined' ? window.location.hash.replace('#', '') : '';
-		const targetPath = hash ? legacyHashRedirects[hash] : null;
-		if (targetPath) {
-			void goto(targetPath, { replaceState: true, noScroll: true });
-		}
 	});
 </script>
 

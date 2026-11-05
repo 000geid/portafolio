@@ -5,6 +5,7 @@
 	import { reveal } from '$lib/actions/reveal';
 	import SectionPageHeader from '$lib/components/SectionPageHeader.svelte';
 
+	let { embedded = false }: { embedded?: boolean } = $props();
 	let expandedId = $state<string | null>(null);
 
 	function toggleExpand(id: string) {
@@ -44,16 +45,29 @@
 	}
 </script>
 
-<section id="career" class="scroll-mt-32 py-14 md:py-20 px-4 md:px-6 max-w-7xl mx-auto">
-	<SectionPageHeader kicker={$t('careerPath.kicker')} title={$t('careerPath.title')}>
-		<svelte:fragment slot="aside">
-			<p
-				class="font-body text-sm md:text-base text-[var(--color-ink-muted)] leading-relaxed pl-4 border-l-2 border-[var(--color-signal)] rounded-sm"
-			>
+<section
+	id="career"
+	tabindex="-1"
+	class="scroll-mt-24 {embedded ? 'pt-16 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]' : 'py-14 md:py-20 px-4 md:px-6 max-w-7xl mx-auto'}"
+>
+	{#if embedded}
+		<header class="mb-8 md:mb-10">
+			<h2 class="font-display font-bold text-3xl md:text-4xl tracking-tight text-[var(--color-ink-strong)] leading-snug mb-3">
+				{$t('careerPath.title')}
+			</h2>
+			<p class="font-body text-base text-[var(--color-ink-muted)] leading-relaxed max-w-xl">
 				{$t('careerPath.intro')}
 			</p>
-		</svelte:fragment>
-	</SectionPageHeader>
+		</header>
+	{:else}
+		<SectionPageHeader kicker={$t('careerPath.kicker')} title={$t('careerPath.title')}>
+			<svelte:fragment slot="aside">
+				<p class="font-body text-base text-[var(--color-ink-muted)] leading-relaxed">
+					{$t('careerPath.intro')}
+				</p>
+			</svelte:fragment>
+		</SectionPageHeader>
+	{/if}
 
 	<div class="space-y-6 mt-2 md:mt-4">
 		{#each timelineData as item, index}
@@ -73,11 +87,11 @@
 					<div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
 						<div class="flex-1">
 							<div class="flex items-center gap-3 mb-2">
-								<span class="font-mono text-xs font-medium uppercase tracking-[0.16em] text-[var(--color-signal)]">
+								<span class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-signal)]">
 									{formatDate(item.startDate)} — {formatDate(item.endDate)}
 								</span>
 								<span class="w-px h-3 bg-[rgba(31,35,42,0.15)] dark:bg-[rgba(210,217,226,0.12)]"></span>
-								<span class="font-body text-xs uppercase tracking-[0.12em] text-[var(--color-ink-muted)]">
+								<span class="font-body text-xs tracking-normal text-[var(--color-ink-muted)]">
 									{getDuration(item.startDate, item.endDate)}
 								</span>
 							</div>
@@ -86,13 +100,13 @@
 								{$language === 'es' ? item.title_es : item.title_en}
 							</h3>
 							<p class="font-body text-base text-[var(--color-ink-muted)]">
-								{item.company}
+								{$language === 'es' ? item.company : (item.company_en ?? item.company)}
 							</p>
 						</div>
 
 						<button
 							onclick={() => toggleExpand(item.id)}
-							class="group/btn shrink-0 px-4 py-2 rounded-lg font-body text-xs uppercase tracking-[0.14em] font-semibold
+							class="group/btn shrink-0 px-4 py-2 min-h-[44px] flex items-center rounded-lg font-body text-xs uppercase tracking-[0.08em] font-semibold
 								border border-[rgba(31,35,42,0.14)] text-[var(--color-ink-muted)]
 								hover:bg-[var(--color-signal-soft)] hover:border-[color-mix(in_srgb,var(--color-signal)_40%,transparent)]
 								dark:border-[rgba(210,217,226,0.14)]
@@ -121,7 +135,7 @@
 
 					{#if expandedId === item.id}
 						<div class="pt-4 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]">
-							<p class="font-body text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-ink-faint)] mb-3">
+							<p class="font-body text-xs font-semibold uppercase tracking-[0.08em] text-[var(--color-ink-faint)] mb-3">
 								{$t('careerPath.responsibilitiesHeading')}
 							</p>
 							<ul class="space-y-2">

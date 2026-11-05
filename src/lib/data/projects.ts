@@ -9,17 +9,19 @@ export interface SelectedProjectCopy {
   architecture: string
   /** Numbers in this string (e.g. "+30%", "~6,000") are highlighted on the card. */
   impact: string
+  impactDetail?: string
 }
 
-/** Why a project has no public link — shown as a status pill in the card's hover overlay. */
+/** Why a project has no public link — shown with the project year. */
 export type ProjectAccess = 'onPremise' | 'private' | 'hackathon'
 
 /** Single source of truth for project work across the site — rendered by `ProjectCard.svelte`. */
 export type SelectedProject = {
   id: string
   year: string
+  featured?: boolean
   techStack: string[]
-  /** MP4/WebM loop or GIF under `static/`. The card falls back to a placeholder if the file is missing. */
+  /** Architecture image or MP4/WebM loop under `static/`. The card falls back to a placeholder if the file is missing. */
   mediaUrl: string
   liveUrl?: string
   githubUrl?: string
@@ -30,29 +32,28 @@ export type SelectedProject = {
 export const selectedProjects: SelectedProject[] = [
   {
     id: 'muveran-ai',
-    year: '2025 - 2026',
+    featured: true,
+    year: '2025 – 2026',
     es: {
       title: 'Muveran AI',
-      tagline:
-        'Plataforma multicanal de agentes de IA con orquestación RAG personalizada para integraciones SaaS en redes sociales.',
-      role: 'Desarrollador Técnico Líder & Arquitecto',
+      tagline: 'Plataforma de agentes de IA para atender conversaciones en redes sociales.',
+      role: 'Liderazgo técnico y arquitectura',
       architecture:
         'Capa de orquestación en LangGraph integrada a un pipeline RAG personalizado, con despliegue de microservicios en VPS.',
-      impact:
-        '+30% de rendimiento en API RAG bajo ejecución paralela; beta en producción con cientos de usuarios activos.'
+      impact: '+30% de rendimiento de la API RAG al procesar solicitudes en paralelo.',
+      impactDetail: 'Beta en producción con cientos de usuarios activos.'
     },
     en: {
       title: 'Muveran AI',
-      tagline:
-        'Multi-channel AI agent platform with customized RAG orchestration for SaaS social media integrations.',
-      role: 'Lead Technical Developer & Architect',
+      tagline: 'AI agent platform for handling conversations across social channels.',
+      role: 'Technical lead and architect',
       architecture:
         'LangGraph orchestration layer integrated into custom RAG pipeline with microservices VPS deployment.',
-      impact:
-        '+30% RAG API throughput under parallel execution; live beta serving hundreds of active users.'
+      impact: '+30% RAG API throughput when processing requests in parallel.',
+      impactDetail: 'The live beta serves hundreds of active users.'
     },
     techStack: ['Python', 'LangGraph', 'LLMs', 'RAG', 'Docker', 'Meta API'],
-    mediaUrl: '/videos/muveran-demo.mp4',
+    mediaUrl: '/images/architecture/muveran-arch.svg',
     liveUrl: 'https://muveran.ai'
   },
   {
@@ -79,39 +80,38 @@ export const selectedProjects: SelectedProject[] = [
         'Dramatically reduced stock registration delays; delighted initial retail clients with real-time sales insights.'
     },
     techStack: ['React', 'Tauri', 'Hono', 'Cloudflare Workers', 'TypeScript'],
-    mediaUrl: '/videos/optifacil-demo.mp4',
+    mediaUrl: '/images/architecture/optifacil-arch.svg',
     access: 'private'
   },
   {
     id: 'maxi-ai',
+    featured: true,
     year: '2023',
     es: {
       title: 'MAXI — Soporte de Decisión Clínica',
-      tagline:
-        'Sistema de detección de anomalías en radiografías de tórax mediante Deep Learning integrado a flujos clínicos hospitalarios.',
-      role: 'Desarrollador Fullstack AI',
+      tagline: 'Sistema que detecta anomalías en radiografías de tórax para apoyar decisiones clínicas.',
+      role: 'Desarrollo full-stack e IA',
       architecture:
         'Pipeline de preprocesamiento de imágenes médicas y fine-tuning de CNN servido mediante Gradio en servidores del hospital.',
-      impact:
-        '70% AUROC en producción; procesa ~6,000 radiografías de tórax mensuales (~200 diarias) en flujos clínicos activos.'
+      impact: 'Procesa unas 6.000 radiografías de tórax al mes en flujos clínicos activos.',
+      impactDetail: '70% de AUROC en producción, con unas 200 radiografías procesadas por día.'
     },
     en: {
       title: 'MAXI — Clinical Decision Support',
-      tagline:
-        'Deep learning chest X-ray anomaly detection system integrated into hospital clinical workflows.',
-      role: 'Fullstack AI Developer',
+      tagline: 'System that flags anomalies in chest X-rays to support clinical decisions.',
+      role: 'Full-stack and AI development',
       architecture:
         'Medical imaging preprocessing & CNN fine-tuning pipeline served via Gradio on hospital servers.',
-      impact:
-        '70% AUROC in production; processes ~6,000 chest X-rays monthly (~200 daily) in active clinical workflows.'
+      impact: 'Processes about 6,000 chest X-rays a month in active clinical workflows.',
+      impactDetail: '70% AUROC in production, with about 200 X-rays processed per day.'
     },
     techStack: ['PyTorch', 'CNNs', 'Python', 'Gradio', 'On-Premise Infrastructure'],
-    mediaUrl: '/videos/maxi-demo.mp4',
+    mediaUrl: '/images/architecture/maxi-arch.svg',
     access: 'onPremise'
   },
   {
     id: 'developer-tooling',
-    year: '2024 - 2025',
+    year: '2024 – 2025',
     es: {
       title: 'Pacto CLI y herramientas Madie para VS Code',
       tagline:
@@ -133,7 +133,7 @@ export const selectedProjects: SelectedProject[] = [
         'Published open-source CLI with versioned releases + published VS Code Marketplace extension.'
     },
     techStack: ['Go', 'TypeScript', 'VS Code Extension API', 'GitHub Actions'],
-    mediaUrl: '/videos/pacto-madie.mp4',
+    mediaUrl: '/images/architecture/pacto-arch.svg',
     githubUrl: 'https://github.com/triple0-labs/pacto-spec'
   },
   {
@@ -160,7 +160,7 @@ export const selectedProjects: SelectedProject[] = [
         'Shipped and deployed live under strict hackathon timeline for jury evaluation.'
     },
     techStack: ['Next.js', 'Webflow Cloud', 'Webflow CMS API', 'CI/CD'],
-    mediaUrl: '/videos/pixel-rush.mp4',
+    mediaUrl: '/images/architecture/pixel-rush-arch.svg',
     access: 'hackathon'
   }
 ]

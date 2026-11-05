@@ -52,20 +52,20 @@
 				</p>
 
 				<!-- Section label -->
-				<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--color-ink-faint)] mb-6">
+				<p class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-ink-faint)] mb-4">
 					{$t('about.sectorsIntro')}
 				</p>
 
 				<!-- Sector cards -->
-				<div class="space-y-8 max-w-2xl">
+				<div class="space-y-6 max-w-2xl">
 					{#each ABOUT_SECTOR_IDS as sectorId}
-						<div class="border-l-2 border-[var(--color-signal)] pl-5 md:pl-6">
-							<h3 class="font-display font-semibold text-base md:text-lg tracking-tight text-[var(--color-ink-strong)] mb-3 leading-snug">
+						<div class="rounded-xl border border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)] bg-[var(--color-elevated)] dark:bg-[var(--color-parchment-alt)] p-5 md:p-6">
+							<h3 class="font-display font-semibold text-lg tracking-tight text-[var(--color-ink-strong)] mb-2 leading-snug">
 								{$t(`about.sectors.${sectorId}.title`)}
 							</h3>
-							<div class="space-y-2.5">
+							<div class="space-y-2">
 								{#each $t(`about.sectors.${sectorId}.points`) as point}
-									<p class="font-body text-sm md:text-[0.9375rem] text-[var(--color-ink-muted)] leading-relaxed">
+									<p class="font-body text-sm md:text-base text-[var(--color-ink-muted)] leading-relaxed">
 										{point}
 									</p>
 								{/each}
@@ -75,14 +75,14 @@
 				</div>
 
 				<!-- Freelance pitch -->
-				<div class="mt-12 rounded-xl border border-[rgba(31,35,42,0.1)] dark:border-[rgba(210,217,226,0.1)] bg-[rgba(31,35,42,0.02)] dark:bg-[rgba(210,217,226,0.02)] p-6 md:p-7 max-w-2xl">
-					<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--color-ink-faint)] mb-3">
+				<div class="mt-10 rounded-xl border border-[rgba(31,35,42,0.1)] dark:border-[rgba(210,217,226,0.1)] bg-[rgba(31,35,42,0.02)] dark:bg-[rgba(210,217,226,0.02)] p-6 md:p-7 max-w-2xl">
+					<p class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-ink-faint)] mb-3">
 						{$t('about.freelance.label')}
 					</p>
 					<h3 class="font-display font-semibold text-xl tracking-tight text-[var(--color-ink-strong)] mb-2">
 						{$t('about.freelance.heading')}
 					</h3>
-					<p class="font-body text-sm text-[var(--color-ink-muted)] leading-relaxed mb-5">
+					<p class="font-body text-sm md:text-base text-[var(--color-ink-muted)] leading-relaxed mb-5">
 						{$t('about.freelance.body')}
 					</p>
 					<ul class="space-y-2 mb-6">
@@ -114,7 +114,7 @@
 
 					<!-- Stack section -->
 					<div class="p-6 md:p-7 border-b border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]">
-						<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-ink-faint)] mb-4">
+						<p class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-ink-faint)] mb-4">
 							{$t('about.profileCard.label')}
 						</p>
 						<ul class="space-y-2">
@@ -129,12 +129,12 @@
 
 					<!-- Stack chips -->
 					<div class="p-6 md:p-7 border-b border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]">
-						<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-ink-faint)] mb-4">
+						<p class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-ink-faint)] mb-4">
 							{$t('about.coreExpertise')}
 						</p>
 						<div class="flex flex-wrap gap-1.5">
 							{#each $t('about.highlights') as highlight}
-								<span class="px-2.5 py-1.5 rounded-md bg-[rgba(31,35,42,0.05)] dark:bg-[rgba(210,217,226,0.05)] border border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)] font-mono text-[11px] text-[var(--color-ink-strong)] uppercase tracking-[0.1em]">
+								<span class="px-2.5 py-1.5 rounded-md bg-[rgba(31,35,42,0.05)] dark:bg-[rgba(210,217,226,0.05)] border border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)] font-mono text-xs text-[var(--color-ink-strong)] uppercase tracking-[0.06em]">
 									{highlight}
 								</span>
 							{/each}

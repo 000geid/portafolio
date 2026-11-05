@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14181e"/>
+      <stop offset="100%" stop-color="#0e1115"/>
+    </linearGradient>
+    <linearGradient id="signal-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9bcbb1" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#355a4c" stop-opacity="0.9"/>
+    </linearGradient>
+    <pattern id="dot-grid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#9bcbb1" fill-opacity="0.07"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg-grad)"/>
+  <rect width="800" height="450" fill="url(#dot-grid)"/>
+
+  <!-- Top bar / Architecture Badge -->
+  <rect x="32" y="24" width="210" height="28" rx="14" fill="#1e242c" stroke="#9bcbb1" stroke-opacity="0.25"/>
+  <circle cx="48" cy="38" r="4" fill="#9bcbb1"/>
+  <text x="60" y="42" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#9bcbb1" letter-spacing="0.1em">LANGGRAPH RAG PIPELINE</text>
+
+  <rect x="636" y="24" width="132" height="28" rx="14" fill="#1b2e25" stroke="#9bcbb1" stroke-opacity="0.4"/>
+  <text x="702" y="42" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#9bcbb1">+30% THROUGHPUT</text>
+
+  <!-- Pipeline Flow Nodes -->
+  <!-- Node 1: Input Ingestion -->
+  <g transform="translate(48, 120)">
+    <rect width="180" height="210" rx="12" fill="#181d24" stroke="rgba(210,217,226,0.12)" stroke-width="1.5"/>
+    <rect x="16" y="16" width="48" height="20" rx="4" fill="#202732"/>
+    <text x="40" y="30" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#959eac">INGEST</text>
+    <text x="16" y="64" font-family="'DM Sans', sans-serif" font-size="16" font-weight="600" fill="#eceef3">Multi-Channel</text>
+    <text x="16" y="84" font-family="'DM Sans', sans-serif" font-size="13" fill="#959eac">Social Integrations</text>
+
+    <g transform="translate(16, 110)">
+      <rect width="148" height="34" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">Meta Graph API</text>
+    </g>
+    <g transform="translate(16, 154)">
+      <rect width="148" height="34" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">WhatsApp Webhooks</text>
+    </g>
+  </g>
+
+  <!-- Flow Arrow 1 to 2 -->
+  <path d="M236 225 L300 225" stroke="#9bcbb1" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="4 4"/>
+  <polygon points="304,225 296,220 296,230" fill="#9bcbb1"/>
+
+  <!-- Node 2: Core LangGraph Agent Orchestration (Highlighted) -->
+  <g transform="translate(310, 95)">
+    <rect width="210" height="260" rx="12" fill="#1a222b" stroke="#9bcbb1" stroke-opacity="0.5" stroke-width="2"/>
+    <rect x="16" y="16" width="90" height="22" rx="4" fill="#1b3329"/>
+    <text x="61" y="31" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#9bcbb1">ORCHESTRATOR</text>
+    <text x="16" y="66" font-family="'DM Sans', sans-serif" font-size="18" font-weight="700" fill="#eceef3">LangGraph Core</text>
+    <text x="16" y="86" font-family="'DM Sans', sans-serif" font-size="13" fill="#959eac">State Graph &amp; RAG</text>
+
+    <!-- Sub-boxes -->
+    <g transform="translate(16, 108)">
+      <rect width="178" height="36" rx="6" fill="#12161b" stroke="#9bcbb1" stroke-opacity="0.2"/>
+      <text x="12" y="23" font-family="'JetBrains Mono', monospace" font-size="11" fill="#9bcbb1">State Router &amp; Guard</text>
+    </g>
+    <g transform="translate(16, 154)">
+      <rect width="178" height="36" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="23" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">Hybrid Vector Retr.</text>
+    </g>
+    <g transform="translate(16, 200)">
+      <rect width="178" height="36" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="23" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">Context Synthesis</text>
+    </g>
+  </g>
+
+  <!-- Flow Arrow 2 to 3 -->
+  <path d="M528 225 L576 225" stroke="#9bcbb1" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="4 4"/>
+  <polygon points="580,225 572,220 572,230" fill="#9bcbb1"/>
+
+  <!-- Node 3: Execution & Microservices -->
+  <g transform="translate(584, 120)">
+    <rect width="170" height="210" rx="12" fill="#181d24" stroke="rgba(210,217,226,0.12)" stroke-width="1.5"/>
+    <rect x="16" y="16" width="68" height="20" rx="4" fill="#202732"/>
+    <text x="50" y="30" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#959eac">DEPLOY</text>
+    <text x="16" y="64" font-family="'DM Sans', sans-serif" font-size="16" font-weight="600" fill="#eceef3">Production</text>
+    <text x="16" y="84" font-family="'DM Sans', sans-serif" font-size="13" fill="#959eac">Microservices Cluster</text>
+
+    <g transform="translate(16, 110)">
+      <rect width="138" height="34" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">Docker Swarm</text>
+    </g>
+    <g transform="translate(16, 154)">
+      <rect width="138" height="34" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">VPS Cloud Edge</text>
+    </g>
+  </g>
+
+  <!-- Subtle Metric Line at Bottom -->
+  <line x1="48" y1="390" x2="752" y2="390" stroke="rgba(210,217,226,0.08)"/>
+  <text x="48" y="415" font-family="'JetBrains Mono', monospace" font-size="10" fill="#6d7685">PARALLEL CONCURRENCY · LOW-LATENCY RETRIEVAL · REAL-TIME TOKEN STREAMING</text>
+</svg>

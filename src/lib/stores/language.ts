@@ -11,7 +11,7 @@ function syncLangCookie(lang: Language) {
 }
 
 function createLanguage() {
-	const { subscribe, set, update } = writable<Language>('es');
+	const { subscribe, set, update } = writable<Language>('en');
 
 	return {
 		subscribe,
@@ -34,7 +34,14 @@ function createLanguage() {
 		init: () => {
 			if (typeof window !== 'undefined') {
 				const stored = localStorage.getItem(KEY) as Language | null;
-				const value: Language = stored === 'en' || stored === 'es' ? stored : 'es';
+				let value: Language = 'en';
+				if (stored === 'en' || stored === 'es') {
+					value = stored;
+				} else if (typeof navigator !== 'undefined' && navigator.language?.toLowerCase().startsWith('es')) {
+					value = 'es';
+				} else {
+					value = 'en';
+				}
 				set(value);
 				syncLangCookie(value);
 			}

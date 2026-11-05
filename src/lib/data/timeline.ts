@@ -3,6 +3,7 @@ export interface WorkExperience {
   title_es: string
   title_en: string
   company: string
+  company_en?: string
   startDate: string
   endDate: string | null
   description_es: string
@@ -41,6 +42,7 @@ export const timelineData: WorkExperience[] = [
     title_es: 'Desarrollador Freelance',
     title_en: 'Freelance Developer',
     company: 'Independiente',
+    company_en: 'Independent / Freelance',
     startDate: '2024-01-01',
     endDate: '2024-12-31',
     description_es: 'Diseñé y desarrollé soluciones de software a medida para más de 10 clientes, cubriendo el ciclo completo del producto: desde la definición del problema hasta el despliegue en producción.',
@@ -64,6 +66,7 @@ export const timelineData: WorkExperience[] = [
     title_es: 'Desarrollador Fullstack',
     title_en: 'Fullstack Developer',
     company: 'Proyecto de IA aplicada a Salud – Universidad Austral',
+    company_en: 'Healthcare AI Initiative – Universidad Austral',
     startDate: '2023-03-01',
     endDate: '2023-12-31',
     description_es: 'Participé en el desarrollo de un sistema de detección de anomalías en radiografías de tórax, utilizado como soporte en la toma de decisiones médicas.',

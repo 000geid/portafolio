@@ -5,6 +5,8 @@
 	import { reveal } from '$lib/actions/reveal';
 	import SectionPageHeader from '$lib/components/SectionPageHeader.svelte';
 
+	export let embedded: boolean = false;
+
 	type EducationTab = 'degrees' | 'diplomas';
 
 	let panel: EducationTab = 'degrees';
@@ -49,14 +51,28 @@
 	}
 </script>
 
-<section id="education" class="scroll-mt-32 py-14 md:py-20 px-4 md:px-6 max-w-7xl mx-auto">
-	<SectionPageHeader layout="split" kicker={$t('education.kicker')} title={$t('education.title')}>
-		<svelte:fragment slot="aside">
-			<p class="font-body text-sm md:text-base text-[var(--color-ink-muted)] leading-relaxed pl-4 border-l-2 border-[var(--color-signal)] rounded-sm">
+<section
+	id="education"
+	class="scroll-mt-24 {embedded ? 'pt-16 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]' : 'py-14 md:py-20 px-4 md:px-6 max-w-7xl mx-auto'}"
+>
+	{#if embedded}
+		<header class="mb-8 md:mb-10">
+			<h2 class="font-display font-bold text-3xl md:text-4xl tracking-tight text-[var(--color-ink-strong)] leading-snug mb-3">
+				{$t('education.title')}
+			</h2>
+			<p class="font-body text-base text-[var(--color-ink-muted)] leading-relaxed max-w-xl">
 				{$t('meta.education')}
 			</p>
-		</svelte:fragment>
-	</SectionPageHeader>
+		</header>
+	{:else}
+		<SectionPageHeader layout="split" kicker={$t('education.kicker')} title={$t('education.title')}>
+			<svelte:fragment slot="aside">
+				<p class="font-body text-base text-[var(--color-ink-muted)] leading-relaxed">
+					{$t('meta.education')}
+				</p>
+			</svelte:fragment>
+		</SectionPageHeader>
+	{/if}
 
 	<!-- Segmented control -->
 	<div
@@ -74,7 +90,7 @@
 			tabindex={panel === 'degrees' ? 0 : -1}
 			onkeydown={(e) => tabsKeydown(e, 'degrees')}
 			onclick={() => setPanel('degrees')}
-			class="relative px-5 py-2.5 rounded-lg font-body text-[11px] font-semibold uppercase tracking-[0.16em] transition-all duration-200
+			class="relative px-5 py-2.5 min-h-[44px] flex items-center rounded-lg font-body text-xs font-semibold uppercase tracking-[0.08em] transition-all duration-200
 				{panel === 'degrees'
 					? 'bg-[var(--color-ink-strong)] text-[var(--color-parchment)] dark:bg-[var(--color-elevated)] dark:text-[var(--color-ink-strong)] shadow-sm'
 					: 'text-[var(--color-ink-muted)] hover:text-[var(--color-ink-strong)]'}"
@@ -91,7 +107,7 @@
 			tabindex={panel === 'diplomas' ? 0 : -1}
 			onkeydown={(e) => tabsKeydown(e, 'diplomas')}
 			onclick={() => setPanel('diplomas')}
-			class="relative px-5 py-2.5 rounded-lg font-body text-[11px] font-semibold uppercase tracking-[0.16em] transition-all duration-200
+			class="relative px-5 py-2.5 min-h-[44px] flex items-center rounded-lg font-body text-xs font-semibold uppercase tracking-[0.08em] transition-all duration-200
 				{panel === 'diplomas'
 					? 'bg-[var(--color-ink-strong)] text-[var(--color-parchment)] dark:bg-[var(--color-elevated)] dark:text-[var(--color-ink-strong)] shadow-sm'
 					: 'text-[var(--color-ink-muted)] hover:text-[var(--color-ink-strong)]'}"
@@ -116,24 +132,24 @@
 						style="animation-delay: {index * 90}ms"
 						use:reveal
 					>
-						<div class="rounded-xl border border-[rgba(31,35,42,0.1)] dark:border-[rgba(210,217,226,0.1)] bg-[var(--color-elevated)]/80 dark:bg-[var(--color-parchment-alt)]/80 overflow-hidden border-l-[3px] border-l-[var(--color-signal)]">
+						<div class="rounded-xl border border-[rgba(31,35,42,0.1)] dark:border-[rgba(210,217,226,0.1)] bg-[var(--color-elevated)] dark:bg-[var(--color-parchment-alt)] overflow-hidden">
 							<div class="px-5 py-5 md:px-7 md:py-6">
 								<!-- Header row -->
 								<div class="flex flex-wrap items-start justify-between gap-3 mb-3">
 									<div class="flex items-center gap-2.5">
 										{#if item.dates === 'Current'}
-											<span class="flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--color-signal)]">
+											<span class="flex items-center gap-1.5 font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-signal)]">
 												<span class="w-1.5 h-1.5 rounded-full bg-[var(--color-signal)] status-pulse" aria-hidden="true"></span>
 												{$t('education.current')}
 											</span>
 										{:else}
-											<span class="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--color-ink-faint)]">
+											<span class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-ink-faint)]">
 												{$t('education.completed')}
 											</span>
 										{/if}
 									</div>
 									{#if item.location}
-										<span class="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--color-ink-faint)] flex items-center gap-1.5">
+										<span class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-ink-faint)] flex items-center gap-1.5">
 											<svg class="w-3 h-3 shrink-0 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -144,7 +160,7 @@
 								</div>
 
 								<!-- Institution -->
-								<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-ink-faint)] mb-1.5">
+								<p class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-ink-faint)] mb-1.5">
 									{item.institution}
 								</p>
 
@@ -154,7 +170,7 @@
 								</h3>
 
 								<!-- Description -->
-								<p class="font-body text-sm md:text-[0.9375rem] text-[var(--color-ink-muted)] leading-relaxed">
+								<p class="font-body text-sm md:text-base text-[var(--color-ink-muted)] leading-relaxed">
 									{$language === 'es' ? item.description_es : item.description_en}
 								</p>
 							</div>
@@ -174,22 +190,22 @@
 			aria-labelledby="education-tab-diplomas"
 		>
 			{#if diplomasData.length === 0}
-				<p class="font-mono text-[12px] leading-relaxed text-[var(--color-ink-faint)] max-w-2xl">
+				<p class="font-mono text-xs leading-relaxed text-[var(--color-ink-faint)] max-w-2xl">
 					{$t('education.diplomasEmpty')}
 				</p>
 			{:else}
 				<ul class="space-y-4" role="list">
 					{#each diplomasSorted as d, index (d.id)}
 						<li class="reveal" style="animation-delay: {index * 70}ms" use:reveal>
-							<div class="rounded-xl border border-[rgba(31,35,42,0.1)] dark:border-[rgba(210,217,226,0.1)] bg-[var(--color-elevated)]/80 dark:bg-[var(--color-parchment-alt)]/80 overflow-hidden border-l-[3px] border-l-[var(--color-signal)]">
+							<div class="rounded-xl border border-[rgba(31,35,42,0.1)] dark:border-[rgba(210,217,226,0.1)] bg-[var(--color-elevated)] dark:bg-[var(--color-parchment-alt)] overflow-hidden">
 								<div class="px-5 py-5 md:px-7 md:py-6">
 									<!-- Header row: issuer + year -->
 									<div class="flex items-center justify-between gap-3 mb-1.5">
-										<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-ink-faint)]">
+										<p class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-ink-faint)]">
 											{issuer(d)}
 										</p>
 										{#if d.year}
-											<span class="font-mono text-[10px] tabular-nums tracking-wide text-[var(--color-ink-faint)]">
+											<span class="font-mono text-xs tabular-nums tracking-wide text-[var(--color-ink-faint)]">
 												{d.year}
 											</span>
 										{/if}

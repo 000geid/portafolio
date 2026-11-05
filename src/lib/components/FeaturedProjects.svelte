@@ -1,57 +1,47 @@
 <script lang="ts">
 	import { t } from '$lib/stores/i18n';
 	import { language } from '$lib/stores/language';
-	import { selectedProjects } from '$lib/data/projects';
+	import { selectedProjects, type SelectedProject } from '$lib/data/projects';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
-	import { reveal } from '$lib/actions/reveal';
+	import ChevronDown from 'lucide-svelte/icons/chevron-down';
+
+	const featured = selectedProjects.filter((project) => project.featured);
+	const additional = selectedProjects.filter((project) => !project.featured);
 </script>
 
-<section id="featured-work" aria-labelledby="featured-work-title" class="scroll-mt-8">
-	<header class="mb-6 md:mb-8">
-		<p class="font-mono text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-signal)] mb-3">
-			{$t('home.featured.kicker')}
-		</p>
-		<h2
-			id="featured-work-title"
-			class="font-display font-bold text-3xl md:text-4xl tracking-tighter text-[var(--color-ink-strong)] leading-[1.03]"
-		>
-			{$t('home.featured.title')}
-		</h2>
-	</header>
-
-	<ol class="space-y-6 md:space-y-8">
-		{#each selectedProjects as project (project.id)}
-			{@const copy = project[$language]}
-			<li class="reveal" use:reveal>
+{#snippet projectList(projects: SelectedProject[])}
+	<ul class="divide-y divide-[color-mix(in_srgb,var(--color-ink)_16%,transparent)] border-t border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
+		{#each projects as project (project.id)}
+			<li class="pt-5 pb-3 md:pt-6 md:pb-4">
 				<ProjectCard
-					title={copy.title}
-					tagline={copy.tagline}
+					{...project[$language]}
 					year={project.year}
 					mediaUrl={project.mediaUrl}
 					liveUrl={project.liveUrl}
 					githubUrl={project.githubUrl}
 					statusLabel={$t(`projects.card.access.${project.access ?? 'private'}`)}
-					role={copy.role}
 					techStack={project.techStack}
-					architecture={copy.architecture}
-					impact={copy.impact}
 				/>
 			</li>
 		{/each}
-	</ol>
+	</ul>
+{/snippet}
+
+<section id="featured-work" tabindex="-1" aria-labelledby="featured-work-title" class="scroll-mt-8">
+	<h2
+		id="featured-work-title"
+		class="font-display font-bold text-3xl md:text-4xl tracking-tight text-[var(--color-ink-strong)] leading-snug mb-4 md:mb-5"
+	>
+		{$t('home.featured.title')}
+	</h2>
+
+	{@render projectList(featured)}
+
+	<details class="group/more border-y border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
+		<summary class="flex items-center gap-2 min-h-11 py-3 cursor-pointer list-none font-body text-sm font-semibold text-[var(--color-ink-strong)] hover:text-[var(--color-signal)] [&::-webkit-details-marker]:hidden">
+			<ChevronDown class="w-4 h-4 group-open/more:rotate-180" strokeWidth={1.75} aria-hidden="true" />
+			{$t('home.featured.viewAll')}
+		</summary>
+		{@render projectList(additional)}
+	</details>
 </section>
-
-<style>
-	.reveal {
-		opacity: 0;
-		transform: translateY(14px);
-		transition:
-			opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-			transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-	}
-
-	.reveal:global(.visible) {
-		opacity: 1;
-		transform: translateY(0);
-	}
-</style>

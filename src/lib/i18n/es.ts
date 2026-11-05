@@ -1,27 +1,26 @@
 export const es = {
 	hero: {
 		name: 'Diego Alvarado',
-		subtitle: 'Product Engineer · Desarrollador Full-Stack',
-		description:
-			'Construyo productos de principio a fin—frontend, backend, APIs e infraestructura. Integro IA donde realmente suma valor: búsqueda inteligente, automatización y features de lenguaje que llegan a producción.',
+		subtitle: 'Product Engineer',
+		description: 'Construyo productos de software y llevo sistemas de IA a producción.',
 		toggleDarkMode: 'Cambiar modo oscuro'
 	},
 	meta: {
 		about:
-			'Product Engineer y Desarrollador Full-Stack con base en Buenos Aires—UI, APIs, bases de datos y sistemas en producción. Disponible para roles y proyectos freelance.',
+			'Product Engineer y Arquitecto de Sistemas Full-Stack en Buenos Aires—aplicaciones web completas, sistemas de IA en producción e infraestructura cloud.',
 		projects:
-			'Trabajo seleccionado: plataformas de IA, productos publicados y herramientas open source—con rol, arquitectura e impacto medible.',
+			'Trabajo seleccionado: plataformas de IA en producción, aplicaciones edge de escritorio y herramientas para developers—con arquitectura e impacto medible.',
 		skills:
-			'Stack agrupado por área: desarrollo full-stack, integración de IA/LLM, cloud y entrega continua.',
-		career: 'Línea de tiempo laboral y freelance: roles, alcance, clientes e IA aplicada a salud, con métricas.',
-		education: 'Títulos, diplomas y certificaciones.',
-		contact: 'Formas de contacto para roles o proyectos freelance.'
+			'Stack en producción: arquitectura de sistemas full-stack, orquestación de IA/RAG, cloud y entrega continua.',
+		career: 'Trayectoria profesional: liderazgo técnico, entrega a clientes e IA clínica aplicada en salud—con métricas.',
+		education: 'Títulos académicos, diplomas y credenciales verificadas.',
+		contact: 'Contacto para roles full-time y consultoría técnica especializada.'
 	},
 	about: {
 		title: 'Sobre mí',
 		kicker: 'Hola! Soy',
 		coreExpertise: 'Stack actual',
-		headline: 'Product Engineer · Desarrollador Full-Stack',
+		headline: 'Product Engineer · Arquitecto de Sistemas Full-Stack',
 		valueProp:
 			'Llevo proyectos del primer boceto a producción, con ownership completo del stack—frontend, APIs, bases de datos y despliegue. Cuando la IA mejora genuinamente el producto, también la construyo. Tres cosas que aporto a cada proyecto:',
 		sectorsIntro: 'Qué aporto',
@@ -41,7 +40,7 @@ export const es = {
 			clients: {
 				title: 'Trabajo con clientes',
 				points: [
-					'Entreggué proyectos para clientes en salud, SaaS y consumo—encargándome de todo, desde la definición del problema hasta el despliegue. Me comunico con claridad, cumplo plazos y dejo el código en un estado en que el próximo developer puede seguir trabajando. El trabajo representativo está en Proyectos.'
+					'Entregué proyectos para clientes en salud, SaaS y consumo—encargándome de todo, desde la definición del problema hasta el despliegue. Me comunico con claridad, cumplo plazos y dejo el código en un estado en que el próximo developer puede seguir trabajando. El trabajo representativo está en Proyectos.'
 				]
 			}
 		},
@@ -124,6 +123,8 @@ export const es = {
 		card: {
 			role: 'Rol',
 			stack: 'Stack',
+			details: 'Detalles técnicos',
+			diagram: 'Diagrama de arquitectura',
 			architecture: 'Arquitectura',
 			impact: 'Impacto',
 			liveDemo: 'Ver sitio en vivo',
@@ -139,7 +140,11 @@ export const es = {
 	contact: {
 		title: 'Contacto',
 		kicker: 'Conéctate',
-		description: 'Busco un rol de product engineer o desarrollador full-stack—remote-first, desde Buenos Aires (GMT-3). También acepto proyectos freelance: productos, integraciones de API y features de IA.',
+		description: 'Disponible para roles remotos de Product Engineer a tiempo completo y para consultorías técnicas puntuales.',
+		emailSubject: 'Oportunidad de Product Engineering / Arquitectura',
+		ctaEmail: 'Enviar un correo',
+		downloadCv: 'Descargar CV',
+		backToTop: 'Volver arriba',
 		github: 'GitHub',
 		linkedin: 'LinkedIn',
 		email: 'Correo',
@@ -152,20 +157,16 @@ export const es = {
 	},
 	home: {
 		meta: {
-			title: 'Product Engineer · Desarrollador Full-Stack',
-			description:
-				'Product Engineer con base en Buenos Aires—productos full-stack y features de IA en producción. Disponible para roles y proyectos freelance.'
+			title: 'Product Engineer',
+			description: 'Diego Alvarado, Product Engineer. Construyo productos de software y llevo sistemas de IA a producción.'
 		},
 		indexLabel: 'Empezá acá',
 		flowHint:
 			'De IA para diagnóstico médico a SaaS full-stack—productos construidos de punta a punta y corriendo en producción.',
-		availability: {
-			openToRoles: 'Disponible para roles'
-		},
 		featured: {
 			kicker: 'Trabajo publicado',
 			title: 'Proyectos destacados',
-			viewAll: 'Ver todos los proyectos'
+			viewAll: 'Ver otros proyectos'
 		},
 		audience: {
 			hiring: {

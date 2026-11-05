@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="bg-grad-maxi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14181e"/>
+      <stop offset="100%" stop-color="#0e1115"/>
+    </linearGradient>
+    <pattern id="dot-grid-maxi" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#9bcbb1" fill-opacity="0.07"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg-grad-maxi)"/>
+  <rect width="800" height="450" fill="url(#dot-grid-maxi)"/>
+
+  <!-- Top bar / Architecture Badge -->
+  <rect x="32" y="24" width="270" height="28" rx="14" fill="#1e242c" stroke="#9bcbb1" stroke-opacity="0.25"/>
+  <circle cx="48" cy="38" r="4" fill="#9bcbb1"/>
+  <text x="60" y="42" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#9bcbb1" letter-spacing="0.1em">CLINICAL DEEP LEARNING (CDS)</text>
+
+  <rect x="580" y="24" width="188" height="28" rx="14" fill="#1b2e25" stroke="#9bcbb1" stroke-opacity="0.4"/>
+  <text x="674" y="42" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#9bcbb1">70% AUROC · ~6K/MO X-RAYS</text>
+
+  <!-- Node 1: Hospital PACS & DICOM -->
+  <g transform="translate(48, 110)">
+    <rect width="190" height="230" rx="12" fill="#181d24" stroke="rgba(210,217,226,0.12)" stroke-width="1.5"/>
+    <rect x="16" y="16" width="70" height="22" rx="4" fill="#202732"/>
+    <text x="51" y="31" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#959eac">HOSPITAL</text>
+    <text x="16" y="66" font-family="'DM Sans', sans-serif" font-size="17" font-weight="700" fill="#eceef3">DICOM Stream</text>
+    <text x="16" y="86" font-family="'DM Sans', sans-serif" font-size="13" fill="#959eac">Clinical Image Feed</text>
+
+    <g transform="translate(16, 110)">
+      <rect width="158" height="34" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">PACS Network Gateway</text>
+    </g>
+    <g transform="translate(16, 154)">
+      <rect width="158" height="34" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">16-bit Radiography</text>
+    </g>
+  </g>
+
+  <!-- Flow Arrow 1 to 2 -->
+  <path d="M246 225 L294 225" stroke="#9bcbb1" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="4 4"/>
+  <polygon points="298,225 290,220 290,230" fill="#9bcbb1"/>
+
+  <!-- Node 2: Preprocessing & PyTorch CNN (Core) -->
+  <g transform="translate(304, 95)">
+    <rect width="216" height="260" rx="12" fill="#1a222b" stroke="#9bcbb1" stroke-opacity="0.5" stroke-width="2"/>
+    <rect x="16" y="16" width="94" height="22" rx="4" fill="#1b3329"/>
+    <text x="63" y="31" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#9bcbb1">AI INFERENCE</text>
+    <text x="16" y="66" font-family="'DM Sans', sans-serif" font-size="18" font-weight="700" fill="#eceef3">PyTorch CNN</text>
+    <text x="16" y="86" font-family="'DM Sans', sans-serif" font-size="13" fill="#959eac">Pretrained &amp; Fine-Tuned</text>
+
+    <g transform="translate(16, 108)">
+      <rect width="184" height="36" rx="6" fill="#12161b" stroke="#9bcbb1" stroke-opacity="0.2"/>
+      <text x="12" y="23" font-family="'JetBrains Mono', monospace" font-size="11" fill="#9bcbb1">CLAHE Normalization</text>
+    </g>
+    <g transform="translate(16, 154)">
+      <rect width="184" height="36" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="23" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">Thorax Anomaly Head</text>
+    </g>
+    <g transform="translate(16, 200)">
+      <rect width="184" height="36" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="23" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">Grad-CAM Heatmaps</text>
+    </g>
+  </g>
+
+  <!-- Flow Arrow 2 to 3 -->
+  <path d="M528 225 L570 225" stroke="#9bcbb1" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="4 4"/>
+  <polygon points="574,225 566,220 566,230" fill="#9bcbb1"/>
+
+  <!-- Node 3: Clinical Decision Interface -->
+  <g transform="translate(580, 110)">
+    <rect width="172" height="230" rx="12" fill="#181d24" stroke="rgba(210,217,226,0.12)" stroke-width="1.5"/>
+    <rect x="16" y="16" width="60" height="22" rx="4" fill="#202732"/>
+    <text x="46" y="31" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#959eac">DOCTOR</text>
+    <text x="16" y="66" font-family="'DM Sans', sans-serif" font-size="17" font-weight="700" fill="#eceef3">Gradio CDS</text>
+    <text x="16" y="86" font-family="'DM Sans', sans-serif" font-size="13" fill="#959eac">Physician Review UI</text>
+
+    <g transform="translate(16, 110)">
+      <rect width="140" height="34" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">Anomaly Scores</text>
+    </g>
+    <g transform="translate(16, 154)">
+      <rect width="140" height="34" rx="6" fill="#12161b" stroke="rgba(210,217,226,0.08)"/>
+      <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cfd5de">On-Prem Server</text>
+    </g>
+  </g>
+
+  <line x1="48" y1="380" x2="752" y2="380" stroke="rgba(210,217,226,0.08)"/>
+  <text x="48" y="405" font-family="'JetBrains Mono', monospace" font-size="10" fill="#6d7685">HIPAA/PATIENT PRIVACY COMPLIANT · AIR-GAPPED ON-PREMISE DEPLOYMENT · ACTIVE HOSPITAL USE</text>
+</svg>

@@ -1,21 +1,20 @@
 export const en = {
 	hero: {
 		name: 'Diego Alvarado',
-		subtitle: 'Product Engineer · Full-Stack Developer',
-		description:
-			'I build products from first line to production—owning frontend, backend, APIs, and the infrastructure that holds it all. I bring AI into products where it genuinely adds value: smarter search, automation, and language features that ship reliably.',
+		subtitle: 'Product Engineer',
+		description: 'I build software products and bring AI systems into production.',
 		toggleDarkMode: 'Toggle dark mode'
 	},
 	meta: {
 		about:
-			'Product Engineer and Full-Stack Developer based in Buenos Aires—UI, APIs, databases, and production systems. Available for roles and freelance projects.',
+			'Product Engineer and Full-Stack Systems Architect based in Buenos Aires—end-to-end web apps, production AI systems, and cloud infrastructure.',
 		projects:
-			'Selected work: AI platforms, shipped products, and open-source tools—with role, architecture, and measurable impact.',
+			'Selected work: production AI platforms, edge desktop systems, and developer tooling—with architecture and quantifiable impact.',
 		skills:
-			'Stack grouped by area: full-stack engineering, AI/LLM integration, cloud and delivery.',
-		career: 'Employment and freelance timeline: roles, scope, clients, and applied ML in healthcare—with metrics.',
-		education: 'Formal degrees, diplomas and certificates.',
-		contact: 'Ways to reach me for roles or freelance projects.'
+			'Production stack: full-stack systems engineering, AI/RAG orchestration, and cloud delivery.',
+		career: 'Career journey: engineering leadership, client delivery, and applied clinical AI in healthcare—with metrics.',
+		education: 'Formal degrees, diplomas and verified credentials.',
+		contact: 'Get in touch for full-time senior roles and select consulting engagements.'
 	},
 	about: {
 		title: 'About',
@@ -125,6 +124,8 @@ export const en = {
 		card: {
 			role: 'Role',
 			stack: 'Tech stack',
+			details: 'Technical details',
+			diagram: 'Architecture diagram',
 			architecture: 'Architecture',
 			impact: 'Impact',
 			liveDemo: 'View live site',
@@ -140,7 +141,11 @@ export const en = {
 	contact: {
 		title: 'Contact',
 		kicker: 'Connect',
-		description: 'Looking for a product engineering or full-stack role—remote-first, based in Buenos Aires (GMT-3). Also taking freelance projects: product builds, API integrations, and AI features.',
+		description: 'Open to full-time remote Product Engineer roles and select technical consulting.',
+		emailSubject: 'Product Engineering / Architecture opportunity',
+		ctaEmail: 'Send an email',
+		downloadCv: 'Download CV',
+		backToTop: 'Back to top',
 		github: 'GitHub',
 		linkedin: 'LinkedIn',
 		email: 'Email',
@@ -153,20 +158,16 @@ export const en = {
 	},
 	home: {
 		meta: {
-			title: 'Product Engineer · Full-Stack Developer',
-			description:
-				'Product Engineer based in Buenos Aires—shipping full-stack products and AI features to production. Open to roles and freelance projects.'
+			title: 'Product Engineer',
+			description: 'Diego Alvarado, Product Engineer. I build software products and bring AI systems into production.'
 		},
 		indexLabel: 'Start here',
 		flowHint:
 			'From medical imaging AI to full-stack SaaS—products built end to end, in production.',
-		availability: {
-			openToRoles: 'Open to roles'
-		},
 		featured: {
 			kicker: 'Proof of work',
 			title: 'Featured projects',
-			viewAll: 'View all projects'
+			viewAll: 'See more projects'
 		},
 		audience: {
 			hiring: {

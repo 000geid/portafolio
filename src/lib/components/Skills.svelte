@@ -2,47 +2,27 @@
 	import { t } from '$lib/stores/i18n';
 	import { language } from '$lib/stores/language';
 	import { skillsData } from '$lib/data/skills';
-	import type { SkillCategoryAccent } from '$lib/data/skills';
 	import { reveal } from '$lib/actions/reveal';
 
-	function accentBorderClass(accent: SkillCategoryAccent): string {
-		return accent === 'primary'
-			? 'border-l-[var(--color-primary)]'
-			: 'border-l-[var(--color-secondary)]';
-	}
+	let { embedded = false }: { embedded?: boolean } = $props();
 </script>
 
-<section id="skills" class="scroll-mt-32 py-14 md:py-20 px-4 md:px-6">
-	<div class="max-w-4xl mx-auto">
-		<header class="mb-12 md:mb-16">
-			<p class="font-mono text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-signal)] mb-3">
-				{$t('skills.kicker')}
-			</p>
+<section
+	id="skills"
+	class="scroll-mt-24 {embedded ? 'pt-16 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]' : 'py-14 md:py-20 px-4 md:px-6'}"
+>
+	<div class="{embedded ? 'w-full' : 'max-w-4xl mx-auto'}">
+		<header class="mb-8 md:mb-10">
 			<h2
-				class="font-display font-bold text-4xl md:text-5xl lg:text-6xl tracking-tighter text-[var(--color-ink-strong)] leading-[1.03] mb-6 md:mb-8"
+				class="font-display font-bold {embedded ? 'text-3xl md:text-4xl' : 'text-4xl md:text-5xl lg:text-6xl'} tracking-tight text-[var(--color-ink-strong)] leading-snug mb-3"
 			>
 				{$t('skills.title')}
 			</h2>
-			<div class="max-w-2xl h-px bg-[rgba(31,35,42,0.12)] dark:bg-[rgba(210,217,226,0.12)]"></div>
 			<p
-				class="font-body text-base md:text-lg text-[var(--color-ink-muted)] leading-relaxed max-w-2xl mt-6 md:mt-8"
+				class="font-body text-base text-[var(--color-ink-muted)] leading-relaxed max-w-xl"
 			>
 				{$t('skills.intro')}
 			</p>
-
-			<!-- At-a-glance tech strip -->
-			<div class="mt-8">
-				<p class="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--color-ink-faint)] mb-4">
-					{$t('skills.atGlanceLabel')}
-				</p>
-				<div class="flex flex-wrap gap-2" aria-label={$t('skills.atGlanceLabel')}>
-					{#each skillsData.flatMap(c => c.skills) as skill}
-						<span class="px-3 py-1.5 rounded-full font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--color-ink-strong)] bg-[rgba(31,35,42,0.05)] dark:bg-[rgba(210,217,226,0.06)] ring-1 ring-[rgba(31,35,42,0.1)] dark:ring-[rgba(210,217,226,0.12)]">
-							{skill}
-						</span>
-					{/each}
-				</div>
-			</div>
 		</header>
 
 		<div class="flow-root border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]">
@@ -56,9 +36,7 @@
 					aria-labelledby={`skill-heading-${category.name}`}
 				>
 					<div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-12 xl:gap-14">
-						<div
-							class="border-l-[3px] pl-5 md:pl-6 {accentBorderClass(category.accent)} lg:w-[12rem] lg:shrink-0"
-						>
+						<div class="lg:w-[12rem] lg:shrink-0">
 							<h3
 								id={`skill-heading-${category.name}`}
 								class="font-display font-semibold text-2xl md:text-[1.65rem] tracking-tight text-[var(--color-ink-strong)] leading-snug"
@@ -73,7 +51,7 @@
 						<div class="min-w-0 flex-1 space-y-7">
 							<div>
 								<p
-									class="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--color-ink-faint)] mb-4"
+									class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-ink-faint)] mb-3"
 									id="skills-practice-{category.name}"
 								>
 									{$t('skills.practiceLabel')}
@@ -84,7 +62,7 @@
 								>
 									{#each category.bullets[$language] as line}
 										<li
-											class="font-body text-[0.95rem] md:text-base text-[var(--color-ink-muted)] leading-relaxed pl-1 md:pl-2"
+											class="font-body text-sm md:text-base text-[var(--color-ink-muted)] leading-relaxed pl-1 md:pl-2"
 										>
 											{line}
 										</li>
@@ -93,14 +71,14 @@
 							</div>
 
 							<div>
-								<p class="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--color-ink-faint)] mb-3">
+								<p class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-ink-faint)] mb-3">
 									{$t('skills.toolsLabel')}
 								</p>
 								<ul class="flex flex-wrap gap-x-2 gap-y-2" aria-label={$t(`skills.${category.name}`)}>
 									{#each category.skills as skill}
 										<li>
 											<span
-												class="inline-block rounded-md px-2.5 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-[var(--color-ink-muted)] ring-1 ring-[rgba(31,35,42,0.1)] bg-[rgba(31,35,42,0.04)] transition-[ring-color] duration-200 dark:bg-[rgba(210,217,226,0.06)] dark:ring-[rgba(210,217,226,0.12)]"
+												class="inline-block rounded-md px-2.5 py-1 font-mono text-xs font-medium text-[var(--color-ink-strong)] ring-1 ring-[rgba(31,35,42,0.1)] bg-[rgba(31,35,42,0.04)] transition-[ring-color] duration-200 dark:bg-[rgba(210,217,226,0.06)] dark:ring-[rgba(210,217,226,0.12)]"
 											>
 												{skill}
 											</span>
