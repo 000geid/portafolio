@@ -8,6 +8,7 @@
 	import Education from '$lib/components/Education.svelte';
 	import Contact from '$lib/components/Contact.svelte';
 	import SiteControls from '$lib/components/SiteControls.svelte';
+	import ArrowDown from 'lucide-svelte/icons/arrow-down';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 
 	const cvHref = $derived($language === 'es' ? '/cv/cv-es.pdf' : '/cv/cv-en.pdf');
@@ -47,14 +48,19 @@
 	</header>
 
 	<main id="main-content" class="min-w-0">
-		<section aria-labelledby="intro-title" class="intro grid items-end gap-3 border-b border-[var(--color-rule)] py-6 md:py-8">
-			<div>
-				<h1 id="intro-title" class="font-display text-[clamp(2.45rem,5.1vw,4.25rem)] leading-none font-bold tracking-tight text-[var(--color-ink-strong)]">
-					{$t('hero.name')}
-				</h1>
-				<p class="mt-1.5 text-[var(--color-ink-muted)]">{$t('hero.subtitle')}</p>
-			</div>
-			<p class="max-w-[34ch] text-lg leading-snug md:text-xl lg:text-[1.375rem]">{$t('hero.description')}</p>
+		<section aria-labelledby="intro-title" class="border-b border-[var(--color-rule)] pt-9 pb-8 md:pt-14 md:pb-12">
+			<h1 id="intro-title" class="max-w-[26ch] font-display text-[clamp(2.5rem,6.6vw,6rem)] leading-[0.98] font-semibold tracking-tight text-balance text-[var(--color-ink-strong)]">
+				{$t('hero.headline')}
+			</h1>
+			<p class="mt-4 text-sm text-[var(--color-ink-muted)] md:mt-5 md:text-base">
+				<strong class="font-semibold text-[var(--color-ink-strong)]">{$t('hero.name')}</strong>
+				<span class="mx-1" aria-hidden="true">·</span>{$t('hero.subtitle')}
+			</p>
+			<p class="mt-2 max-w-[54ch] leading-relaxed text-pretty md:text-lg">{$t('hero.scope')}</p>
+			<a href="#featured-work" class="mt-5 inline-flex min-h-11 items-center gap-2.5 rounded-sm bg-[var(--color-ink-strong)] px-4 text-sm font-semibold text-[var(--color-parchment)] hover:bg-[var(--color-ink)] md:mt-6">
+				{$t('about.ctaProjects')}
+				<ArrowDown class="size-4" strokeWidth={1.75} aria-hidden="true" />
+			</a>
 		</section>
 
 		<FeaturedProjects editorial={true} />
@@ -93,12 +99,5 @@
 
 	nav a:hover {
 		color: var(--color-signal);
-	}
-
-	@media (min-width: 768px) {
-		.intro {
-			grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-			column-gap: clamp(2.5rem, 8vw, 7.625rem);
-		}
 	}
 </style>

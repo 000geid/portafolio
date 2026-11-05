@@ -2,6 +2,8 @@ export const es = {
 	hero: {
 		name: 'Diego Alvarado',
 		subtitle: 'Product Engineer',
+		headline: 'Llevo productos de la primera versión a producción.',
+		scope: 'Trabajo en todo el stack, desde la interfaz hasta el despliegue, e integro IA cuando aporta valor.',
 		description: 'Construyo productos de software y llevo sistemas de IA a producción.',
 		toggleDarkMode: 'Cambiar modo oscuro'
 	},
