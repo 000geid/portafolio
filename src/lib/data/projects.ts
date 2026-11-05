@@ -93,7 +93,7 @@ export const selectedProjects: SelectedProject[] = [
       role: 'Desarrollo full-stack e IA',
       architecture:
         'Pipeline de preprocesamiento de imágenes médicas y fine-tuning de CNN servido mediante Gradio en servidores del hospital.',
-      impact: 'Procesa unas 6.000 radiografías de tórax al mes en flujos clínicos activos.',
+      impact: '≈6.000 radiografías de tórax procesadas al mes en flujos clínicos activos.',
       impactDetail: '70% de AUROC en producción, con unas 200 radiografías procesadas por día.'
     },
     en: {
@@ -102,7 +102,7 @@ export const selectedProjects: SelectedProject[] = [
       role: 'Full-stack and AI development',
       architecture:
         'Medical imaging preprocessing & CNN fine-tuning pipeline served via Gradio on hospital servers.',
-      impact: 'Processes about 6,000 chest X-rays a month in active clinical workflows.',
+      impact: '≈6,000 chest X-rays processed per month in active clinical workflows.',
       impactDetail: '70% AUROC in production, with about 200 X-rays processed per day.'
     },
     techStack: ['PyTorch', 'CNNs', 'Python', 'Gradio', 'On-Premise Infrastructure'],

@@ -2,55 +2,63 @@
 @import "tw-animate-css";
 
 @theme {
-	/* Portfolio default · cool stone parchment + muted sage accent */
+	/* Portfolio default · warm ivory paper and brick ink */
 	--font-display: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
 	--font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
 	--font-mono: "JetBrains Mono", ui-monospace, monospace;
 	--font-family-mono: var(--font-mono);
 	--font-sans: var(--font-body);
 
-	--color-ink-strong: #171a1f;
-	--color-ink: #2f3540;
-	--color-ink-muted: #4e5664;
-	--color-ink-faint: #596373;
+	--color-ink-strong: #211c16;
+	--color-ink: #3c3025;
+	--color-ink-muted: #675645;
+	--color-ink-faint: #705947;
 
-	--color-parchment: #e8eaee;
-	--color-parchment-alt: #dde0e6;
-	--color-elevated: #f3f4f7;
+	--color-parchment: #f5eddb;
+	--color-parchment-alt: #ece1ca;
+	--color-elevated: #faf4e7;
 
-	--color-signal: #2d5043;
-	--color-signal-soft: rgba(45, 80, 67, 0.12);
+	--color-signal: #a43620;
+	--color-signal-soft: rgba(164, 54, 32, 0.12);
 
-	--color-secondary: #4f6355;
-	--color-accent: #56687a;
+	--color-secondary: #6b5744;
+	--color-accent: #795a46;
 
 	--color-primary: var(--color-signal);
+	--color-rule: color-mix(in srgb, var(--color-ink-muted) 44%, transparent);
 	--color-surface: var(--color-parchment);
 	--color-surface-alt: var(--color-parchment-alt);
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Dark · portfolio default (cool charcoal, sage accent) */
+/* Dark · portfolio default (warm charcoal and terracotta) */
 .dark {
-	--color-ink-strong: #f4f6fa;
-	--color-ink: #dde2ea;
-	--color-ink-muted: #b0b8c4;
-	--color-ink-faint: #919ba8;
+	--color-ink-strong: #faf0df;
+	--color-ink: #e8d9c4;
+	--color-ink-muted: #c7b49e;
+	--color-ink-faint: #b6a28c;
 
-	--color-parchment: #121519;
-	--color-parchment-alt: #181c22;
-	--color-elevated: #1e232b;
+	--color-parchment: #221c17;
+	--color-parchment-alt: #2b231d;
+	--color-elevated: #342a22;
 
-	--color-signal: #9bcbb1;
-	--color-signal-soft: rgba(155, 203, 177, 0.18);
+	--color-signal: #f19b7c;
+	--color-signal-soft: rgba(241, 155, 124, 0.18);
 
-	--color-secondary: #6d9087;
-	--color-accent: #8799ab;
+	--color-secondary: #bda388;
+	--color-accent: #d8b497;
 
 	--color-primary: var(--color-signal);
 	--color-surface: var(--color-parchment);
 	--color-surface-alt: var(--color-parchment-alt);
+}
+
+@layer base {
+	:focus-visible {
+		outline: 2px solid var(--color-signal);
+		outline-offset: 4px;
+	}
 }
 
 html {

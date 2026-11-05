@@ -124,6 +124,7 @@ export const es = {
 			role: 'Rol',
 			stack: 'Stack',
 			details: 'Detalles técnicos',
+			viewArchitecture: 'Ver arquitectura',
 			diagram: 'Diagrama de arquitectura',
 			architecture: 'Arquitectura',
 			impact: 'Impacto',
@@ -166,7 +167,11 @@ export const es = {
 		featured: {
 			kicker: 'Trabajo publicado',
 			title: 'Proyectos destacados',
-			viewAll: 'Ver otros proyectos'
+			viewAll: 'Ver otros proyectos',
+			socialChannels: 'Canales sociales',
+			customRag: 'RAG personalizado',
+			diagramDescription: 'Las conversaciones de los canales sociales llegan a LangGraph, que se conecta a un pipeline RAG personalizado.',
+			diagramCaption: 'Vista simplificada · Muveran AI'
 		},
 		audience: {
 			hiring: {

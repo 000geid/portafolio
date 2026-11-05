@@ -8,7 +8,6 @@
 	import Education from '$lib/components/Education.svelte';
 	import Contact from '$lib/components/Contact.svelte';
 	import SiteControls from '$lib/components/SiteControls.svelte';
-	import ArrowDown from 'lucide-svelte/icons/arrow-down';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 
 	const cvHref = $derived($language === 'es' ? '/cv/cv-es.pdf' : '/cv/cv-en.pdf');
@@ -32,71 +31,74 @@
 	});
 </script>
 
-<div id="home" class="max-w-6xl mx-auto px-5 md:px-8 lg:px-12">
-	<header class="pt-6 pb-12 md:pt-8 md:pb-20 lg:pb-28">
-		<div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 mb-12 md:mb-20">
-			<p class="font-body text-sm text-[var(--color-ink-muted)]">Buenos Aires, Argentina</p>
-			<SiteControls />
-		</div>
-
-		<h1 class="font-display font-semibold text-5xl sm:text-6xl lg:text-7xl tracking-tight text-[var(--color-ink-strong)] leading-[1.05] mb-2">
-			{$t('hero.name')}
-		</h1>
-		<p class="font-body text-base sm:text-lg font-medium text-[var(--color-signal)]">
-			{$t('hero.subtitle')}
-		</p>
-		<p class="font-body text-base sm:text-lg text-[var(--color-ink)] leading-relaxed max-w-xl mt-4 lg:mt-6">
-			{$t('hero.description')}
-		</p>
-
-		<div class="mt-5 lg:mt-7 flex flex-wrap items-center gap-x-4 gap-y-1">
-			<a
-				href="#featured-work"
-				class="px-4 min-h-11 rounded-lg bg-[var(--color-ink-strong)] text-[var(--color-parchment)] hover:bg-[var(--color-ink)] font-body font-semibold text-sm inline-flex items-center gap-2 transition-colors duration-200"
-			>
-				{$t('about.ctaProjects')}
-				<ArrowDown class="w-4 h-4" strokeWidth={1.75} aria-hidden="true" />
-			</a>
-			<a
-				href={cvHref}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="min-h-11 px-1 inline-flex items-center font-body text-sm font-medium text-[var(--color-ink-muted)] underline decoration-current/35 underline-offset-4 hover:text-[var(--color-signal)]"
-			>
+<div id="home" class="mx-auto max-w-[1320px] px-5 md:px-8 lg:px-12">
+	<header class="flex flex-wrap items-center justify-between gap-x-5 border-b-2 border-[var(--color-ink-strong)] py-3 md:py-4">
+		<p class="text-sm text-[var(--color-ink-muted)]">Buenos Aires, Argentina</p>
+		<div class="md:ml-auto"><SiteControls /></div>
+		<nav aria-label={$t('nav.sections')} class="flex w-full flex-wrap gap-x-3 text-sm md:w-auto md:gap-x-5">
+			<a href="#featured-work">{$t('about.ctaProjects')}</a>
+			<a href="#career">{$t('careerPath.title')}</a>
+			<a href={cvHref} target="_blank" rel="noopener noreferrer">
 				{$t('contact.downloadCv')}
 				<span class="sr-only">{$t('projects.card.opensNewTab')}</span>
 			</a>
-		</div>
-
-		<nav aria-label={$t('nav.sections')} class="mt-3 lg:mt-6 flex flex-wrap gap-x-5">
-			<a href="#career" class="inline-flex items-center min-h-11 font-body text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-signal)] hover:underline underline-offset-4">
-				{$t('careerPath.title')}
-			</a>
-			<a href="#contact" class="inline-flex items-center min-h-11 font-body text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-signal)] hover:underline underline-offset-4">
-				{$t('contact.title')}
-			</a>
+			<a href="#contact">{$t('contact.title')}</a>
 		</nav>
 	</header>
 
-	<main id="main-content" class="min-w-0 space-y-16 md:space-y-24 lg:space-y-32">
-		<FeaturedProjects />
-		<Timeline embedded={true} />
-		<div class="border-t border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
-			<details class="group border-b border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
-				<summary class="flex items-center justify-between gap-4 min-h-16 cursor-pointer list-none font-display font-semibold text-2xl text-[var(--color-ink-strong)] hover:text-[var(--color-signal)] [&::-webkit-details-marker]:hidden">
-					{$t('skills.title')}
-					<ChevronDown class="w-5 h-5 shrink-0 group-open:rotate-180" strokeWidth={1.75} aria-hidden="true" />
-				</summary>
-				<Skills embedded={true} />
-			</details>
-			<details class="group border-b border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
-				<summary class="flex items-center justify-between gap-4 min-h-16 cursor-pointer list-none font-display font-semibold text-2xl text-[var(--color-ink-strong)] hover:text-[var(--color-signal)] [&::-webkit-details-marker]:hidden">
-					{$t('education.title')}
-					<ChevronDown class="w-5 h-5 shrink-0 group-open:rotate-180" strokeWidth={1.75} aria-hidden="true" />
-				</summary>
-				<Education embedded={true} />
-			</details>
+	<main id="main-content" class="min-w-0">
+		<section aria-labelledby="intro-title" class="intro grid items-end gap-3 border-b border-[var(--color-rule)] py-6 md:py-8">
+			<div>
+				<h1 id="intro-title" class="font-display text-[clamp(2.45rem,5.1vw,4.25rem)] leading-none font-bold tracking-tight text-[var(--color-ink-strong)]">
+					{$t('hero.name')}
+				</h1>
+				<p class="mt-1.5 text-[var(--color-ink-muted)]">{$t('hero.subtitle')}</p>
+			</div>
+			<p class="max-w-[34ch] text-lg leading-snug md:text-xl lg:text-[1.375rem]">{$t('hero.description')}</p>
+		</section>
+
+		<FeaturedProjects editorial={true} />
+
+		<div class="mt-16 space-y-16 md:mt-24 md:space-y-24 lg:mt-32 lg:space-y-32">
+			<Timeline embedded={true} />
+			<div class="border-t border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
+				<details class="group border-b border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
+					<summary class="flex items-center justify-between gap-4 min-h-16 cursor-pointer list-none font-display font-semibold text-2xl text-[var(--color-ink-strong)] hover:text-[var(--color-signal)] [&::-webkit-details-marker]:hidden">
+						{$t('skills.title')}
+						<ChevronDown class="w-5 h-5 shrink-0 group-open:rotate-180" strokeWidth={1.75} aria-hidden="true" />
+					</summary>
+					<Skills embedded={true} />
+				</details>
+				<details class="group border-b border-[color-mix(in_srgb,var(--color-ink)_16%,transparent)]">
+					<summary class="flex items-center justify-between gap-4 min-h-16 cursor-pointer list-none font-display font-semibold text-2xl text-[var(--color-ink-strong)] hover:text-[var(--color-signal)] [&::-webkit-details-marker]:hidden">
+						{$t('education.title')}
+						<ChevronDown class="w-5 h-5 shrink-0 group-open:rotate-180" strokeWidth={1.75} aria-hidden="true" />
+					</summary>
+					<Education embedded={true} />
+				</details>
+			</div>
+			<Contact embedded={true} />
 		</div>
-		<Contact embedded={true} />
 	</main>
 </div>
+
+<style>
+	nav a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		text-decoration: underline;
+		text-underline-offset: 0.25em;
+	}
+
+	nav a:hover {
+		color: var(--color-signal);
+	}
+
+	@media (min-width: 768px) {
+		.intro {
+			grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+			column-gap: clamp(2.5rem, 8vw, 7.625rem);
+		}
+	}
+</style>

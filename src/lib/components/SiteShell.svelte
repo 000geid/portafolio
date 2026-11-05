@@ -5,7 +5,7 @@
 	import SiteControls from '$lib/components/SiteControls.svelte';
 	import ArrowLeft from 'lucide-svelte/icons/arrow-left';
 
-	// Home carries its own controls in the sticky profile column; every other route gets a minimal bar.
+	// Home carries its own controls in the masthead.
 	$: isHome = $page.url.pathname === '/';
 </script>
 
@@ -26,7 +26,7 @@
 
 	{#if !isHome}
 		<header
-			class="sticky top-0 z-30 border-b border-[rgba(31,35,42,0.12)] dark:border-[rgba(210,217,226,0.12)] bg-[rgba(243,244,247,0.82)] backdrop-blur-md dark:bg-[rgba(18,21,25,0.82)] supports-[backdrop-filter]:bg-[rgba(243,244,247,0.72)] dark:supports-[backdrop-filter]:bg-[rgba(18,21,25,0.72)]"
+			class="sticky top-0 z-30 border-b border-[var(--color-rule)] bg-[var(--color-parchment)]"
 		>
 			<div class="max-w-7xl mx-auto flex items-center justify-between gap-3 px-4 md:px-6 py-2.5">
 				<a

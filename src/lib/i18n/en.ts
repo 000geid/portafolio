@@ -125,6 +125,7 @@ export const en = {
 			role: 'Role',
 			stack: 'Tech stack',
 			details: 'Technical details',
+			viewArchitecture: 'View architecture',
 			diagram: 'Architecture diagram',
 			architecture: 'Architecture',
 			impact: 'Impact',
@@ -167,7 +168,11 @@ export const en = {
 		featured: {
 			kicker: 'Proof of work',
 			title: 'Featured projects',
-			viewAll: 'See more projects'
+			viewAll: 'See more projects',
+			socialChannels: 'Social channels',
+			customRag: 'Custom RAG pipeline',
+			diagramDescription: 'Conversations from social channels go to LangGraph, which connects to a custom RAG pipeline.',
+			diagramCaption: 'Simplified view · Muveran AI'
 		},
 		audience: {
 			hiring: {
