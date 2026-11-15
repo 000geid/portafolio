@@ -14,19 +14,19 @@
 </script>
 
 {#snippet muveranFigure()}
-	<figure class="border-t border-[var(--color-ink-muted)] pt-4">
+	<figure class="border-t-2 border-[var(--color-ink-strong)] pt-4">
 		<figcaption class="mb-5 font-display text-xl font-medium text-[var(--color-ink-strong)]">
 			{$t('projects.card.diagram')}
 		</figcaption>
 		<p class="sr-only">{$t('home.featured.diagramDescription')}</p>
 		<div aria-hidden="true" class="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1.25fr)] items-stretch font-display text-base md:text-lg">
 			<span class="flex items-center border border-[var(--color-rule)] px-2.5 py-3">{$t('home.featured.socialChannels')}</span>
-			<ArrowRight class="mx-1 size-4 self-center text-[var(--color-signal)]" aria-hidden="true" />
-			<span class="flex items-center border border-[var(--color-rule)] px-2.5 py-3">LangGraph</span>
-			<ArrowDown class="col-start-3 my-1 size-4 justify-self-center text-[var(--color-signal)]" aria-hidden="true" />
+			<ArrowRight class="mx-1 size-4 self-center text-[var(--color-signal)]" strokeWidth={2} aria-hidden="true" />
+			<span class="flex items-center border border-[color-mix(in_srgb,var(--color-signal)_45%,transparent)] bg-[var(--color-signal-soft)] px-2.5 py-3">LangGraph</span>
+			<ArrowDown class="col-start-3 my-1 size-4 justify-self-center text-[var(--color-signal)]" strokeWidth={2} aria-hidden="true" />
 			<span class="col-start-3 border border-[var(--color-rule)] px-2.5 py-3">{$t('home.featured.customRag')}</span>
 		</div>
-		<p class="mt-4 border-t border-[var(--color-rule)] pt-2 text-sm text-[var(--color-ink-muted)]">
+		<p class="mt-4 border-t border-[var(--color-rule)] pt-2 font-mono text-xs tracking-[0.12em] uppercase text-[var(--color-ink-muted)]">
 			{$t('home.featured.diagramCaption')}
 		</p>
 	</figure>
@@ -56,7 +56,7 @@
 	<h2
 		id="featured-work-title"
 		class={editorial
-			? 'py-2.5 text-xs font-semibold tracking-widest uppercase text-[var(--color-ink-strong)]'
+			? 'border-t-2 border-[var(--color-ink-strong)] py-3 font-display text-xl font-semibold tracking-tight text-[var(--color-ink-strong)] md:text-2xl'
 			: 'mb-6 font-display text-3xl leading-snug font-bold tracking-tight text-[var(--color-ink-strong)] md:mb-8 md:text-4xl'}
 	>
 		{$t('home.featured.title')}
