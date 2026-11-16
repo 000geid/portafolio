@@ -124,7 +124,7 @@
 	</section>
 {:else}
 	<footer id="contact" class="scroll-mt-32 border-t border-[rgba(31,35,42,0.1)] dark:border-[rgba(210,217,226,0.1)] bg-[rgba(243,244,247,0.5)] dark:bg-[rgba(18,21,25,0.35)]">
-		<div class="max-w-7xl mx-auto px-4 md:px-6 py-14 md:py-20">
+		<div class="px-5 md:px-8 lg:px-12 py-14 md:py-20">
 			<SectionPageHeader kicker={$t('contact.kicker')} title={$t('contact.title')}>
 				<svelte:fragment slot="aside">
 					<p class="font-body text-sm md:text-base text-[var(--color-ink-muted)] leading-relaxed max-w-xl">

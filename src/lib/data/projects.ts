@@ -12,6 +12,24 @@ export interface SelectedProjectCopy {
   impactDetail?: string
 }
 
+/** One numbered step of the project story told by `ArchitectureDiagram`. */
+export interface ProjectFlowStep {
+  /** Plain-language headline, e.g. 'Llega una radiografía'. */
+  title: string
+  /** One supporting sentence, no jargon. */
+  detail: string
+}
+
+/**
+ * The consistent project story: what enters → what the system does → what the user gets.
+ * Rendered bilingually by `ArchitectureDiagram.svelte` — exactly three steps, in order.
+ */
+export interface ProjectFlow {
+  /** Complementary metric line shown under the steps (should not repeat `impact`). */
+  metric: Record<Language, string>
+  steps: Record<Language, [ProjectFlowStep, ProjectFlowStep, ProjectFlowStep]>
+}
+
 /** Why a project has no public link — shown with the project year. */
 export type ProjectAccess = 'onPremise' | 'private' | 'hackathon'
 
@@ -21,8 +39,8 @@ export type SelectedProject = {
   year: string
   featured?: boolean
   techStack: string[]
-  /** Architecture image or MP4/WebM loop under `static/`. The card falls back to a placeholder if the file is missing. */
-  mediaUrl: string
+  /** Bilingual three-step story rendered by `ArchitectureDiagram` inside the card. */
+  flow: ProjectFlow
   liveUrl?: string
   githubUrl?: string
   /** Only used when there is no `liveUrl`/`githubUrl`; defaults to `'private'`. */
@@ -53,7 +71,24 @@ export const selectedProjects: SelectedProject[] = [
       impactDetail: 'The live beta serves hundreds of active users.'
     },
     techStack: ['Python', 'LangGraph', 'LLMs', 'RAG', 'Docker', 'Meta API'],
-    mediaUrl: '/images/architecture/muveran-arch.svg',
+    flow: {
+      metric: {
+        es: 'Beta en producción · cientos de usuarios activos',
+        en: 'Live beta · hundreds of active users'
+      },
+      steps: {
+        es: [
+          { title: 'Llega un mensaje', detail: 'Alguien escribe por Instagram, WhatsApp o Facebook.' },
+          { title: 'La IA entiende y responde', detail: 'Un agente consulta la información de la marca y redacta la respuesta.' },
+          { title: 'Sale la respuesta', detail: 'El cliente recibe una respuesta útil en segundos, sin intervención humana.' }
+        ],
+        en: [
+          { title: 'A message arrives', detail: 'Someone writes on Instagram, WhatsApp or Facebook.' },
+          { title: 'The AI understands and answers', detail: 'An agent looks up the brand’s knowledge and drafts the reply.' },
+          { title: 'The reply goes out', detail: 'The customer gets a helpful answer in seconds, without human intervention.' }
+        ]
+      }
+    },
     liveUrl: 'https://muveran.ai'
   },
   {
@@ -80,7 +115,24 @@ export const selectedProjects: SelectedProject[] = [
         'Dramatically reduced stock registration delays; delighted initial retail clients with real-time sales insights.'
     },
     techStack: ['React', 'Tauri', 'Hono', 'Cloudflare Workers', 'TypeScript'],
-    mediaUrl: '/images/architecture/optifacil-arch.svg',
+    flow: {
+      metric: {
+        es: 'Datos siempre al día, en tiempo real',
+        en: 'Always-current data, in real time'
+      },
+      steps: {
+        es: [
+          { title: 'El local registra stock y ventas', detail: 'La app de escritorio funciona incluso sin conexión.' },
+          { title: 'Los datos se sincronizan', detail: 'Viajan por APIs serverless hasta la nube, en el edge.' },
+          { title: 'El negocio se ve en vivo', detail: 'El dueño consulta ventas y stock actualizados al instante.' }
+        ],
+        en: [
+          { title: 'The shop logs stock and sales', detail: 'The desktop app works even while offline.' },
+          { title: 'Data syncs to the cloud', detail: 'It travels through serverless APIs to the edge.' },
+          { title: 'The business goes live', detail: 'The owner sees sales and stock updated in real time.' }
+        ]
+      }
+    },
     access: 'private'
   },
   {
@@ -106,7 +158,24 @@ export const selectedProjects: SelectedProject[] = [
       impactDetail: '70% AUROC in production, with about 200 X-rays processed per day.'
     },
     techStack: ['PyTorch', 'CNNs', 'Python', 'Gradio', 'On-Premise Infrastructure'],
-    mediaUrl: '/images/architecture/maxi-arch.svg',
+    flow: {
+      metric: {
+        es: '70% AUROC · ~200 radiografías por día',
+        en: '70% AUROC · ~200 X-rays a day'
+      },
+      steps: {
+        es: [
+          { title: 'Llega una radiografía', detail: 'El hospital envía una imagen de tórax al servidor local.' },
+          { title: 'La IA marca lo sospechoso', detail: 'El modelo señala las zonas con posibles anomalías.' },
+          { title: 'El médico decide mejor', detail: 'Revisa el caso con la IA como segunda opinión.' }
+        ],
+        en: [
+          { title: 'An X-ray comes in', detail: 'The hospital sends a chest image to the on-site server.' },
+          { title: 'The AI flags what looks wrong', detail: 'The model marks the areas with possible anomalies.' },
+          { title: 'The doctor decides better', detail: 'They review the case with the AI as a second opinion.' }
+        ]
+      }
+    },
     access: 'onPremise'
   },
   {
@@ -133,7 +202,24 @@ export const selectedProjects: SelectedProject[] = [
         'Published open-source CLI with versioned releases + published VS Code Marketplace extension.'
     },
     techStack: ['Go', 'TypeScript', 'VS Code Extension API', 'GitHub Actions'],
-    mediaUrl: '/images/architecture/pacto-arch.svg',
+    flow: {
+      metric: {
+        es: 'Open source · publicado en el VS Code Marketplace',
+        en: 'Open source · published on the VS Code Marketplace'
+      },
+      steps: {
+        es: [
+          { title: 'El plan se escribe en Markdown', detail: 'Cada funcionalidad queda descrita como pasos verificables.' },
+          { title: 'La CLI verifica cada paso', detail: 'Compara lo planificado con el estado real del trabajo.' },
+          { title: 'Nada se desactualiza', detail: 'El plan y el código cuentan siempre la misma historia.' }
+        ],
+        en: [
+          { title: 'The plan is written in Markdown', detail: 'Each feature is described as verifiable steps.' },
+          { title: 'The CLI checks every step', detail: 'It compares what was planned with the actual state of the work.' },
+          { title: 'Nothing goes stale', detail: 'The plan and the code always tell the same story.' }
+        ]
+      }
+    },
     githubUrl: 'https://github.com/triple0-labs/pacto-spec'
   },
   {
@@ -160,7 +246,24 @@ export const selectedProjects: SelectedProject[] = [
         'Shipped and deployed live under strict hackathon timeline for jury evaluation.'
     },
     techStack: ['Next.js', 'Webflow Cloud', 'Webflow CMS API', 'CI/CD'],
-    mediaUrl: '/images/architecture/pixel-rush-arch.svg',
+    flow: {
+      metric: {
+        es: 'Construido y desplegado en vivo, durante el evento',
+        en: 'Built and deployed live, during the event'
+      },
+      steps: {
+        es: [
+          { title: 'El público entra a jugar', detail: 'Escanea un código y se suma a la trivia desde su celular.' },
+          { title: 'El servidor puntúa en vivo', detail: 'Cada respuesta se guarda y se puntúa al instante.' },
+          { title: 'El jurado ve los resultados', detail: 'Un ranking en pantalla grande se arma en tiempo real.' }
+        ],
+        en: [
+          { title: 'The crowd jumps in', detail: 'They scan a code and join the quiz from their phones.' },
+          { title: 'The server scores live', detail: 'Every answer is stored and scored instantly.' },
+          { title: 'The jury sees the results', detail: 'A big-screen ranking builds up in real time.' }
+        ]
+      }
+    },
     access: 'hackathon'
   }
 ]

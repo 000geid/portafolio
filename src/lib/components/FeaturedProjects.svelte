@@ -3,8 +3,7 @@
 	import { language } from '$lib/stores/language';
 	import { selectedProjects, type SelectedProject } from '$lib/data/projects';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
-	import ArrowDown from 'lucide-svelte/icons/arrow-down';
-	import ArrowRight from 'lucide-svelte/icons/arrow-right';
+	import ArchitectureDiagram from '$lib/components/ArchitectureDiagram.svelte';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 
 	let { editorial = false }: { editorial?: boolean } = $props();
@@ -13,35 +12,24 @@
 	const additional = selectedProjects.filter((project) => !project.featured);
 </script>
 
-{#snippet muveranFigure()}
-	<figure class="border-t-2 border-[var(--color-ink-strong)] pt-4">
-		<figcaption class="mb-5 font-display text-xl font-medium text-[var(--color-ink-strong)]">
-			{$t('projects.card.diagram')}
-		</figcaption>
-		<p class="sr-only">{$t('home.featured.diagramDescription')}</p>
-		<div aria-hidden="true" class="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1.25fr)] items-stretch font-display text-base md:text-lg">
-			<span class="flex items-center border border-[var(--color-rule)] px-2.5 py-3">{$t('home.featured.socialChannels')}</span>
-			<ArrowRight class="mx-1 size-4 self-center text-[var(--color-signal)]" strokeWidth={2} aria-hidden="true" />
-			<span class="flex items-center border border-[color-mix(in_srgb,var(--color-signal)_45%,transparent)] bg-[var(--color-signal-soft)] px-2.5 py-3">LangGraph</span>
-			<ArrowDown class="col-start-3 my-1 size-4 justify-self-center text-[var(--color-signal)]" strokeWidth={2} aria-hidden="true" />
-			<span class="col-start-3 border border-[var(--color-rule)] px-2.5 py-3">{$t('home.featured.customRag')}</span>
-		</div>
-		<p class="mt-4 border-t border-[var(--color-rule)] pt-2 font-mono text-xs tracking-[0.12em] uppercase text-[var(--color-ink-muted)]">
-			{$t('home.featured.diagramCaption')}
-		</p>
-	</figure>
-{/snippet}
-
 {#snippet projectList(projects: SelectedProject[], isFeatured = false)}
 	<ul class="divide-y divide-[var(--color-rule)] border-t border-[var(--color-rule)]">
 		{#each projects as project (project.id)}
+			{#snippet flowFigure()}
+				<figure class="border-t-2 border-[var(--color-ink-strong)] pt-4">
+					<figcaption class="mb-5 font-display text-xl font-medium text-[var(--color-ink-strong)]">
+						{$t('projects.card.diagram')}
+					</figcaption>
+					<ArchitectureDiagram flow={project.flow} />
+				</figure>
+			{/snippet}
 			<li class={editorial && isFeatured ? 'py-7 md:py-8' : 'py-8 md:py-12'}>
 				<ProjectCard
 					{...project[$language]}
 					editorial={editorial && isFeatured}
-					leadFigure={editorial && isFeatured && project.id === 'muveran-ai' ? muveranFigure : undefined}
+					leadFigure={editorial && isFeatured ? flowFigure : undefined}
 					year={project.year}
-					mediaUrl={project.mediaUrl}
+					flow={project.flow}
 					liveUrl={project.liveUrl}
 					githubUrl={project.githubUrl}
 					statusLabel={$t(`projects.card.access.${project.access ?? 'private'}`)}

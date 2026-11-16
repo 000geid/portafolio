@@ -54,7 +54,7 @@
 	});
 </script>
 
-<div id="home" class="mx-auto max-w-[1320px] px-5 md:px-8 lg:px-12">
+<div id="home" class="px-5 md:px-8 lg:px-12">
 	<header class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 border-b-2 border-[var(--color-ink-strong)] py-1 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-x-6">
 		<p class="flex items-center gap-2 font-mono text-xs tracking-[0.1em] uppercase text-[var(--color-ink-muted)] md:tracking-[0.14em]">
 			<span class="inline-block size-1.5 shrink-0 bg-[var(--color-signal)]" aria-hidden="true"></span>

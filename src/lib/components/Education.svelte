@@ -53,7 +53,7 @@
 
 <section
 	id="education"
-	class="scroll-mt-24 {embedded ? 'pt-16 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]' : 'py-14 md:py-20 px-4 md:px-6 max-w-7xl mx-auto'}"
+	class="scroll-mt-24 {embedded ? 'pt-16 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]' : 'py-14 md:py-20 px-5 md:px-8 lg:px-12'}"
 >
 	{#if embedded}
 		<header class="mb-8 md:mb-10">

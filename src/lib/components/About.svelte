@@ -13,7 +13,7 @@
 
 </script>
 
-<section id="about" class="scroll-mt-32 py-14 md:py-20 px-4 md:px-6 max-w-7xl mx-auto">
+<section id="about" class="scroll-mt-32 py-14 md:py-20 px-5 md:px-8 lg:px-12">
 	<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14 lg:gap-16">
 
 		<!-- Left column -->

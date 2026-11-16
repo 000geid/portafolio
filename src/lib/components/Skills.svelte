@@ -9,9 +9,9 @@
 
 <section
 	id="skills"
-	class="scroll-mt-24 {embedded ? 'pt-16 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]' : 'py-14 md:py-20 px-4 md:px-6'}"
+	class="scroll-mt-24 {embedded ? 'pt-16 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]' : 'py-14 md:py-20 px-5 md:px-8 lg:px-12'}"
 >
-	<div class="{embedded ? 'w-full' : 'max-w-4xl mx-auto'}">
+	<div class="w-full">
 		<header class="mb-8 md:mb-10">
 			<h2
 				class="font-display font-bold {embedded ? 'text-3xl md:text-4xl' : 'text-4xl md:text-5xl lg:text-6xl'} tracking-tight text-[var(--color-ink-strong)] leading-snug mb-3"

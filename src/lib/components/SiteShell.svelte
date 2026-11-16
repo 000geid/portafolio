@@ -28,7 +28,7 @@
 		<header
 			class="sticky top-0 z-30 border-b border-[var(--color-rule)] bg-[var(--color-parchment)]"
 		>
-			<div class="max-w-7xl mx-auto flex items-center justify-between gap-3 px-4 md:px-6 py-2.5">
+			<div class="flex items-center justify-between gap-3 px-5 md:px-8 lg:px-12 py-2.5">
 				<a
 					href="/"
 					class="group inline-flex items-center gap-2 min-h-[44px] font-display font-semibold text-base tracking-tight text-[var(--color-ink-strong)]"

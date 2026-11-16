@@ -1,14 +1,17 @@
 <script lang="ts">
-	import { onMount, type Snippet } from 'svelte';
+	import type { Snippet } from 'svelte';
 	import { t } from '$lib/stores/i18n';
 	import ExternalLink from 'lucide-svelte/icons/external-link';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
+	import ArchitectureDiagram from '$lib/components/ArchitectureDiagram.svelte';
+	import type { ProjectFlow } from '$lib/data/projects';
 
 	interface Props {
 		title: string;
 		tagline: string;
 		year: string;
-		mediaUrl: string;
+		/** Bilingual three-step story; shown inside the details unless a `leadFigure` already displays it. */
+		flow?: ProjectFlow;
 		liveUrl?: string;
 		githubUrl?: string;
 		/** Shown with the year when the project has no public URL. */
@@ -26,7 +29,7 @@
 		title,
 		tagline,
 		year,
-		mediaUrl,
+		flow,
 		liveUrl,
 		githubUrl,
 		statusLabel,
@@ -42,38 +45,8 @@
 	// Keep the numeric result and any approximation sign together when splitting the sentence.
 	const METRIC_PATTERN = /([+~≈]?\d[\d.,]*%?)/g;
 
-	const isImage = $derived(/\.(svg|webp|png|jpg|jpeg|gif)($|\?)/i.test(mediaUrl));
-	const isDiagram = $derived(/\.svg($|\?)/i.test(mediaUrl));
-	const isVideo = $derived(/\.(mp4|webm)($|\?)/i.test(mediaUrl));
 	const impactParts = $derived(impact.split(METRIC_PATTERN));
 	const hasLinks = $derived(Boolean(liveUrl || githubUrl));
-
-	let mediaFailed = $state(false);
-	let videoEl: HTMLVideoElement | undefined = $state();
-	let imgEl: HTMLImageElement | undefined = $state();
-
-	onMount(() => {
-		// SSR markup may have already failed to load before hydration attached the error handler.
-		if (imgEl?.complete && imgEl.naturalWidth === 0) mediaFailed = true;
-		if (videoEl && (videoEl.error || videoEl.networkState === HTMLMediaElement.NETWORK_NO_SOURCE)) {
-			mediaFailed = true;
-		}
-
-		const video = videoEl;
-		if (!video || typeof IntersectionObserver === 'undefined') return;
-		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-		// Only play loops that are on screen.
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry?.isIntersecting) void video.play().catch(() => {});
-				else video.pause();
-			},
-			{ threshold: 0.35 }
-		);
-		observer.observe(video);
-		return () => observer.disconnect();
-	});
 </script>
 
 <article class="project" class:lead={Boolean(leadFigure)} class:editorial>
@@ -121,37 +94,9 @@
 					<p class="max-w-prose">{impactDetail}</p>
 				{/if}
 				<p class="max-w-prose">{techStack.join(' · ')}</p>
-				<div class="relative aspect-video overflow-hidden rounded-lg bg-[var(--color-parchment-alt)]">
-					{#if mediaFailed || (!isImage && !isVideo)}
-						<div class="media-fallback absolute inset-0 flex items-center justify-center bg-[var(--color-elevated)]" aria-hidden="true">
-							<span class="font-display font-semibold text-6xl tracking-tighter text-[var(--color-signal)] opacity-40">
-								{title.charAt(0)}
-							</span>
-						</div>
-					{:else if isImage}
-						<img
-							bind:this={imgEl}
-							src={mediaUrl}
-							alt={isDiagram ? `${$t('projects.card.diagram')} · ${title}` : title}
-							loading="lazy"
-							decoding="async"
-							class="absolute inset-0 w-full h-full object-cover"
-							onerror={() => (mediaFailed = true)}
-						/>
-					{:else if isVideo}
-						<video
-							bind:this={videoEl}
-							src={mediaUrl}
-							class="absolute inset-0 w-full h-full object-cover"
-							muted
-							loop
-							playsinline
-							preload="metadata"
-							aria-hidden="true"
-							onerror={() => (mediaFailed = true)}
-						></video>
-					{/if}
-				</div>
+				{#if flow && !leadFigure}
+					<ArchitectureDiagram {flow} />
+				{/if}
 				{#if hasLinks}
 					<div class="flex flex-wrap gap-x-5">
 						{#each [{ href: liveUrl, label: 'projects.card.liveDemo' }, { href: githubUrl, label: 'projects.card.sourceCode' }] as { href, label } (label)}
@@ -178,6 +123,8 @@
 <style>
 	.project:not(.editorial) {
 		max-width: 48rem;
+		/* Center the card inside the full-width section feed instead of hugging the left edge. */
+		margin-inline: auto;
 	}
 
 	.editorial .impact strong {
