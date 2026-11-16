@@ -5,6 +5,15 @@
         "nodejs_compat"
     ],
     "main": ".svelte-kit/cloudflare/_worker.js",
+    "routes": [
+        {
+            "pattern": "me.ogeid.xyz",
+            "custom_domain": true
+        }
+    ],
+    "vars": {
+        "PUBLIC_SITE_URL": "https://me.ogeid.xyz"
+    },
     "assets": {
         "directory": ".svelte-kit/cloudflare",
         "binding": "ASSETS"
