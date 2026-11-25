@@ -24,157 +24,55 @@
 </script>
 
 {#if embedded}
-	<section
+	<footer
 		id="contact"
 		tabindex="-1"
-		class="scroll-mt-24 pt-16 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]"
+		class="scroll-mt-12 bg-[var(--color-emerald)] text-[var(--color-emerald-ink)]"
 	>
-		<header class="mb-8 md:mb-10">
-			<h2 class="font-display font-bold text-3xl md:text-4xl tracking-tight text-[var(--color-ink-strong)] leading-snug mb-3">
-				{$t('contact.title')}
-			</h2>
-			<p class="font-body text-base text-[var(--color-ink-muted)] leading-relaxed max-w-xl">
-				{$t('contact.description')}
-			</p>
-		</header>
-
-		<div
-			class="rounded-2xl border border-[rgba(31,35,42,0.14)] dark:border-[rgba(210,217,226,0.12)] bg-[var(--color-elevated)] dark:bg-[var(--color-parchment-alt)] brutalist-shadow overflow-hidden"
-		>
-			<div class="p-6 md:p-8 border-b border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]">
-				<div class="flex flex-col sm:flex-row gap-3">
-					<a
-						href={emailHref}
-						class="px-5 py-3.5 rounded-xl bg-[var(--color-ink-strong)] text-[var(--color-parchment)] dark:bg-[var(--color-signal)] dark:text-[#121519] dark:hover:bg-[#86bfa2] font-display font-semibold text-base tracking-tight text-center border border-transparent hover:bg-[var(--color-ink)] transition-all duration-200 brutalist-shadow brutalist-shadow-hover min-h-[44px] inline-flex items-center justify-center gap-2"
-					>
-						<Mail class="w-4 h-4" strokeWidth={1.75} aria-hidden={true} />
-						{$t('contact.ctaEmail')}
-					</a>
-					<a
-						href={cvHref}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="px-5 py-3.5 rounded-xl border border-[rgba(31,35,42,0.14)] dark:border-[rgba(210,217,226,0.14)] bg-transparent font-display font-semibold text-base tracking-tight text-center text-[var(--color-ink-strong)] hover:bg-[var(--color-signal-soft)] hover:border-[color-mix(in_srgb,var(--color-signal)_40%,transparent)] transition-all duration-200 inline-flex items-center justify-center gap-2 min-h-[44px]"
-					>
-						<svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-						</svg>
-						{$t('contact.downloadCv')}
-					</a>
-				</div>
-			</div>
-
-			<div class="divide-y divide-[rgba(31,35,42,0.08)] dark:divide-[rgba(210,217,226,0.08)]">
-				<a
-					href="https://github.com/000geid"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="group flex items-center justify-between gap-4 px-6 py-4 hover:bg-[var(--color-signal-soft)] transition-colors duration-200"
-				>
-					<span class="flex items-center gap-3">
-						<svg class="w-4 h-4 text-[var(--color-ink-muted)] group-hover:text-[var(--color-signal)] transition-colors" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-							<path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
-						</svg>
-						<span class="font-display font-medium text-base text-[var(--color-ink-strong)]">{$t('contact.github')}</span>
-					</span>
-					<span class="flex items-center gap-1.5 font-mono text-xs text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-colors">
-						@000geid
-						<ArrowUpRight class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" />
-					</span>
-				</a>
-
-				<a
-					href="https://www.linkedin.com/in/ogeid/"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="group flex items-center justify-between gap-4 px-6 py-4 hover:bg-[var(--color-signal-soft)] transition-colors duration-200"
-				>
-					<span class="flex items-center gap-3">
-						<svg class="w-4 h-4 text-[var(--color-ink-muted)] group-hover:text-[var(--color-signal)] transition-colors" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-							<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
-						</svg>
-						<span class="font-display font-medium text-base text-[var(--color-ink-strong)]">{$t('contact.linkedin')}</span>
-					</span>
-					<span class="flex items-center gap-1.5 font-mono text-xs text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-colors">
-						linkedin.com/in/ogeid
-						<ArrowUpRight class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" />
-					</span>
-				</a>
-			</div>
-		</div>
-
-		<div class="pt-8 mt-8 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)] flex flex-col sm:flex-row items-center justify-between gap-4 pb-12">
-			<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[var(--color-ink-muted)] font-mono">
-				<span>© {new Date().getFullYear()} Diego Alvarado</span>
-				<span class="opacity-40">·</span>
-				<span class="inline-flex items-center gap-1">
-					<MapPin class="shrink-0 opacity-80" size={13} strokeWidth={2} aria-hidden="true" />
-					Buenos Aires (GMT-3)
-				</span>
-			</div>
-			<button
-				type="button"
-				onclick={scrollToTop}
-				class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-[var(--color-ink-muted)] hover:text-[var(--color-signal)] transition-colors min-h-[44px] px-2 py-1 -my-1 rounded-md"
-			>
-				<span>{$t('contact.backToTop')}</span>
-				<ArrowUp class="w-3.5 h-3.5" strokeWidth={2} />
-			</button>
-		</div>
-	</section>
-{:else}
-	<footer id="contact" class="scroll-mt-32 border-t border-[rgba(31,35,42,0.1)] dark:border-[rgba(210,217,226,0.1)] bg-[rgba(243,244,247,0.5)] dark:bg-[rgba(18,21,25,0.35)]">
-		<div class="px-5 md:px-8 lg:px-12 py-14 md:py-20">
-			<SectionPageHeader kicker={$t('contact.kicker')} title={$t('contact.title')}>
-				<svelte:fragment slot="aside">
-					<p class="font-body text-sm md:text-base text-[var(--color-ink-muted)] leading-relaxed max-w-xl">
+		<div class="mx-auto max-w-[1440px] px-6 py-20 md:px-12 md:py-28 lg:px-20">
+			<div class="grid grid-cols-1 gap-y-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-end lg:gap-x-20">
+				<div>
+					<h2 class="font-display text-4xl leading-[1.04] font-bold tracking-[-0.025em] text-[var(--color-emerald-ink)] md:text-5xl lg:text-6xl">
+						{$t('contact.title')}
+					</h2>
+					<p class="mt-5 max-w-[44ch] font-body text-lg leading-relaxed text-[var(--color-emerald-muted)]">
 						{$t('contact.description')}
 					</p>
-				</svelte:fragment>
-			</SectionPageHeader>
 
-			<div
-				class="rounded-2xl border border-[rgba(31,35,42,0.14)] dark:border-[rgba(210,217,226,0.12)] bg-[var(--color-elevated)] dark:bg-[var(--color-parchment-alt)] brutalist-shadow overflow-hidden"
-			>
-				<div class="p-6 md:p-8 border-b border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)]">
-					<div class="flex flex-col sm:flex-row gap-3">
+					<div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
 						<a
 							href={emailHref}
-							class="px-5 py-3.5 rounded-xl bg-[var(--color-ink-strong)] text-[var(--color-parchment)] dark:bg-[var(--color-signal)] dark:text-[#121519] dark:hover:bg-[#86bfa2] font-display font-semibold text-base tracking-tight text-center border border-transparent hover:bg-[var(--color-ink)] transition-all duration-200 brutalist-shadow brutalist-shadow-hover min-h-[44px] inline-flex items-center justify-center gap-2"
+							class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-[3px] bg-[var(--color-signal)] px-7 font-body text-sm font-semibold text-[#f7f5ef] transition-colors hover:bg-[var(--color-signal-hover)] md:text-base"
 						>
-							<Mail class="w-4 h-4" strokeWidth={1.75} aria-hidden={true} />
+							<Mail class="size-4" strokeWidth={1.75} aria-hidden={true} />
 							{$t('contact.ctaEmail')}
 						</a>
 						<a
 							href={cvHref}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="px-5 py-3.5 rounded-xl border border-[rgba(31,35,42,0.14)] dark:border-[rgba(210,217,226,0.14)] bg-transparent font-display font-semibold text-base tracking-tight text-center text-[var(--color-ink-strong)] hover:bg-[var(--color-signal-soft)] hover:border-[color-mix(in_srgb,var(--color-signal)_40%,transparent)] transition-all duration-200 inline-flex items-center justify-center gap-2 min-h-[44px]"
+							class="inline-flex min-h-12 items-center justify-center gap-2 rounded-[3px] border border-[var(--color-emerald-rule)] px-6 font-body text-sm font-medium text-[var(--color-emerald-ink)] transition-colors hover:border-[var(--color-emerald-ink)] md:text-base"
 						>
-							<svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-							</svg>
 							{$t('contact.downloadCv')}
+							<ArrowUpRight class="size-4" strokeWidth={1.75} aria-hidden="true" />
+							<span class="sr-only">{$t('projects.card.opensNewTab')}</span>
 						</a>
 					</div>
 				</div>
 
-				<div class="divide-y divide-[rgba(31,35,42,0.08)] dark:divide-[rgba(210,217,226,0.08)]">
+				<div class="divide-y divide-[var(--color-emerald-rule)] border-y border-[var(--color-emerald-rule)]">
 					<a
 						href="https://github.com/000geid"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="group flex items-center justify-between gap-4 px-6 py-4 hover:bg-[var(--color-signal-soft)] transition-colors duration-200"
+						class="group flex min-h-16 items-center justify-between gap-4 py-4 transition-colors hover:text-[var(--color-signal-on-dark)]"
 					>
-						<span class="flex items-center gap-3">
-							<svg class="w-4 h-4 text-[var(--color-ink-muted)] group-hover:text-[var(--color-signal)] transition-colors" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-								<path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
-							</svg>
-							<span class="font-display font-medium text-base text-[var(--color-ink-strong)]">{$t('contact.github')}</span>
+						<span class="font-display text-xl font-semibold text-[var(--color-emerald-ink)] group-hover:text-[var(--color-signal-on-dark)] transition-colors">
+							{$t('contact.github')}
 						</span>
-						<span class="flex items-center gap-1.5 font-mono text-xs text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-colors">
+						<span class="flex items-center gap-2 font-mono text-xs tracking-[0.08em] text-[var(--color-emerald-muted)] group-hover:text-[var(--color-emerald-ink)] transition-colors">
 							@000geid
-							<ArrowUpRight class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" />
+							<ArrowUpRight class="size-4" strokeWidth={1.75} aria-hidden="true" />
 						</span>
 					</a>
 
@@ -182,27 +80,24 @@
 						href="https://www.linkedin.com/in/ogeid/"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="group flex items-center justify-between gap-4 px-6 py-4 hover:bg-[var(--color-signal-soft)] transition-colors duration-200"
+						class="group flex min-h-16 items-center justify-between gap-4 py-4 transition-colors hover:text-[var(--color-signal-on-dark)]"
 					>
-						<span class="flex items-center gap-3">
-							<svg class="w-4 h-4 text-[var(--color-ink-muted)] group-hover:text-[var(--color-signal)] transition-colors" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-								<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
-							</svg>
-							<span class="font-display font-medium text-base text-[var(--color-ink-strong)]">{$t('contact.linkedin')}</span>
+						<span class="font-display text-xl font-semibold text-[var(--color-emerald-ink)] group-hover:text-[var(--color-signal-on-dark)] transition-colors">
+							{$t('contact.linkedin')}
 						</span>
-						<span class="flex items-center gap-1.5 font-mono text-xs text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-colors">
+						<span class="flex items-center gap-2 font-mono text-xs tracking-[0.08em] text-[var(--color-emerald-muted)] group-hover:text-[var(--color-emerald-ink)] transition-colors">
 							linkedin.com/in/ogeid
-							<ArrowUpRight class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" />
+							<ArrowUpRight class="size-4" strokeWidth={1.75} aria-hidden="true" />
 						</span>
 					</a>
 				</div>
 			</div>
 
-			<div class="pt-10 md:pt-12 mt-10 md:mt-12 border-t border-[rgba(31,35,42,0.08)] dark:border-[rgba(210,217,226,0.08)] flex flex-col sm:flex-row items-center justify-between gap-4">
-				<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[var(--color-ink-muted)] font-mono">
+			<div class="mt-16 flex flex-col items-start justify-between gap-4 border-t border-[var(--color-emerald-rule)] pt-7 sm:flex-row sm:items-center">
+				<div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs tracking-[0.1em] uppercase text-[var(--color-emerald-muted)]">
 					<span>© {new Date().getFullYear()} Diego Alvarado</span>
 					<span class="opacity-40">·</span>
-					<span class="inline-flex items-center gap-1">
+					<span class="inline-flex items-center gap-1.5">
 						<MapPin class="shrink-0 opacity-80" size={13} strokeWidth={2} aria-hidden="true" />
 						Buenos Aires (GMT-3)
 					</span>
@@ -210,11 +105,63 @@
 				<button
 					type="button"
 					onclick={scrollToTop}
-					class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-[var(--color-ink-muted)] hover:text-[var(--color-signal)] transition-colors min-h-[44px] px-2 py-1 -my-1 rounded-md"
+					class="inline-flex min-h-[44px] items-center gap-1.5 font-mono text-xs tracking-[0.12em] uppercase text-[var(--color-emerald-muted)] transition-colors hover:text-[var(--color-emerald-ink)] cursor-pointer"
 				>
 					<span>{$t('contact.backToTop')}</span>
-					<ArrowUp class="w-3.5 h-3.5" strokeWidth={2} />
+					<ArrowUp class="size-3.5" strokeWidth={2} aria-hidden="true" />
 				</button>
+			</div>
+		</div>
+	</footer>
+{:else}
+	<footer id="contact" class="scroll-mt-32 bg-[var(--color-emerald)] text-[var(--color-emerald-ink)]">
+		<div class="mx-auto max-w-[1440px] px-6 py-16 md:px-10 md:py-24 lg:px-14">
+			<SectionPageHeader kicker={$t('contact.kicker')} title={$t('contact.title')}>
+				<svelte:fragment slot="aside">
+					<p class="font-body text-base text-[var(--color-emerald-muted)] leading-relaxed max-w-xl">
+						{$t('contact.description')}
+					</p>
+				</svelte:fragment>
+			</SectionPageHeader>
+
+			<div class="mt-8 flex flex-wrap items-center gap-4">
+				<a
+					href={emailHref}
+					class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-[3px] bg-[var(--color-signal)] px-7 font-body text-sm font-semibold text-[#f7f5ef] transition-colors hover:bg-[var(--color-signal-hover)] md:text-base"
+				>
+					<Mail class="size-4" strokeWidth={1.75} aria-hidden={true} />
+					{$t('contact.ctaEmail')}
+				</a>
+				<a
+					href={cvHref}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex min-h-12 items-center justify-center gap-2 rounded-[3px] border border-[var(--color-emerald-rule)] px-6 font-body text-sm font-medium text-[var(--color-emerald-ink)] transition-colors hover:border-[var(--color-emerald-ink)] md:text-base"
+				>
+					{$t('contact.downloadCv')}
+					<ArrowUpRight class="size-4" strokeWidth={1.75} aria-hidden="true" />
+				</a>
+			</div>
+
+			<div class="mt-12 divide-y divide-[var(--color-emerald-rule)] border-y border-[var(--color-emerald-rule)] max-w-xl">
+				<a
+					href="https://github.com/000geid"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group flex min-h-16 items-center justify-between gap-4 py-4"
+				>
+					<span class="font-display text-lg font-semibold text-[var(--color-emerald-ink)] group-hover:text-[var(--color-signal-on-dark)] transition-colors">{$t('contact.github')}</span>
+					<span class="flex items-center gap-1.5 font-mono text-xs text-[var(--color-emerald-muted)]">@000geid <ArrowUpRight class="size-3.5" aria-hidden="true" /></span>
+				</a>
+				<a
+					href="https://www.linkedin.com/in/ogeid/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group flex min-h-16 items-center justify-between gap-4 py-4"
+				>
+					<span class="font-display text-lg font-semibold text-[var(--color-emerald-ink)] group-hover:text-[var(--color-signal-on-dark)] transition-colors">{$t('contact.linkedin')}</span>
+					<span class="flex items-center gap-1.5 font-mono text-xs text-[var(--color-emerald-muted)]">linkedin.com/in/ogeid <ArrowUpRight class="size-3.5" aria-hidden="true" /></span>
+				</a>
 			</div>
 		</div>
 	</footer>

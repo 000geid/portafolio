@@ -2,21 +2,22 @@
 version: 1
 slug: "src-routes-page-svelte"
 primary_target: "src/routes/+page.svelte"
-related_targets: ["src/lib/components/Home.svelte","src/lib/components/FeaturedProjects.svelte","src/lib/components/ProjectCard.svelte"]
+related_targets: ["src/lib/components/Home.svelte","src/lib/components/FeaturedProjects.svelte","src/lib/components/ProjectCard.svelte","src/lib/components/Timeline.svelte","src/lib/components/Contact.svelte","src/lib/components/SiteShell.svelte"]
+approved_comp: ".impeccable/mocks/malba-monograph-2.png"
 ---
 
 # Home
-Mode: Experience. Recruiters and engineering leads scan the introduction and two cases for evidence of systems in production. Keep the bilingual CV, project details, career and contact accessible.
+Mode: Experience. Hiring managers, engineering leads, and startup founders evaluate Diego Alvarado for senior Product Engineer and Full-Stack AI roles. Keep bilingual EN/ES, light/dark themes, CV access, projects, career, skills, education, and contact intact, with far fewer elements visible on screen at any given moment.
 
 ## Direction contract
-**Thesis.** Informe de campo opens with Diego and makes his work the next thing a visitor sees. The results and their units tell the story.
+**THESIS:** Malba Monograph stages Diego's shipped production systems as calm, color-blocked museum rooms rather than a dense beige text report or a dark-mode neon developer template.
 
-**Own-world.** Warm ivory paper, coffee ink and brick-red figures. A warm dark counterpart carries the same hierarchy. Serif titles, thin printed rules and small figure captions set the rhythm.
+**OWN-WORLD:** Deep mineral forest emerald (#0E342A) opening room paired with crisp coated-paper gallery white (#F7F6F2), warm ivory ink (#F4F1E8), carbon obsidian (#141517), and vivid cadmium orange (#D9431F) reserved for primary action and key proof figures. Commanding neo-grotesque display sans paired with crisp humanist body sans and technical monospace indices.
 
-**Story.** The headline, byline and scope sit on the left; a ruled proof ledger on the right lists Muveran's throughput and MAXI's clinical volume. The chapter head then opens the featured cases, Muveran's simplified architecture figure and its disclosure, followed by MAXI's result.
+**STORY:** The visitor enters a serene emerald gallery wall carrying only Diego's positioning headline, one scope line, primary actions ("View projects", "Download CV"), and a single hairline proof caption strip (+30% RAG throughput, ~6,000 X-rays/mo). Scrolling moves cleanly from room to room: Muveran AI on bright gallery white, MAXI on deep mineral obsidian, Career Path on warm stone, collapsible Skills & Education, and a high-contrast Contact room.
 
-**First viewport.** A single ruled masthead carries the location, section links, language and theme. The headline spans the canvas, then a 2px rule opens the intro band: signature, scope and two actions on the left, the proof ledger on the right. The chapter head and Muveran's title follow within the first screen. Below 1024px the ledger stacks under the intro; below 768px the cases stack and the figure follows the disclosure.
+**FIRST VIEWPORT:** Crisp warm-cream top bar across the upper edge ("DIEGO ALVARADO" left in tracked mono, centered links Work / Career / CV / Contact, EN/ES and theme switch right). Below it, a full-bleed deep forest emerald (#0E342A) gallery wall fills the rest of the viewport with generous negative space: monumental warm-ivory grotesque headline at left ("I take products from the first version to production."), one concise subline, solid cadmium-orange "View projects" button beside "Download CV →", and a single hairline proof strip along the bottom edge.
 
-**Form.** Informe de campo, first-ranked candidate, seed 2793bc54. Implement the approved HTML sketch directly in SvelteKit.
+**FORM:** Malba Monograph, Impeccable's Pick (rank 1 on grounded list), seed:63c78d648b145b9d. Approved comp: `.impeccable/mocks/malba-monograph-2.png`.
 
-**Finish.** unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+**FINISH:** unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

@@ -1,197 +1,122 @@
 ---
 name: Diego Alvarado
-description: "Informe de campo, a portfolio set like a printed field report."
+description: "Malba Monograph, a color-blocked exhibition portfolio with deep forest emerald rooms, coated gallery white, mineral obsidian, and cadmium orange."
 colors:
-  primary: "#a43620"
-  primary-dark: "#f19b7c"
-  signal-soft: "rgba(164, 54, 32, 0.12)"
-  signal-soft-dark: "rgba(241, 155, 124, 0.18)"
-  parchment: "#f5eddb"
-  parchment-dark: "#221c17"
-  parchment-alt: "#ece1ca"
-  parchment-alt-dark: "#2b231d"
-  elevated: "#faf4e7"
-  elevated-dark: "#342a22"
-  ink-strong: "#211c16"
-  ink-strong-dark: "#faf0df"
-  ink: "#3c3025"
-  ink-dark: "#e8d9c4"
-  ink-muted: "#675645"
-  ink-muted-dark: "#c7b49e"
-  ink-faint: "#705947"
-  ink-faint-dark: "#b6a28c"
-  rule: "color-mix(in srgb, #675645 44%, transparent)"
-  rule-dark: "color-mix(in srgb, #c7b49e 44%, transparent)"
+  primary: "#c83c13"
+  primary-hover: "#a8300d"
+  primary-dark: "#eb5e33"
+  signal-soft: "rgba(200, 60, 19, 0.11)"
+  signal-soft-dark: "rgba(235, 94, 51, 0.16)"
+  emerald: "#0b3326"
+  emerald-dark: "#08281e"
+  emerald-ink: "#f4f1e8"
+  emerald-muted: "#b8cfc5"
+  obsidian: "#121715"
+  obsidian-dark: "#0a2219"
+  obsidian-ink: "#f4f1e8"
+  obsidian-muted: "#b0beb7"
+  parchment: "#f7f5ef"
+  parchment-dark: "#101513"
+  parchment-alt: "#eeebe2"
+  parchment-alt-dark: "#161d1a"
+  elevated: "#ffffff"
+  elevated-dark: "#1c2521"
+  ink-strong: "#111c17"
+  ink-strong-dark: "#f4f1e8"
+  ink: "#27342e"
+  ink-dark: "#dbe2dd"
+  ink-muted: "#4f6158"
+  ink-muted-dark: "#a4b4ac"
+  ink-faint: "#61736a"
+  ink-faint-dark: "#86988f"
+  rule: "rgba(17, 28, 23, 0.16)"
+  rule-dark: "rgba(244, 241, 232, 0.15)"
 typography:
   display:
-    fontFamily: 'Newsreader, ui-serif, Georgia, "Times New Roman", serif'
+    fontFamily: '"Familjen Grotesk", ui-sans-serif, system-ui, sans-serif'
     fontWeight: 700
-    lineHeight: 1
+    lineHeight: 1.02
     letterSpacing: "-0.025em"
-  lead-title:
-    fontFamily: 'Newsreader, ui-serif, Georgia, "Times New Roman", serif'
-    fontWeight: 600
-    lineHeight: 0.98
+  project-title:
+    fontFamily: '"Familjen Grotesk", ui-sans-serif, system-ui, sans-serif'
+    fontWeight: 700
+    lineHeight: 1.02
     letterSpacing: "-0.025em"
-  lead-result:
-    fontFamily: 'Newsreader, ui-serif, Georgia, "Times New Roman", serif'
-    fontWeight: 500
-    lineHeight: 1
-    letterSpacing: "-0.055em"
-  title:
-    fontFamily: 'Newsreader, ui-serif, Georgia, "Times New Roman", serif'
-    fontSize: "1.875rem"
-    fontWeight: 600
-    lineHeight: 1.25
-    letterSpacing: "-0.025em"
-  signature:
-    fontFamily: 'Newsreader, ui-serif, Georgia, "Times New Roman", serif'
-    fontSize: "1.875rem"
-    fontWeight: 600
-    lineHeight: 1
-    letterSpacing: "-0.025em"
-  ledger-result:
-    fontFamily: 'Newsreader, ui-serif, Georgia, "Times New Roman", serif'
-    fontSize: "2.5rem"
-    fontWeight: 500
-    lineHeight: 1
-    letterSpacing: "-0.04em"
+  project-metric:
+    fontFamily: '"Familjen Grotesk", ui-sans-serif, system-ui, sans-serif'
+    fontWeight: 700
+    lineHeight: 0.95
+    letterSpacing: "-0.035em"
+  section-title:
+    fontFamily: '"Familjen Grotesk", ui-sans-serif, system-ui, sans-serif'
+    fontSize: "2.25rem"
+    fontWeight: 700
+    lineHeight: 1.15
+    letterSpacing: "-0.02em"
+  body-lg:
+    fontFamily: '"Public Sans", ui-sans-serif, system-ui, sans-serif'
+    fontSize: "1.25rem"
+    fontWeight: 400
+    lineHeight: 1.6
   body:
-    fontFamily: "DM Sans, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: '"Public Sans", ui-sans-serif, system-ui, sans-serif'
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.625
   navigation:
-    fontFamily: "DM Sans, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.875rem"
+    fontFamily: '"Public Sans", ui-sans-serif, system-ui, sans-serif'
+    fontSize: "0.9375rem"
     fontWeight: 500
-  label:
-    fontFamily: "DM Sans, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.75rem"
-    fontWeight: 600
-    letterSpacing: "0.1em"
+  brand-mark:
+    fontFamily: '"JetBrains Mono", ui-monospace, monospace'
+    fontSize: "0.8125rem"
+    fontWeight: 500
+    letterSpacing: "0.22em"
   utility:
-    fontFamily: "JetBrains Mono, ui-monospace, monospace"
+    fontFamily: '"JetBrains Mono", ui-monospace, monospace'
     fontSize: "0.75rem"
-    lineHeight: 1.333333
-    letterSpacing: "0.12em"
+    lineHeight: 1.4
+    letterSpacing: "0.14em"
 rounded:
-  control: "0.25rem"
-  media: "0.5rem"
+  control: "0.1875rem"
+  pill: "9999px"
 spacing:
-  utility-gap: "0.5rem"
-  figure-inset: "0.75rem"
-  gutter-mobile: "1.25rem"
-  gutter-tablet: "2rem"
-  gutter-desktop: "3rem"
-  page-max: "1320px"
+  gutter-mobile: "1.5rem"
+  gutter-tablet: "3rem"
+  gutter-desktop: "5rem"
+  page-max: "1440px"
   touch-target: "44px"
-components:
-  theme-switch:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink-strong}"
-    rounded: "{rounded.control}"
-    size: "{spacing.touch-target}"
-  language-switch:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink-strong}"
-    typography: "{typography.utility}"
-    rounded: "{rounded.control}"
-    height: "{spacing.touch-target}"
-    padding: "0 0.625rem"
-  masthead-nav:
-    textColor: "{colors.ink}"
-    typography: "{typography.navigation}"
-  proof-ledger:
-    textColor: "{colors.ink}"
-    typography: "{typography.utility}"
-  chapter-head:
-    textColor: "{colors.ink-strong}"
-    typography: "{typography.title}"
-  editorial-case:
-    textColor: "{colors.ink-strong}"
-    typography: "{typography.lead-title}"
-  architecture-figure:
-    textColor: "{colors.ink}"
-    padding: "0.75rem 0.625rem"
-  project-disclosure:
-    textColor: "{colors.primary}"
-    height: "{spacing.touch-target}"
-  project-media:
-    backgroundColor: "{colors.parchment-alt}"
-    rounded: "{rounded.media}"
 ---
 
-# Design System — Diego Alvarado
+# Design System — Diego Alvarado (Malba Monograph)
 
 ## Overview
 
-**Creative North Star — “Informe de campo”**
+**Creative North Star — “Malba Monograph”**
 
-The portfolio reads like a printed field report. Warm paper, serif headlines and thin rules organize the work. Project results keep their units and context close so readers can scan the numbers and understand what they measure.
-
-**Key Characteristics**
-
-- Warm paper and coffee ink in light mode, warm charcoal and pale ink in dark mode.
-- Large Newsreader titles and figures with compact, readable sans-serif context.
-- A ruled opening spread: statement on the left, measured proof on the right.
-- Ruled sections, outlined diagrams and native disclosures.
+Inspired by Buenos Aires architectural exhibition catalogues (MALBA, Fundación Proa), the portfolio stages Diego's shipped engineering work as calm, full-bleed color-blocked gallery rooms. Every viewport carries very few elements at once, relying on mineral color contrast, monumental neo-grotesque typography, and generous negative space rather than dense cards or decorative effects.
 
 ## Colors
 
-### Primary
-
-Brick red pairs with terracotta in dark mode. Use the accent for results, diagram arrows, interactive emphasis and keyboard focus. The translucent signal tint marks selection and hover on outlined controls.
-
-### Neutral
-
-Ivory parchment pairs with warm charcoal for the page. Alternate and raised paper tones frame media and supporting surfaces. Use strong ink for titles, standard ink for prose, muted ink for roles and captions, and faint ink for inactive utility labels. Rules use muted ink at 44% opacity. The masthead uses a heavier rule in strong ink.
-
-**The Signal Rule.** Reserve the brick or terracotta accent for evidence and interaction.
+- **Deep Forest Emerald (`#0b3326` light / `#08281e` dark):** Owns the full-viewport opening gallery wall and bookends the site in the closing Contact room. Paired with warm museum ivory (`#f4f1e8`) and sage-tinted secondary ink (`#b8cfc5`).
+- **Coated Gallery White (`#f7f5ef` light / `#101513` dark):** Owns the top masthead, lead featured project room (Muveran AI), and quiet Skills & Education disclosures.
+- **Mineral Obsidian (`#121715` light / `#0a2219` dark):** Alternates against gallery white for the second featured project room (MAXI Clinical Decision Support), creating bold visual pacing between cases.
+- **Warm Museum Stone (`#eeebe2` light / `#161d1a` dark):** Grounds the Career Path room.
+- **Cadmium Orange (`#c83c13` light / `#eb5e33` dark):** Reserved strictly for the primary action CTA and monumental project proof metrics (`+30%`, `≈6,000`).
 
 ## Typography
 
-Newsreader sets titles, figures and diagram labels. DM Sans carries prose, navigation and captions. JetBrains Mono sets compact utility labels such as the masthead location, the proof ledger's role/year line, the language switch and the figure caption.
+- **Display (`Familjen Grotesk` 600–700):** Commands the hero headline (`clamp(2.75rem, 6.2vw, 5.35rem)`), project room titles, and monumental tabular proof numerals (`clamp(4rem, 8vw, 7rem)`).
+- **Body (`Public Sans` 400–600):** Clean modernist sans for navigation, concise scope statements, and technical summaries.
+- **Metadata & Indices (`JetBrains Mono` 400–600):** Tracked uppercase masthead signature (`DIEGO ALVARADO`), bottom hero proof caption strip, dates, roles, and tech stack lists.
 
-The name sits at 1.875rem and the lead project title ranges from 2.75rem to 5.875rem. The lead figure ranges from 5.5rem to 9.5rem and uses lining numerals. The hero proof ledger uses 2.5rem results so the two numbers stay scannable in the first viewport; the second result ranges from 2.5rem to 3.75rem. Project summaries use relaxed 1rem body type and figure captions use 0.75rem monospace.
+## Layout & Pacing
 
-**The Figure Rule.** Keep the result, its units and its explanatory text in one reading group.
+- **Full-Bleed Rooms, 1440px Inner Grid:** Every major band spans 100% viewport width with its own material color field while constraining content to `max-w-[1440px]` with `24px / 48px / 80px` horizontal gutters.
+- **One Calm Room Per Viewport:** The hero fills `min-h-[calc(100svh-4.5rem)]` with only the headline, one scope line, action pair, and bottom hairline proof strip. Featured project rooms show only title, metadata, tagline, primary metric, and on-demand architecture disclosures—keeping the resting screen calm and uncluttered.
 
-**The Proof Rule.** The first viewport carries evidence, not only a claim: the statement, the byline and the two measured results share one ruled spread.
+## Accessibility & Browser Craft
 
-## Layout
-
-The home page centers on a 1320px canvas with 20px gutters on phones, 32px from 768px and 48px from 1024px. The masthead keeps one ruled row from 1024px; below that, location and utilities share the first row and section links take the second.
-
-The opening spread runs a full-width headline, then a ruled band split into the byline, scope and actions on the left and the proof ledger on the right (1.15:1 from 1024px, fluid 56px gap). Below the band, the chapter head opens the featured cases. From 768px, each editorial case shares a 1.45:1 grid with a fluid gap from 40px to 122px. The lead diagram occupies the second column and the second case places its result in that column.
-
-Below 1024px, stack the introduction band and the proof ledger; below 768px, stack the cases, place the lead diagram after the result and its disclosure, and give the wrapping masthead navigation its own line. Use the section rules to maintain the reading order through the stack.
-
-## Elevation & Depth
-
-The masthead, introduction and featured cases sit flat on the paper canvas. A fine grain runs through the shell. Paper tones and borders distinguish media and supporting content.
-
-## Shapes
-
-Use square diagram boxes and 1px rules, with a 2px rule under the masthead. Masthead controls soften to a 4px radius. Project media clips to an 8px radius in a 16:9 frame.
-
-## Components
-
-- **Masthead.** A single running head: monospace location marked with a signal square on the left, underlined section and CV links 44px high, then the language and theme controls behind a hairline divider. The location and navigation are restrained so the headline stays the first voice.
-- **Opening spread.** A 2px rule under the headline separates the statement from the byline, scope and actions. The byline pairs the Newsreader signature with a monospace role. The primary action is a solid ink block; the CV is a quiet underlined second action.
-- **Proof ledger.** A mono label and ruled rows, one per featured case: title, result in accent display numerals, one-line context, then role and year in mono with the year flush right. It is a summary, not a stat-card grid; the featured cases below carry the full record.
-- **Chapter head.** Title the featured cases at 1.25–1.5rem Newsreader between a 2px rule above and a hairline below, so the lead case title opens the section rather than a tiny uppercase label.
-- **Language and theme controls.** The language button uses monospace labels with the active language bold in the accent. The square theme button swaps moon and sun. Both use quiet borders, a tinted hover and an offset accent focus ring.
-- **Editorial case.** Group title and role with the measured result and concise context. Separate cases with a shared rule. Open architecture, stack and media in place through a native disclosure. The chevron turns when the disclosure opens.
-- **Architecture figure.** Set a caption above outlined steps, use accent arrows for flow, tint the orchestration node, and separate the muted figure note with a rule. Provide an equivalent text description of the flow.
-- **Route shell.** Use a short entrance on navigation, with reduced-motion support. Keep the progress line thin and the return affordance compact.
-
-## Do's and Don'ts
-
-- **Do** Keep titles and measured results easy to locate at phone width.
-- **Do** Carry the warm paper and ink relationships through both themes.
-- **Do** Put the measured results in the first viewport, beside the claim rather than below it.
-- **Do** Keep a visible keyboard focus treatment and 44px masthead and disclosure targets.
-- **Don't** Add filled panels or shadows around the featured case rows.
-- **Don't** Use a tiny uppercase label as the section heading; the chapter head is Newsreader.
-- **Don't** Turn technical details into a separate reading step when they can open in place.
+- WCAG 2.1 AA+ contrast across all emerald, obsidian, stone, and gallery-white rooms in both light and dark modes.
+- Minimum 44px touch targets for all navigation links, language/theme controls, buttons, and disclosures.
+- Palette-themed text selection (`--color-signal`), caret color, scrollbar, and `:focus-visible` outlines; full `prefers-reduced-motion` support.

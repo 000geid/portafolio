@@ -9,12 +9,10 @@
 	$: isHome = $page.url.pathname === '/';
 </script>
 
-<div
-	class="min-h-screen bg-[var(--color-parchment)] text-[var(--color-ink)] transition-colors noise-overlay relative"
->
+<div class="min-h-screen bg-[var(--color-parchment)] text-[var(--color-ink)] transition-colors relative">
 	<a
 		href="#main-content"
-		class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-black focus:text-white"
+		class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--color-emerald)] focus:text-[var(--color-emerald-ink)] focus:font-mono focus:text-xs"
 	>
 		Skip to content
 	</a>
@@ -25,13 +23,11 @@
 	></div>
 
 	{#if !isHome}
-		<header
-			class="sticky top-0 z-30 border-b border-[var(--color-rule)] bg-[var(--color-parchment)]"
-		>
-			<div class="flex items-center justify-between gap-3 px-5 md:px-8 lg:px-12 py-2.5">
+		<header class="sticky top-0 z-30 border-b border-[var(--color-rule)] bg-[var(--color-parchment)]">
+			<div class="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-6 md:px-10 lg:px-14 py-2.5">
 				<a
 					href="/"
-					class="group inline-flex items-center gap-2 min-h-[44px] font-display font-semibold text-base tracking-tight text-[var(--color-ink-strong)]"
+					class="group inline-flex items-center gap-2.5 min-h-[44px] font-mono text-xs md:text-[0.8125rem] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-strong)]"
 					aria-label="{$t('nav.home')} — {$t('hero.name')}"
 				>
 					<ArrowLeft

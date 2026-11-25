@@ -1,7 +1,6 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
 	import { t } from '$lib/stores/i18n';
-	import ExternalLink from 'lucide-svelte/icons/external-link';
+	import ArrowUpRight from 'lucide-svelte/icons/arrow-up-right';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 	import ArchitectureDiagram from '$lib/components/ArchitectureDiagram.svelte';
 	import type { ProjectFlow } from '$lib/data/projects';
@@ -10,11 +9,9 @@
 		title: string;
 		tagline: string;
 		year: string;
-		/** Bilingual three-step story; shown inside the details unless a `leadFigure` already displays it. */
 		flow?: ProjectFlow;
 		liveUrl?: string;
 		githubUrl?: string;
-		/** Shown with the year when the project has no public URL. */
 		statusLabel?: string;
 		role: string;
 		techStack: string[];
@@ -22,7 +19,7 @@
 		impact: string;
 		impactDetail?: string;
 		editorial?: boolean;
-		leadFigure?: Snippet;
+		inverted?: boolean;
 	}
 
 	let {
@@ -39,161 +36,209 @@
 		impact,
 		impactDetail,
 		editorial = false,
-		leadFigure
+		inverted = false
 	}: Props = $props();
 
-	// Keep the numeric result and any approximation sign together when splitting the sentence.
-	const METRIC_PATTERN = /([+~≈]?\d[\d.,]*%?)/g;
-
-	const impactParts = $derived(impact.split(METRIC_PATTERN));
+	const METRIC_PATTERN = /([+~≈]?\d[\d.,]*%?)/;
+	const impactSplit = $derived(impact.split(METRIC_PATTERN));
+	const primaryMetric = $derived(impactSplit[1] ?? '');
+	const impactBefore = $derived((impactSplit[0] ?? '').trim());
+	const impactAfter = $derived((impactSplit[2] ?? '').trim());
 	const hasLinks = $derived(Boolean(liveUrl || githubUrl));
 </script>
 
-<article class="project" class:lead={Boolean(leadFigure)} class:editorial>
-	<div class="project-copy min-w-0">
-		<header class="mb-3">
-			<h3 class="project-title font-display font-semibold text-3xl md:text-4xl tracking-tight text-[var(--color-ink-strong)] leading-tight mb-1">
-				{title}
-			</h3>
-			<p class="flex flex-wrap gap-x-2 font-body text-sm text-[var(--color-ink-muted)]">
-				<span>{role}</span>
-				<span aria-hidden="true">·</span>
-				<span class="tabular-nums">{year}</span>
-				{#if statusLabel && !hasLinks}
-					<span aria-hidden="true">·</span>
-					<span>{statusLabel}</span>
+{#if editorial}
+	<article class="grid grid-cols-1 gap-y-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.85fr)] lg:items-start lg:gap-x-20">
+		<div class="min-w-0">
+			<header>
+				<h3
+					class="font-display text-[clamp(2.5rem,5.2vw,4.5rem)] leading-[1.02] font-bold tracking-[-0.025em] text-balance {inverted
+						? 'text-[var(--color-obsidian-ink)]'
+						: 'text-[var(--color-ink-strong)]'}"
+				>
+					{title}
+				</h3>
+				<p
+					class="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs tracking-[0.1em] uppercase {inverted
+						? 'text-[var(--color-obsidian-muted)]'
+						: 'text-[var(--color-ink-muted)]'}"
+				>
+					<span>{role}</span>
+					<span aria-hidden="true" class="opacity-50">·</span>
+					<span class="tabular-nums">{year}</span>
+					{#if statusLabel && !hasLinks}
+						<span aria-hidden="true" class="opacity-50">·</span>
+						<span>{statusLabel}</span>
+					{/if}
+				</p>
+			</header>
+
+			<p
+				class="mt-7 max-w-[46ch] text-pretty font-body text-lg leading-relaxed md:text-xl {inverted
+					? 'text-[var(--color-obsidian-muted)]'
+					: 'text-[var(--color-ink)]'}"
+			>
+				{tagline}
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
+				{#if liveUrl}
+					<a
+						href={liveUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex min-h-11 items-center gap-1.5 font-body text-sm font-semibold transition-colors hover:underline underline-offset-4 {inverted
+							? 'text-[var(--color-signal-on-dark)]'
+							: 'text-[var(--color-signal)]'}"
+					>
+						{$t('projects.card.liveDemo')}
+						<ArrowUpRight class="size-4" strokeWidth={1.75} aria-hidden="true" />
+						<span class="sr-only">{$t('projects.card.opensNewTab')}</span>
+					</a>
+				{/if}
+				{#if githubUrl}
+					<a
+						href={githubUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex min-h-11 items-center gap-1.5 font-body text-sm font-semibold transition-colors hover:underline underline-offset-4 {inverted
+							? 'text-[var(--color-signal-on-dark)]'
+							: 'text-[var(--color-signal)]'}"
+					>
+						{$t('projects.card.sourceCode')}
+						<ArrowUpRight class="size-4" strokeWidth={1.75} aria-hidden="true" />
+						<span class="sr-only">{$t('projects.card.opensNewTab')}</span>
+					</a>
+				{/if}
+			</div>
+
+			<details class="group mt-4">
+				<summary
+					class="inline-flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 font-mono text-xs font-medium tracking-[0.12em] uppercase transition-colors [&::-webkit-details-marker]:hidden {inverted
+						? 'text-[var(--color-obsidian-ink)] hover:text-[var(--color-signal-on-dark)]'
+						: 'text-[var(--color-ink-strong)] hover:text-[var(--color-signal)]'}"
+				>
+					<ChevronDown class="size-4 transition-transform duration-200 group-open:rotate-180" strokeWidth={1.75} aria-hidden="true" />
+					{$t('projects.card.viewArchitecture')}
+				</summary>
+
+				<div
+					class="mt-6 space-y-6 border-t pt-6 {inverted
+						? 'border-[var(--color-obsidian-rule)] text-[var(--color-obsidian-muted)]'
+						: 'border-[var(--color-rule)] text-[var(--color-ink-muted)]'}"
+				>
+					<p class="max-w-prose font-body text-base leading-relaxed">{architecture}</p>
+					{#if impactDetail}
+						<p class="max-w-prose font-body text-base leading-relaxed">{impactDetail}</p>
+					{/if}
+					<p class="font-mono text-xs tracking-[0.06em]">{techStack.join(' · ')}</p>
+					{#if flow}
+						<div class="pt-2">
+							<ArchitectureDiagram {flow} {inverted} />
+						</div>
+					{/if}
+				</div>
+			</details>
+		</div>
+
+		<aside
+			class="min-w-0 border-t pt-8 lg:border-t-0 lg:border-l lg:pt-2 lg:pl-12 {inverted
+				? 'border-[var(--color-obsidian-rule)]'
+				: 'border-[var(--color-rule)]'}"
+		>
+			{#if primaryMetric}
+				<p
+					class="font-display text-[clamp(4rem,8vw,7rem)] leading-[0.95] font-bold tracking-[-0.035em] tabular-nums {inverted
+						? 'text-[var(--color-signal-on-dark)]'
+						: 'text-[var(--color-signal)]'}"
+				>
+					{primaryMetric}
+				</p>
+			{/if}
+			<p
+				class="mt-4 max-w-[32ch] text-pretty font-body text-base leading-relaxed font-medium md:text-lg {inverted
+					? 'text-[var(--color-obsidian-ink)]'
+					: 'text-[var(--color-ink-strong)]'}"
+			>
+				{#if primaryMetric}
+					{#if impactBefore}{impactBefore} {/if}{impactAfter}
+				{:else}
+					{impact}
 				{/if}
 			</p>
-		</header>
+			{#if impactDetail}
+				<p
+					class="mt-3 max-w-[36ch] font-body text-sm leading-relaxed {inverted
+						? 'text-[var(--color-obsidian-muted)]'
+						: 'text-[var(--color-ink-muted)]'}"
+				>
+					{impactDetail}
+				</p>
+			{/if}
+		</aside>
+	</article>
+{:else}
+	<article class="grid grid-cols-1 gap-y-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-x-16">
+		<div class="min-w-0">
+			<header>
+				<h3 class="font-display text-2xl font-bold tracking-tight text-[var(--color-ink-strong)] md:text-3xl">
+					{title}
+				</h3>
+				<p class="mt-2 flex flex-wrap items-center gap-x-2 font-mono text-xs tracking-[0.08em] uppercase text-[var(--color-ink-muted)]">
+					<span>{role}</span>
+					<span aria-hidden="true" class="opacity-50">·</span>
+					<span class="tabular-nums">{year}</span>
+					{#if statusLabel && !hasLinks}
+						<span aria-hidden="true" class="opacity-50">·</span>
+						<span>{statusLabel}</span>
+					{/if}
+				</p>
+			</header>
 
-		{#if !leadFigure}
-			<p class="project-tagline font-body text-base text-[var(--color-ink-muted)] leading-relaxed max-w-prose">{tagline}</p>
-		{/if}
-		<p class="impact mt-4 max-w-prose font-body text-base leading-relaxed font-medium text-[var(--color-ink-strong)] md:text-lg">
-			{#each impactParts as part, i}
-				{#if i % 2 === 1}
-					<strong class="font-mono font-semibold text-[var(--color-signal)]">{part}</strong>
-				{:else if part.trim()}
-					<span>{part}</span>
-				{/if}
-			{/each}
-		</p>
-		{#if leadFigure}
-			<p class="mt-4 max-w-prose font-body text-base leading-relaxed text-[var(--color-ink-muted)]">{tagline}</p>
-		{/if}
+			<p class="mt-4 max-w-prose font-body text-base leading-relaxed text-[var(--color-ink)]">
+				{tagline}
+			</p>
 
-		<details class="group mt-3">
-			<summary class="flex items-center gap-2 min-h-11 w-fit cursor-pointer list-none font-body text-sm font-semibold text-[var(--color-signal)] hover:underline underline-offset-4 [&::-webkit-details-marker]:hidden">
-				<ChevronDown class="w-4 h-4 group-open:rotate-180" strokeWidth={1.75} aria-hidden="true" />
-				{$t(leadFigure ? 'projects.card.viewArchitecture' : 'projects.card.details')}
-			</summary>
-
-			<div class="space-y-4 pb-2 pt-2 font-body text-sm text-[var(--color-ink-muted)] leading-relaxed">
-				<p class="max-w-prose">{architecture}</p>
-				{#if impactDetail}
-					<p class="max-w-prose">{impactDetail}</p>
-				{/if}
-				<p class="max-w-prose">{techStack.join(' · ')}</p>
-				{#if flow && !leadFigure}
-					<ArchitectureDiagram {flow} />
-				{/if}
-				{#if hasLinks}
-					<div class="flex flex-wrap gap-x-5">
-						{#each [{ href: liveUrl, label: 'projects.card.liveDemo' }, { href: githubUrl, label: 'projects.card.sourceCode' }] as { href, label } (label)}
-							{#if href}
-								<a href={href} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 min-h-11 text-[var(--color-signal)] font-medium hover:underline underline-offset-4">
-									{$t(label)}
-									<ExternalLink class="w-3.5 h-3.5" strokeWidth={1.75} aria-hidden="true" />
+			<details class="group mt-4">
+				<summary class="inline-flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 font-mono text-xs font-medium tracking-[0.12em] uppercase text-[var(--color-signal)] hover:underline underline-offset-4 [&::-webkit-details-marker]:hidden">
+					<ChevronDown class="size-4 transition-transform duration-200 group-open:rotate-180" strokeWidth={1.75} aria-hidden="true" />
+					{$t('projects.card.details')}
+				</summary>
+				<div class="mt-4 space-y-4 border-t border-[var(--color-rule)] pt-4 text-sm text-[var(--color-ink-muted)]">
+					<p class="max-w-prose font-body leading-relaxed">{architecture}</p>
+					<p class="font-mono text-xs">{techStack.join(' · ')}</p>
+					{#if flow}
+						<ArchitectureDiagram {flow} />
+					{/if}
+					{#if hasLinks}
+						<div class="flex flex-wrap gap-x-6">
+							{#if liveUrl}
+								<a href={liveUrl} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center gap-1.5 font-body font-medium text-[var(--color-signal)] hover:underline underline-offset-4">
+									{$t('projects.card.liveDemo')}
+									<ArrowUpRight class="size-3.5" strokeWidth={1.75} aria-hidden="true" />
 									<span class="sr-only">{$t('projects.card.opensNewTab')}</span>
 								</a>
 							{/if}
-						{/each}
-					</div>
-				{/if}
-			</div>
-		</details>
-	</div>
-	{#if leadFigure}
-		<div class="lead-figure min-w-0">
-			{@render leadFigure()}
+							{#if githubUrl}
+								<a href={githubUrl} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center gap-1.5 font-body font-medium text-[var(--color-signal)] hover:underline underline-offset-4">
+									{$t('projects.card.sourceCode')}
+									<ArrowUpRight class="size-3.5" strokeWidth={1.75} aria-hidden="true" />
+									<span class="sr-only">{$t('projects.card.opensNewTab')}</span>
+								</a>
+							{/if}
+						</div>
+					{/if}
+				</div>
+			</details>
 		</div>
-	{/if}
-</article>
 
-<style>
-	.project:not(.editorial) {
-		max-width: 48rem;
-		/* Center the card inside the full-width section feed instead of hugging the left edge. */
-		margin-inline: auto;
-	}
-
-	.editorial .impact strong {
-		font-family: var(--font-display);
-		font-size: 1.65em;
-		line-height: 1;
-		font-variant-numeric: lining-nums;
-	}
-
-	.editorial:not(.lead) .impact strong:first-child {
-		display: block;
-		width: fit-content;
-		margin-bottom: 0.25rem;
-		font-size: clamp(2.5rem, 4.2vw, 3.75rem);
-		font-weight: 500;
-		letter-spacing: -0.04em;
-	}
-
-	.lead .project-title {
-		font-size: clamp(2.75rem, 6.8vw, 5.875rem);
-		line-height: 0.98;
-	}
-
-	.lead .impact {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: 0.25rem 1.25rem;
-		max-width: none;
-		line-height: 1.35;
-	}
-
-	.lead .impact strong {
-		font-size: clamp(5.5rem, 10.5vw, 9.5rem);
-		font-weight: 500;
-		letter-spacing: -0.055em;
-		white-space: nowrap;
-	}
-
-	.lead .impact span {
-		max-width: 23ch;
-		font-size: 1rem;
-	}
-
-	.lead-figure {
-		margin-top: 1.5rem;
-	}
-
-	@media (min-width: 768px) {
-		.lead,
-		.editorial:not(.lead) .project-copy {
-			display: grid;
-			grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-			column-gap: clamp(2.5rem, 8vw, 7.625rem);
-		}
-
-		.lead-figure {
-			align-self: start;
-			margin-top: clamp(2rem, 6.5vw, 5.5rem);
-		}
-
-		.editorial:not(.lead) .project-tagline {
-			grid-column: 1;
-		}
-
-		.editorial:not(.lead) .impact {
-			grid-area: 1 / 2 / span 2;
-			align-self: center;
-			margin-top: 0;
-		}
-	}
-</style>
+		<div class="min-w-0 lg:pt-1">
+			<p class="max-w-[38ch] font-body text-base leading-relaxed font-medium text-[var(--color-ink-strong)]">
+				{impact}
+			</p>
+			<p class="mt-3 font-mono text-xs tracking-[0.06em] text-[var(--color-ink-muted)]">
+				{techStack.slice(0, 4).join(' · ')}
+			</p>
+		</div>
+	</article>
+{/if}

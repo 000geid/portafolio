@@ -2,30 +2,23 @@
 	import { darkMode } from '$lib/stores/darkMode';
 	import { t } from '$lib/stores/i18n';
 	import LanguageToggler from '$lib/components/LanguageToggler.svelte';
+	import Sun from 'lucide-svelte/icons/sun';
+	import Moon from 'lucide-svelte/icons/moon';
 </script>
 
-<div class="flex items-center gap-2 shrink-0">
+<div class="flex items-center gap-3 shrink-0">
 	<LanguageToggler />
 	<button
+		type="button"
 		onclick={() => darkMode.toggle()}
-		class="w-11 h-11 min-h-[44px] min-w-[44px] rounded-sm border border-[var(--color-rule)] bg-transparent text-[var(--color-ink-strong)] hover:bg-[var(--color-signal-soft)] hover:border-[color-mix(in_srgb,var(--color-signal)_40%,transparent)] dark:hover:border-[color-mix(in_srgb,var(--color-signal)_42%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-signal)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-parchment)] transition-all duration-200 flex items-center justify-center cursor-pointer"
+		class="inline-flex h-11 min-h-[44px] items-center gap-1.5 rounded-full bg-[var(--color-emerald)] px-2.5 text-[var(--color-emerald-ink)] transition-colors hover:bg-[var(--color-signal)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-signal)] cursor-pointer"
 		aria-label={$t('hero.toggleDarkMode')}
 	>
-		<svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="2"
-				d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-			/>
-		</svg>
-		<svg class="w-5 h-5 hidden dark:block opacity-95" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="2"
-				d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-			/>
-		</svg>
+		<span class="flex size-5 items-center justify-center rounded-full bg-[var(--color-emerald-ink)] text-[var(--color-emerald)] dark:bg-transparent dark:text-[var(--color-emerald-muted)] transition-colors">
+			<Sun class="size-3.5" strokeWidth={2.2} aria-hidden="true" />
+		</span>
+		<span class="flex size-5 items-center justify-center rounded-full bg-transparent text-[var(--color-emerald-muted)] dark:bg-[var(--color-emerald-ink)] dark:text-[var(--color-emerald)] transition-colors">
+			<Moon class="size-3.5" strokeWidth={2.2} aria-hidden="true" />
+		</span>
 	</button>
 </div>
